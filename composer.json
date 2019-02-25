@@ -20,13 +20,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
             "EresNote\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-
             "EresNote\\Tests\\": "tests/"
         }
     },
