@@ -8,9 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class NoteCreatorController
 {
-    public function create(Note $note)
+    public function create()
     {
         $name = "asrlan";
-        return new Response(json_encode($note));
+        return new Response();
     }
 }
