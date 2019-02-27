@@ -1,0 +1,4 @@
+EresNote\Domain\Entity\Note:
+  properties:
+    title:
+      - NotBlank: ~

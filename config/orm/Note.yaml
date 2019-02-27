@@ -1,0 +1,14 @@
+EresNote\Domain\Entity\Note:
+  type: entity
+  table: note
+  #repositoryClass: App\Entity\UserRepository
+
+  fields:
+    title:
+      type: string
+      length: 40
+      nullable: false
+    content:
+      type: string
+      length: 40
+      nullable: true

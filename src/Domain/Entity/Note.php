@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EresNote\Domain\Entity;
-
 
 class Note extends AbstractEntity
 {
