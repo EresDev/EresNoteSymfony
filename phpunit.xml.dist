@@ -11,6 +11,7 @@
         <ini name="error_reporting" value="-1" />
         <env name="APP_ENV" value="test" />
         <env name="SHELL_VERBOSITY" value="-1" />
+
     </php>
 
     <testsuites>
@@ -28,5 +29,7 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
+
+
 
 </phpunit>

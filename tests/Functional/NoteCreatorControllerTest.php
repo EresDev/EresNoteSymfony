@@ -16,7 +16,7 @@ class NoteCreatorControllerTest extends WebTestCase
             [
                 "title" => "A test title",
                 "content" => "some test content",
-                "creationTimestamp" => "123",
+                "creationTimestamp" => "2010-01-01 00:00:01",
                 "user" => "1",
                 "id" => 123
             ],
