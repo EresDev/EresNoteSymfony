@@ -4,6 +4,7 @@ namespace EresNote\Controller;
 
 use EresNote\Domain\Entity\Note;
 use EresNote\Domain\Repository\NoteRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -16,9 +17,9 @@ class NoteCreatorController
         $note = new Note();
 
         $note->title = $request->get('title', "");
-        $note->cotnent = $request->get('content', "");
-        $note->creationTimestamp = $request->get('creationTimestampo', "");
-        $note->user = $request->get('user', "");
+        $note->content = $request->get('content', "");
+        $note->creationTimestamp = $request->get('creationTimestamp', "");
+        $note->user = $request->get('user', 1);
 
         $errors = $validator->validate($note);
 
@@ -26,10 +27,12 @@ class NoteCreatorController
             $noteRepository->persist($note);
         }
 
-        return new Response();
+        return new Response("Done");
 
     }
-
+//    /**
+//     *  @ParamConverter("note", options={"mapping": {"title": "title", "content": "content", "id":"id"}})
+//     */
 //    public function create(Note $note)
 //    {
 ////        $note = new Note();

@@ -17,3 +17,10 @@ EresNote\Domain\Entity\Note:
       type: string
       length: 40
       nullable: true
+    user:
+      type: integer
+      column: user_id
+      nullable: false
+      options:
+        unsigned: true
+        default: 1
