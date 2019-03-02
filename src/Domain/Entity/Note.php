@@ -6,6 +6,6 @@ class Note extends AbstractEntity
 {
     public $title;
     public $content;
-    public $creationTimestamp;
+    public $creationDatetime;
     public $user;
 }

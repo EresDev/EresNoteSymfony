@@ -1,0 +1,41 @@
+EresNote\Domain\Entity\User:
+  type: entity
+  table: user
+  #repositoryClass: EresNote\Persistence\Doctrine\Repository\UserRepository
+
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+#  fields:
+#    title:
+#      type: string
+#      length: 40
+#      nullable: false
+#    content:
+#      type: string
+#      length: 40
+#      nullable: true
+#      options:
+#        default: ""
+#    creationTimestamp:
+#      type: timestamp
+#      column: creationTimestamp
+#      nullable: false
+#      options:
+#        default: 0
+##    user:
+##      type: integer
+##      column: user_id
+##      nullable: false
+##      options:
+##        unsigned: true
+#
+#  oneToOne:
+#    user:
+#      targetEntity: User
+#      joinColumn:
+#        name: user_id
+#        referencedColumnName: id
+#        onDelete: CASCADE

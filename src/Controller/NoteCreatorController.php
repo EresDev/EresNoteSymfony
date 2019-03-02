@@ -4,6 +4,7 @@ namespace EresNote\Controller;
 
 use EresNote\Domain\Entity\Note;
 use EresNote\Domain\Repository\NoteRepositoryInterface;
+use EresNote\Domain\Service\Factory\NoteFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,21 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class NoteCreatorController extends CreatorTemplate
 {
+    protected function getFactory() : string
+    {
+        return NoteFactory::class;
+    }
 
+    protected function getSuccessResponse(): Response
+    {
+        return new Response("Success");
+    }
+
+    protected function getFailureResponse(
+        ConstraintViolationListInterface $constraintViolationList
+    ) : Response {
+        return new Response("Failure", Response::HTTP_BAD_REQUEST);
+    }
 //    public function create(Request $request, ValidatorInterface $validator, NoteRepositoryInterface $noteRepository)
 //    {
 //        $note = new Note();

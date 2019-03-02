@@ -10,5 +10,5 @@ class User extends AbstractEntity
     public $password;
     public $active;
     public $deleted;
-    public $roles;
+    public $memberSince;
 }

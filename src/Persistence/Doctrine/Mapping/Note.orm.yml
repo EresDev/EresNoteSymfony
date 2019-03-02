@@ -1,7 +1,7 @@
 EresNote\Domain\Entity\Note:
   type: entity
   table: note
-  #repositoryClass: App\Entity\UserRepository
+  repositoryClass: EresNote\Persistence\Doctrine\Repository\NoteRepository
 
   id:
     id:
@@ -17,10 +17,23 @@ EresNote\Domain\Entity\Note:
       type: string
       length: 40
       nullable: true
+      options:
+        default: ""
+    creationDatetime:
+      type: datetime
+      column: creationDatetime
+      nullable: false
     user:
       type: integer
       column: user_id
       nullable: false
       options:
         unsigned: true
-        default: 1
+
+#  oneToOne:
+#    user:
+#      targetEntity: User
+#      joinColumn:
+#        name: id
+#        referencedColumnName: user_id
+#        onDelete: CASCADE
