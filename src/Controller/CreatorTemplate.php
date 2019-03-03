@@ -2,6 +2,7 @@
 
 namespace EresNote\Controller;
 
+use EresNote\Domain\Entity\AbstractEntity;
 use EresNote\Domain\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,7 @@ abstract class CreatorTemplate
         if ($constraintViolationList->count() === 0) {
             $this->processPreSuccessHook();
             $repository->persist($entity);
-            return $this->getSuccessResponse();
+            return $this->getSuccessResponse($entity);
         }
 
         return $this->getFailureResponse($constraintViolationList);
@@ -45,7 +46,7 @@ abstract class CreatorTemplate
 
     }
 
-    abstract protected function getSuccessResponse() : Response;
+    abstract protected function getSuccessResponse(AbstractEntity $entity) : Response;
 
     abstract protected function getFailureResponse(
         ConstraintViolationListInterface $constraintViolationList

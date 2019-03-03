@@ -14,7 +14,7 @@ class NoteCreatorControllerTest extends WebTestCase
             'POST',
             '/note',
             [
-                "title" => "",
+                "title" => "A sample title",
                 "content" => "Some test content",
                 "user" => 1
             ],

@@ -2,6 +2,7 @@
 
 namespace EresNote\Controller;
 
+use EresNote\Domain\Entity\AbstractEntity;
 use EresNote\Domain\Service\Factory\NoteFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -13,14 +14,20 @@ class NoteCreatorController extends CreatorTemplate
         return NoteFactory::class;
     }
 
-    protected function getSuccessResponse(): Response
+    protected function getSuccessResponse(AbstractEntity $entity): Response
     {
-        return new Response($this->translator->trans("creator.note.success"));
+        return new Response($entity, Response::HTTP_OK);
     }
 
     protected function getFailureResponse(
         ConstraintViolationListInterface $constraintViolationList
     ) : Response {
-        return new Response("Failure", Response::HTTP_BAD_REQUEST);
+        $errors = [];
+        foreach ($constraintViolationList as $index => $constraintViolation) {
+            $errors[$index][$constraintViolation->getPropertyPath()] =
+                $constraintViolation->getMessage();
+        }
+        $errors;
+        return new Response("", Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
