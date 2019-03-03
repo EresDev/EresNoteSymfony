@@ -1,4 +1,8 @@
 EresNote\Domain\Entity\Note:
   properties:
     title:
-      - NotBlank: ~
+      - NotBlank:
+          message: 'invalid.title.notblank'
+      - Length:
+          max: 50
+          maxMessage: 'invalid.title.maxlength'

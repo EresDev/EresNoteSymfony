@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="note_title_is_blank_error">
+                <source>invalid.title.notblank</source>
+                <target>The title must not be blank.</target>
+            </trans-unit>
+            <trans-unit id="note_title_length_above_max_limit">
+                <source>invalid.title.maxlength</source>
+                <target>The title must not be more than %limit% characters.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
