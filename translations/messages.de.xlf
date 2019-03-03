@@ -7,11 +7,6 @@
                 <target>Hinweis wurde erfolgreich erstellt.</target>
             </trans-unit>
 
-            <trans-unit id="invalid.title.notblank">
-                <source>invalid.title.notblank</source>
-                <target>The title must not be blank.</target>
-            </trans-unit>
-
         </body>
     </file>
 </xliff>
