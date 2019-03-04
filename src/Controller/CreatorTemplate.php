@@ -4,8 +4,8 @@ namespace EresNote\Controller;
 
 use EresNote\Domain\Entity\AbstractEntity;
 use EresNote\Domain\Repository\RepositoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,7 +24,7 @@ abstract class CreatorTemplate
         Request $request,
         ValidatorInterface $validator,
         RepositoryInterface $repository
-    ) : Response{
+    ) : JsonResponse{
         $requestParameters = $request->request->all();
         $factory = $this->getFactory();
         $entity = $factory::createFromParameters($requestParameters);
@@ -43,12 +43,11 @@ abstract class CreatorTemplate
 
     protected function processPreSuccessHook() : void
     {
-
     }
 
-    abstract protected function getSuccessResponse(AbstractEntity $entity) : Response;
+    abstract protected function getSuccessResponse(AbstractEntity $entity) : JsonResponse;
 
     abstract protected function getFailureResponse(
         ConstraintViolationListInterface $constraintViolationList
-    ) : Response;
+    ) : JsonResponse;
 }

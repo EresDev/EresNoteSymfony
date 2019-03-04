@@ -4,7 +4,7 @@ namespace EresNote\Controller;
 
 use EresNote\Domain\Entity\AbstractEntity;
 use EresNote\Domain\Service\Factory\NoteFactory;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class NoteCreatorController extends CreatorTemplate
@@ -14,20 +14,20 @@ class NoteCreatorController extends CreatorTemplate
         return NoteFactory::class;
     }
 
-    protected function getSuccessResponse(AbstractEntity $entity): Response
+    protected function getSuccessResponse(AbstractEntity $entity): JsonResponse
     {
-        return new Response($entity, Response::HTTP_OK);
+        return new JsonResponse($entity, JsonResponse::HTTP_OK);
     }
 
     protected function getFailureResponse(
         ConstraintViolationListInterface $constraintViolationList
-    ) : Response {
+    ) : JsonResponse {
         $errors = [];
         foreach ($constraintViolationList as $index => $constraintViolation) {
             $errors[$index][$constraintViolation->getPropertyPath()] =
                 $constraintViolation->getMessage();
         }
         $errors;
-        return new Response("", Response::HTTP_UNPROCESSABLE_ENTITY);
+        return new JsonResponse($errors, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

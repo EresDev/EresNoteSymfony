@@ -42,17 +42,4 @@ class NoteFactoryTest extends TestCase
         $this->assertEquals($expected['content'], $note->content);
         $this->assertEquals($expected['user'], $note->user);
     }
-
-    public function testCreateFromParameters_ToSkipUnnecessaryField(): void
-    {
-        //TODO this test is not required anymore. We are not using loop to hydrate entity anymore
-        $parameters = $this->getValidParameters();
-
-        $unnecessaryFieldName = "unnecessaryField";
-        $parameters[$unnecessaryFieldName] = 'Some Value';
-
-        $note = NoteFactory::createFromParameters($parameters);
-
-        $this->assertObjectNotHasAttribute($unnecessaryFieldName, $note);
-    }
 }
