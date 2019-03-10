@@ -2,32 +2,28 @@
 
 namespace EresNote\Controller;
 
-use EresNote\Domain\Entity\AbstractEntity;
-use EresNote\Domain\Service\Factory\NoteFactory;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
+use EresNote\Domain\Service\TranslatorInterface;
+use EresNote\UseCase\CreateNoteUseCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-class NoteCreatorController extends CreatorTemplate
+
+class NoteCreatorController extends ControllerTemplate
 {
-    protected function getFactory() : string
+    private $createNoteUseCase;
+
+    public function __construct(TranslatorInterface $translator, RequestStack $requestStack, CreateNoteUseCase $createNoteUseCase)
     {
-        return NoteFactory::class;
+        parent::__construct($translator, $requestStack);
+        $this->createNoteUseCase = $createNoteUseCase;
     }
 
-    protected function getSuccessResponse(AbstractEntity $entity): JsonResponse
+    protected function prepare(): void
     {
-        return new JsonResponse($entity, JsonResponse::HTTP_OK);
-    }
+        $requestParameters = $this->request->request->all();
+        $simpleResponse = $this->createNoteUseCase->execute($requestParameters);
 
-    protected function getFailureResponse(
-        ConstraintViolationListInterface $constraintViolationList
-    ) : JsonResponse {
-        $errors = [];
-        foreach ($constraintViolationList as $index => $constraintViolation) {
-            $errors[$index][$constraintViolation->getPropertyPath()] =
-                $constraintViolation->getMessage();
-        }
-        $errors;
-        return new JsonResponse($errors, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        $this->response->setStatusCode($simpleResponse->getStatusCode());
+        $this->response->setContent($simpleResponse->getContent());
     }
 }

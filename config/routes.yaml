@@ -1,4 +1,4 @@
 index:
     path: /note
     methods: [ post ]
-    controller: EresNote\Controller\NoteCreatorController::create
+    controller: EresNote\Controller\NoteCreatorController::handle
