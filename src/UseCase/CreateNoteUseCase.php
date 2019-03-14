@@ -4,8 +4,8 @@ namespace EresNote\UseCase;
 
 use EresNote\Domain\Entity\AbstractEntity;
 use EresNote\Domain\Service\Factory\NoteFactory;
-use EresNote\Domain\Service\ValueObject\SimpleResponse;
-use EresNote\Domain\Service\ValueObject\SimpleResponseInterface;
+use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;
+use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class CreateNoteUseCase extends CreatorTemplate
 {
@@ -14,15 +14,15 @@ class CreateNoteUseCase extends CreatorTemplate
         return NoteFactory::class;
     }
 
-    protected function getSuccessResponse(AbstractEntity $entity): SimpleResponseInterface
+    protected function getSuccessResponse(AbstractEntity $entity): SimpleHttpResponseInterface
     {
-        $response = new SimpleResponse(200, $entity);
+        $response = new SimpleHttpResponse(200, $entity);
         return $response;
     }
 
-    protected function getFailureResponse(array $errors): SimpleResponseInterface
+    protected function getFailureResponse(array $errors): SimpleHttpResponseInterface
     {
-        $response = new SimpleResponse(422, $errors);
+        $response = new SimpleHttpResponse(422, $errors);
         return $response;
     }
 }

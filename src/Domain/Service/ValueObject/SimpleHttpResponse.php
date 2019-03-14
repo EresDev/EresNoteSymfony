@@ -1,13 +1,11 @@
 <?php
 
-
 namespace EresNote\Domain\Service\ValueObject;
 
-use EresNote\Domain\Service\ValueObject\SimpleResponseInterface;
 use http\Exception\InvalidArgumentException;
 
 
-class SimpleResponse implements SimpleResponseInterface
+class SimpleHttpResponse implements SimpleHttpResponseInterface
 {
     private $statusCode;
     private $content;

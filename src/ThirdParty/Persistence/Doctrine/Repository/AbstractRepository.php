@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EresNote\Persistence\Doctrine\Repository;
+namespace EresNote\ThirdParty\Persistence\Doctrine\Repository;
 
 
 use Doctrine\ORM\EntityManagerInterface;

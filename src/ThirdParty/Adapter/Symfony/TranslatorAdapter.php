@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EresNote\Service\Adapater\Symfony;
+namespace EresNote\ThirdParty\Adapter\Symfony;
 
 
 use EresNote\Domain\Service\TranslatorInterface;

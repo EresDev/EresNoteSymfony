@@ -38,8 +38,8 @@ class NoteFactoryTest extends TestCase
 
     private function assertEveryAttribute(array $expected, Note $note) : void
     {
-        $this->assertEquals($expected['title'], $note->title);
-        $this->assertEquals($expected['content'], $note->content);
-        $this->assertEquals($expected['user'], $note->user);
+        $this->assertEquals($expected['title'], $note->getTitle());
+        $this->assertEquals($expected['content'], $note->getContent());
+        $this->assertEquals($expected['user'], $note->getUser());
     }
 }

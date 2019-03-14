@@ -5,9 +5,9 @@ namespace EresNote\Domain\Service;
 
 
 use EresNote\Domain\Entity\AbstractEntity;
-use EresNote\Domain\Service\ValueObject\ValidatorResponse;
+use EresNote\Domain\Service\ValueObject\ValidatorResponseInterface;
 
 interface ValidatorInterface
 {
-    public function validate(AbstractEntity $entity) : ValidatorResponse;
+    public function validate(AbstractEntity $entity) : ValidatorResponseInterface;
 }

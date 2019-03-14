@@ -1,11 +1,12 @@
 <?php
 
-namespace EresNote\Service\Adapater\Symfony;
+namespace EresNote\ThirdParty\Adapter\Symfony;
 
 use EresNote\Domain\Entity\AbstractEntity;
 
 use EresNote\Domain\Service\ValidatorInterface;
 use EresNote\Domain\Service\ValueObject\ValidatorResponse;
+use EresNote\Domain\Service\ValueObject\ValidatorResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -23,13 +24,14 @@ class ValidatorAdapter implements ValidatorInterface
         $this->validator = $validator;
     }
 
-    public function validate(AbstractEntity $entity): ValidatorResponse
+    public function validate(AbstractEntity $entity): ValidatorResponseInterface
     {
         $this->prepare($entity);
 
-        $validatorResponse = new ValidatorResponse();
-        $validatorResponse->isValid = $this->isValid();
-        $validatorResponse->errors = $this->getErrors();
+        $valid = $this->isValid();
+        $errors = $this->getErrors();
+
+        $validatorResponse = new ValidatorResponse($valid, $errors);
 
         return $validatorResponse;
     }

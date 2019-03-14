@@ -1,11 +1,26 @@
 <?php
 
-
 namespace EresNote\Domain\Service\ValueObject;
 
 
-class ValidatorResponse
+class ValidatorResponse implements ValidatorResponseInterface
 {
-    public $isValid;
-    public $errors;
+    private $valid;
+    private $errors;
+
+    public function __construct(bool $valid, array $errors)
+    {
+        $this->valid = $valid;;
+        $this->errors = $errors;
+    }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
 }
