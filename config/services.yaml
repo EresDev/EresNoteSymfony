@@ -27,4 +27,14 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-
+#    EresNote\Controller\NoteCreatorController:
+#        class: EresNote\Controller\NoteCreatorController
+#        public: true
+#        autowire: false
+#        arguments:
+#            - '@EresNote\Domain\Service\TranslatorInterface'
+#            - '@Symfony\Component\HttpFoundation\RequestStack'
+#            - '@EresNote\UseCase\CreateNoteUseCase'
+#
+#    EresNote\Domain\Service\TranslatorInterface:
+#        class: '@EresNote\ThirdParty\Adapter\Symfony\TranslatorAdapter'

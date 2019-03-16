@@ -4,6 +4,9 @@
 namespace EresNote\Tests\Unit\UseCase;
 
 
+use EresNote\Domain\Service\Factory\HttpResponseFactoryInterface;
+use EresNote\Domain\Service\SerializerInterface;
+use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 use PHPUnit\Framework\TestCase;
 use EresNote\Domain\Repository\RepositoryInterface;
 use EresNote\Domain\Service\ValidatorInterface;
@@ -14,24 +17,24 @@ abstract class CreatorTestBase extends TestCase
 {
     protected $dummyRequestParameters = [];
 
-    protected $errorsForValidParameters = [];
-    protected $validStatusCode = 200;
-
-    protected $errorsForInvalidParameters = [
-        'fieldName' => 'This is an error.',
-        'anotherFieldName' => 'This is another error.'
+    protected $responseContentForValidParameters = 'some random content string!';
+    protected $responseContentForInvalidParameters = [
+        'error1' => 'This is error 1.',
+        'error2' => 'This is error 2'
     ];
+    protected $validStatusCode = 200;
     protected $invalidStatusCode = 422;
 
     abstract public function testExecute_WithValidData();
+    abstract public function testExecute_WithInvalidData();
 
-    protected function getValidatorWithValidResponse()
+    protected function getValidator(bool $isValid, $contentOrErrors)
     {
         $validatorWithValidResponseStub = $this->createMock(
             ValidatorInterface::class
         );
 
-        $validValidatorResponse = $this->getValidValidatorResponse();
+        $validValidatorResponse = $this->getValidValidatorResponse($isValid, $contentOrErrors);
 
         $validatorWithValidResponseStub->method('validate')
             ->willReturn($validValidatorResponse);
@@ -40,17 +43,17 @@ abstract class CreatorTestBase extends TestCase
 
     }
 
-    protected function getValidValidatorResponse()
+    protected function getValidValidatorResponse(bool $isValid, $contentOrErrors)
     {
         $validatorResponseStub = $this->createMock(
             ValidatorResponseInterface::class
         );
 
         $validatorResponseStub->method('isValid')
-            ->willReturn(true);
+            ->willReturn($isValid);
 
         $validatorResponseStub->method('getErrors')
-            ->willReturn($this->errorsForValidParameters);
+            ->willReturn($contentOrErrors);
 
         return $validatorResponseStub;
     }
@@ -68,34 +71,34 @@ abstract class CreatorTestBase extends TestCase
         return $repositoryMock;
     }
 
-    protected function getValidatorWithInvalidResponse()
+    protected function getHttpResponseFactory(int $httpStatusCode, $contentOrErrors)
     {
-        $validatorWithInvalidResponseStub = $this->createMock(
-            ValidatorInterface::class
+        $serializerStub = $this->createMock(
+            HttpResponseFactoryInterface::class
         );
 
-        $InvalidValidatorResponse = $this->getInvalidValidatorResponse();
+        $serializerStub->method('create')
+            ->willReturn($this->getSimpleHttpResponse($httpStatusCode, $contentOrErrors));
 
-        $validatorWithInvalidResponseStub->method('validate')
-            ->willReturn($InvalidValidatorResponse);
-
-        return $validatorWithInvalidResponseStub;
-
+        return $serializerStub;
     }
 
-
-    protected function getInvalidValidatorResponse()
+    protected function getSimpleHttpResponse(int $httpStatusCode, $contentOrErrors)
     {
-        $validatorResponseStub = $this->createMock(
-            ValidatorResponseInterface::class
+        $validSimpleHttpResponse = $this->createMock(
+            SimpleHttpResponseInterface::class
         );
 
-        $validatorResponseStub->method('isValid')
-            ->willReturn(false);
+        if (!is_string($contentOrErrors)) {
+            $contentOrErrors = json_encode($contentOrErrors);
+        }
 
-        $validatorResponseStub->method('getErrors')
-            ->willReturn($this->errorsForInvalidParameters);
+        $validSimpleHttpResponse->method('getStatusCode')
+            ->willReturn($httpStatusCode);
 
-        return $validatorResponseStub;
+        $validSimpleHttpResponse->method('getContent')
+            ->willReturn($contentOrErrors);
+
+        return $validSimpleHttpResponse;
     }
 }

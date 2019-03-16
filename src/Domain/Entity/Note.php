@@ -2,7 +2,7 @@
 
 namespace EresNote\Domain\Entity;
 
-class Note extends AbstractEntity implements \JsonSerializable
+class Note extends AbstractEntity
 {
     private $title;
     private $content;
@@ -51,10 +51,4 @@ class Note extends AbstractEntity implements \JsonSerializable
         $this->user = $user;
     }
 
-    public function jsonSerialize()
-    {
-        $vars = get_object_vars($this);
-
-        return $vars;
-    }
 }

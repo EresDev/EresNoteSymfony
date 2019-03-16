@@ -43,7 +43,7 @@ class JsonSerializerTest extends TestCase
 
     private function getExpectedOutputFromArray(): string
     {
-        $expectedOutputFromArray = '{"[\'key1\' ":" \'value1","key2\' ":" \'value2\']"}';
+        $expectedOutputFromArray = '{"key1":"value1","key2":"value2"}';
         return $expectedOutputFromArray;
     }
 

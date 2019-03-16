@@ -4,6 +4,8 @@ namespace EresNote\UseCase;
 
 use EresNote\Domain\Entity\AbstractEntity;
 use EresNote\Domain\Repository\RepositoryInterface;
+use EresNote\Domain\Service\Factory\HttpResponseFactoryInterface;
+use EresNote\Domain\Service\SerializerInterface;
 use EresNote\Domain\Service\ValidatorInterface;
 use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
@@ -11,11 +13,16 @@ abstract class CreatorTemplate
 {
     private $validator;
     private $repository;
+    protected $httpResponseFactory;
 
-    public function __construct(ValidatorInterface $validator, RepositoryInterface $repository)
-    {
+    public function __construct(
+        ValidatorInterface $validator,
+        RepositoryInterface $repository,
+        HttpResponseFactoryInterface $httpResponseFactory
+    ){
         $this->validator = $validator;
         $this->repository = $repository;
+        $this->httpResponseFactory = $httpResponseFactory;
     }
 
     public function execute(array $requestParameters) : SimpleHttpResponseInterface {

@@ -16,13 +16,13 @@ class CreateNoteUseCase extends CreatorTemplate
 
     protected function getSuccessResponse(AbstractEntity $entity): SimpleHttpResponseInterface
     {
-        $response = new SimpleHttpResponse(200, $entity);
+        $response = $this->httpResponseFactory->create(200, $entity);
         return $response;
     }
 
     protected function getFailureResponse(array $errors): SimpleHttpResponseInterface
     {
-        $response = new SimpleHttpResponse(422, $errors);
+        $response = $this->httpResponseFactory->create(422, $errors);
         return $response;
     }
 }
