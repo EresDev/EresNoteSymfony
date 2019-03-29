@@ -1,104 +1,57 @@
 <?php
 
-
 namespace EresNote\Tests\Unit\UseCase;
 
-
-use EresNote\Domain\Service\Factory\HttpResponseFactoryInterface;
-use EresNote\Domain\Service\SerializerInterface;
+use EresNote\Domain\Service\Factory\EntityFactoryInterface;
+use EresNote\Domain\Service\ResponderInterface;
+use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;
 use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
-use PHPUnit\Framework\TestCase;
-use EresNote\Domain\Repository\RepositoryInterface;
-use EresNote\Domain\Service\ValidatorInterface;
-use EresNote\Domain\Service\ValueObject\ValidatorResponseInterface;
 use EresNote\Domain\Entity\AbstractEntity;
+use PHPUnit\Framework\TestCase;
 
 abstract class CreatorTestBase extends TestCase
 {
     protected $dummyRequestParameters = [];
 
-    protected $responseContentForValidParameters = 'some random content string!';
-    protected $responseContentForInvalidParameters = [
-        'error1' => 'This is error 1.',
-        'error2' => 'This is error 2'
-    ];
-    protected $validStatusCode = 200;
-    protected $invalidStatusCode = 422;
-
-    abstract public function testExecute_WithValidData();
-    abstract public function testExecute_WithInvalidData();
-
-    protected function getValidator(bool $isValid, $contentOrErrors)
+    protected function getEntityFactory(AbstractEntity $entity)
     {
-        $validatorWithValidResponseStub = $this->createMock(
-            ValidatorInterface::class
+        $factoryMock = $this->createMock(
+            EntityFactoryInterface::class
         );
 
-        $validValidatorResponse = $this->getValidValidatorResponse($isValid, $contentOrErrors);
+        $factoryMock->expects($this->once())
+            ->method('createFromParameters')
+            ->willReturn($entity);
 
-        $validatorWithValidResponseStub->method('validate')
-            ->willReturn($validValidatorResponse);
-
-        return $validatorWithValidResponseStub;
-
+        return $factoryMock;
     }
 
-    protected function getValidValidatorResponse(bool $isValid, $contentOrErrors)
+    protected function getEntity(int $entity_id)
     {
-        $validatorResponseStub = $this->createMock(
-            ValidatorResponseInterface::class
-        );
+        $entityStub = $this->createMock(AbstractEntity::class);
 
-        $validatorResponseStub->method('isValid')
-            ->willReturn($isValid);
+        $entityStub->method('getId')
+            ->willReturn($entity_id);
 
-        $validatorResponseStub->method('getErrors')
-            ->willReturn($contentOrErrors);
-
-        return $validatorResponseStub;
+        return $entityStub;
     }
 
-    protected function getRepository()
-    {
-        $repositoryMock = $this->createMock(
-            RepositoryInterface::class
-        );
+    protected function getResponder(
+        AbstractEntity $entity,
+        SimpleHttpResponseInterface $simpleHttpResponse
+    ){
+        $responderMock = $this->createMock(ResponderInterface::class);
 
-        $repositoryMock->expects($this->any())
-            ->method('persist')
-            ->with($this->isInstanceOf(AbstractEntity::class));
+        $responderMock->expects($this->once())
+            ->method('prepare')
+            ->with($entity)
+            ->willReturn($simpleHttpResponse);
 
-        return $repositoryMock;
+        return $responderMock;
     }
 
-    protected function getHttpResponseFactory(int $httpStatusCode, $contentOrErrors)
+    protected function getSimpleHttpResponse()
     {
-        $serializerStub = $this->createMock(
-            HttpResponseFactoryInterface::class
-        );
-
-        $serializerStub->method('create')
-            ->willReturn($this->getSimpleHttpResponse($httpStatusCode, $contentOrErrors));
-
-        return $serializerStub;
-    }
-
-    protected function getSimpleHttpResponse(int $httpStatusCode, $contentOrErrors)
-    {
-        $validSimpleHttpResponse = $this->createMock(
-            SimpleHttpResponseInterface::class
-        );
-
-        if (!is_string($contentOrErrors)) {
-            $contentOrErrors = json_encode($contentOrErrors);
-        }
-
-        $validSimpleHttpResponse->method('getStatusCode')
-            ->willReturn($httpStatusCode);
-
-        $validSimpleHttpResponse->method('getContent')
-            ->willReturn($contentOrErrors);
-
-        return $validSimpleHttpResponse;
+        return new SimpleHttpResponse(200, 'Some test content!');
     }
 }

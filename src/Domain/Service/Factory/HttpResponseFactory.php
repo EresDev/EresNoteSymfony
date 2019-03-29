@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EresNote\Domain\Service\Factory;
-
 
 use EresNote\Domain\Service\SerializerInterface;
 use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;

@@ -8,5 +8,5 @@ use EresNote\Domain\Entity\AbstractEntity;
 
 interface EntityFactoryInterface
 {
-    public static function createFromParameters(array $parameters) : AbstractEntity;
+    public function createFromParameters(array $parameters) : AbstractEntity;
 }

@@ -14,7 +14,9 @@ class NoteFactoryTest extends TestCase
     {
         $validParameters = $this->getValidParameters();
 
-        $note = NoteFactory::createFromParameters($validParameters);
+        $noteFactory = new NoteFactory();
+
+        $note = $noteFactory->createFromParameters($validParameters);
 
         $this->assertInstanceOf(
             Note::class,
