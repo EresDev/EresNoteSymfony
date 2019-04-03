@@ -1,9 +1,18 @@
 language: php
+# Allows use container-based infrastructure
+sudo: false
 php:
   - 7.3
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+env:
+  - SYMFONY_VERSION="4.2.*" DB=mysql
 before_script:
   - composer install --no-interaction
-  - mysql -e 'CREATE DATABASE eresnote;'
+  - cp .env.travis .env
 script:
   - php bin/phpunit
 
@@ -14,9 +23,6 @@ services:
 # Create database, schema and fixtures
 install:
   - composer install
-#  - cp app/config/parameters.yml.dist app/config/parameters.yml
-  - APP_ENV=test
-  - DATABASE_URL=mysql://root:@localhost:3306/eresnote
-#  - php bin/console doctrine:database:create
-  - php bin/console doctrine:schema:create
-#  - php bin/console doctrine:fixtures:load -n --env=test
+  - php bin/console doctrine:database:create --env=test
+  - php bin/console doctrine:schema:create --env=test
+  - php bin/console doctrine:fixtures:load -n --env=test
