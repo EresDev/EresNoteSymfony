@@ -3,6 +3,20 @@ php:
   - 7.3
 before_script:
   - composer install --no-interaction
-
+  - mysql -e 'CREATE DATABASE eresnote;'
 script:
   - php bin/phpunit
+
+services:
+  - mysql
+
+# Install composer dependencies,
+# Create database, schema and fixtures
+install:
+  - composer install
+#  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - APP_ENV=prod
+  - DATABASE_URL=mysql://root:@localhost:3306/eresnote
+  - php bin/console doctrine:database:create --env=test
+  - php bin/console doctrine:schema:create --env=test
+#  - php bin/console doctrine:fixtures:load -n --env=test
