@@ -20,10 +20,10 @@ abstract class ControllerTemplate
         $this->response = new JsonResponse();
     }
 
-    public function handle() : JsonResponse {
-        $this->prepare();
+    public function handleRequest() : JsonResponse {
+        $this->prepareResponse();
         return $this->response;
     }
 
-    protected abstract function prepare() : void;
+    protected abstract function prepareResponse() : void;
 }

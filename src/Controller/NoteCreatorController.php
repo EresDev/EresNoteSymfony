@@ -19,7 +19,7 @@ class NoteCreatorController extends ControllerTemplate
         $this->createNoteUseCase = $createNoteUseCase;
     }
 
-    protected function prepare(): void
+    protected function prepareResponse(): void
     {
         $requestParameters = $this->request->request->all();
         $simpleResponse = $this->createNoteUseCase->execute($requestParameters);
