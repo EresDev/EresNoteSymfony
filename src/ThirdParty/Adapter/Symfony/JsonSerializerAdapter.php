@@ -1,13 +1,7 @@
 <?php
-
-
 namespace EresNote\ThirdParty\Adapter\Symfony;
 
-
 use EresNote\Domain\Service\SerializerInterface;
-
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface as SymfonySerializerInterface;
 
 class JsonSerializerAdapter implements SerializerInterface
