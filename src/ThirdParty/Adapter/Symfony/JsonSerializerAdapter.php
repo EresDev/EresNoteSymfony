@@ -18,4 +18,6 @@ class JsonSerializerAdapter implements SerializerInterface
         $serializedJson = $this->serializer->serialize($data, 'json');
         return $serializedJson;
     }
+
+
 }

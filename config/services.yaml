@@ -11,6 +11,9 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+#        bind:
+#            Symfony\Component\Serializer\SerializerInterface $serializer: '@Symfony\Component\Serializer\Serializer'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -27,14 +30,14 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-#    EresNote\Controller\NoteCreatorController:
-#        class: EresNote\Controller\NoteCreatorController
-#        public: true
-#        autowire: false
-#        arguments:
-#            - '@EresNote\Domain\Service\TranslatorInterface'
-#            - '@Symfony\Component\HttpFoundation\RequestStack'
-#            - '@EresNote\UseCase\CreateNoteUseCase'
-#
-#    EresNote\Domain\Service\TranslatorInterface:
-#        class: '@EresNote\ThirdParty\Adapter\Symfony\TranslatorAdapter'
+
+    Symfony\Component\Serializer\SerializerInterface: '@Symfony\Component\Serializer\Serializer'
+    Symfony\Component\Serializer\Serializer:
+        autowire: false
+        arguments:
+            - ['@Symfony\Component\Serializer\Normalizer\ObjectNormalizer']
+            - ['@Symfony\Component\Serializer\Encoder\JsonEncoder']
+    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
+        autowire: true
+    Symfony\Component\Serializer\Encoder\JsonEncoder:
+        autowire: true
