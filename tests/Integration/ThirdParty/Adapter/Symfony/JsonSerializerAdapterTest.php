@@ -32,9 +32,14 @@ class JsonSerializerAdapterTest extends KernelTestCase
     public function testSerializeOnObject()
     {
         $sampleObject = new class {
-            public $id = 123;
-            public $name = "Test name";
+            public $userId;
+            public $name;
 
+            public function __construct()
+            {
+                $this->userId = 123;
+                $this->name = "Test name";
+            }
         };
 
         $jsonSerializerAdapter = new JsonSerializerAdapter($this->symfonySerializer);
