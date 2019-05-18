@@ -1,7 +1,6 @@
 <?php
 namespace EresNote\Tests\Integration\ThirdParty\Adapter\Symfony;
 
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;
 use EresNote\ThirdParty\Adapter\Symfony\JsonSerializerAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -45,7 +44,7 @@ class JsonSerializerAdapterTest extends KernelTestCase
         $jsonSerializerAdapter = new JsonSerializerAdapter($this->symfonySerializer);
         $serializedObject = $jsonSerializerAdapter->serialize($sampleObject);
 
-        $expected = '{"id":123,"name":"Test name"}';
+        $expected = '{"userId":123,"name":"Test name"}';
 
         $this->assertEquals($expected, $serializedObject);
     }
