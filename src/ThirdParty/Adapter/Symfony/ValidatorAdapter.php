@@ -14,11 +14,6 @@ class ValidatorAdapter implements ValidatorInterface
 {
     private $validator;
 
-    /**
-     * @var ConstraintViolationListInterface
-     */
-    private $constraintViolationList;
-
     public function __construct(SymfonyValidator $validator)
     {
         $this->validator = $validator;
@@ -26,34 +21,20 @@ class ValidatorAdapter implements ValidatorInterface
 
     public function validate(AbstractEntity $entity): ValidatorResponseInterface
     {
-        $this->prepare($entity);
+        $constraintViolationList = $this->validator->validate($entity);
 
-        $valid = $this->isValid();
-        $errors = $this->getErrors();
+        $valid = $constraintViolationList->count() === 0;
+        $errors = $this->extractErrors($constraintViolationList);
 
         $validatorResponse = new ValidatorResponse($valid, $errors);
 
         return $validatorResponse;
     }
 
-    private function prepare(AbstractEntity $entity): void
-    {
-        $this->constraintViolationList = $this->validator->validate($entity);
-    }
-
-    private function isValid(): bool
-    {
-        if ($this->constraintViolationList->count() === 0) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function getErrors(): array
+    private function extractErrors(ConstraintViolationListInterface $constraintViolationList): array
     {
         $errors = [];
-        foreach ($this->constraintViolationList as $index => $constraintViolation) {
+        foreach ($constraintViolationList as $index => $constraintViolation) {
             $propertyNameOfEntity = $constraintViolation->getPropertyPath();
             $errors[$index][$propertyNameOfEntity] = $constraintViolation->getMessage();
         }

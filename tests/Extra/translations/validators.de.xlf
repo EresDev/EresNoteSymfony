@@ -3,12 +3,12 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="note_title_blank_error">
-                <source>invalid.title.notblank</source>
-                <target>The title must not be blank.</target>
+                <source>invalid.test.title.notblank</source>
+                <target>Der Titel darf nicht leer sein.</target>
             </trans-unit>
             <trans-unit id="note_title_length_above_max_limit_error">
-                <source>invalid.title.maxlength</source>
-                <target>The title must not be more than %limit% characters.</target>
+                <source>invalid.test.title.maxlength</source>
+                <target>Der Titel darf nicht länger als %limit% Zeichen sein.</target>
             </trans-unit>
         </body>
     </file>

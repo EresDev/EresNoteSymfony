@@ -1,0 +1,8 @@
+EresNote\Tests\Extra\TestEntity:
+  properties:
+    title:
+      - NotBlank:
+          message: 'invalid.test.title.notblank'
+      - Length:
+          max: 50
+          maxMessage: 'invalid.test.title.maxlength'
