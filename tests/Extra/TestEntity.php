@@ -1,9 +1,16 @@
 <?php
 namespace EresNote\Tests\Extra;
 
-class TestEntity
+use EresNote\Domain\Entity\AbstractEntity;
+
+class TestEntity extends AbstractEntity
 {
     private $title;
+
+    public function __construct(string $title)
+    {
+        $this->title = $title;
+    }
 
     public function getTitle() : string
     {
