@@ -6,20 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class TranslatorAdapterTest extends KernelTestCase
 {
-    private $symfonyTranslator;
+    private $translator;
 
     protected function setUp()
     {
         self::bootKernel();
 
-        $this->symfonyTranslator = self::$container->get(
+        $this->translator = self::$container->get(
             'Symfony\Contracts\Translation\TranslatorInterface'
         );
     }
 
     public function testTranslateForDefaultLocaleEnglish()
     {
-        $translatorAdapter = new TranslatorAdapter($this->symfonyTranslator);
+        $translatorAdapter = new TranslatorAdapter($this->translator);
 
         $testString = 'tests.integration.translation.adapter';
 
@@ -32,9 +32,9 @@ class TranslatorAdapterTest extends KernelTestCase
 
     public function testTranslateForModifiedLocaleGerman()
     {
-        $this->symfonyTranslator->setLocale('de_DE');
+        $this->translator->setLocale('de_DE');
 
-        $translatorAdapter = new TranslatorAdapter($this->symfonyTranslator);
+        $translatorAdapter = new TranslatorAdapter($this->translator);
 
         $testString = 'tests.integration.translation.adapter';
 

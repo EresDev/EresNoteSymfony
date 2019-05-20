@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class JsonSerializerAdapterTest extends KernelTestCase
 {
-    private $symfonySerializer;
+    private $serializer;
 
     protected function setUp()
     {
         self::bootKernel();
-        $this->symfonySerializer = self::$container->get(
+        $this->serializer = self::$container->get(
             'Symfony\Component\Serializer\SerializerInterface'
         );
     }
@@ -20,7 +20,7 @@ class JsonSerializerAdapterTest extends KernelTestCase
     {
         $sampleArray = ['id' => 123, 'name' => 'Test name'];
 
-        $jsonSerializerAdapter = new JsonSerializerAdapter($this->symfonySerializer);
+        $jsonSerializerAdapter = new JsonSerializerAdapter($this->serializer);
         $serializedArray = $jsonSerializerAdapter->serialize($sampleArray);
 
         $expected = '{"id":123,"name":"Test name"}';
@@ -41,7 +41,7 @@ class JsonSerializerAdapterTest extends KernelTestCase
             }
         };
 
-        $jsonSerializerAdapter = new JsonSerializerAdapter($this->symfonySerializer);
+        $jsonSerializerAdapter = new JsonSerializerAdapter($this->serializer);
         $serializedObject = $jsonSerializerAdapter->serialize($sampleObject);
 
         $expected = '{"userId":123,"name":"Test name"}';
