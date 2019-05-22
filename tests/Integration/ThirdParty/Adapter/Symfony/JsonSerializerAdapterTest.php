@@ -1,22 +1,22 @@
 <?php
 namespace EresNote\Tests\Integration\ThirdParty\Adapter\Symfony;
 
+use EresNote\Tests\Integration\IntegrationTestCase;
 use EresNote\ThirdParty\Adapter\Symfony\JsonSerializerAdapter;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class JsonSerializerAdapterTest extends KernelTestCase
+class JsonSerializerAdapterTest extends IntegrationTestCase
 {
     private $serializer;
 
-    protected function setUp()
+    protected function setUp() : void
     {
-        self::bootKernel();
-        $this->serializer = self::$container->get(
+        parent::setUp();
+        $this->serializer = parent::getService(
             'Symfony\Component\Serializer\SerializerInterface'
         );
     }
 
-    public function testSerializeOnArray()
+    public function testSerializeOnArray() : void
     {
         $sampleArray = ['id' => 123, 'name' => 'Test name'];
 
@@ -28,7 +28,7 @@ class JsonSerializerAdapterTest extends KernelTestCase
         $this->assertEquals($expected, $serializedArray);
     }
 
-    public function testSerializeOnObject()
+    public function testSerializeOnObject() : void
     {
         $sampleObject = new class {
             public $userId;

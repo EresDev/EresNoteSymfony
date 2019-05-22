@@ -2,18 +2,17 @@
 namespace EresNote\Tests\Integration\ThirdParty\Adapter\Symfony;
 
 use EresNote\Tests\Extra\TestEntity;
+use EresNote\Tests\Integration\IntegrationTestCase;
 use EresNote\ThirdParty\Adapter\Symfony\ValidatorAdapter;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class ValidatorAdapterTest extends KernelTestCase
+class ValidatorAdapterTest extends IntegrationTestCase
 {
     private $validator;
 
     protected function setUp()
     {
-        self::bootKernel();
-
-        $this->validator = self::$container->get(
+        parent::setUp();
+        $this->validator = parent::getService(
             'Symfony\Component\Validator\Validator\ValidatorInterface'
         );
     }

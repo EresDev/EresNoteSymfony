@@ -1,18 +1,17 @@
 <?php
 namespace EresNote\Tests\Integration\ThirdParty\Adapter\Symfony;
 
+use EresNote\Tests\Integration\IntegrationTestCase;
 use EresNote\ThirdParty\Adapter\Symfony\TranslatorAdapter;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TranslatorAdapterTest extends KernelTestCase
+class TranslatorAdapterTest extends IntegrationTestCase
 {
     private $translator;
 
     protected function setUp()
     {
-        self::bootKernel();
-
-        $this->translator = self::$container->get(
+        parent::setUp();
+        $this->translator = parent::getService(
             'Symfony\Contracts\Translation\TranslatorInterface'
         );
     }
