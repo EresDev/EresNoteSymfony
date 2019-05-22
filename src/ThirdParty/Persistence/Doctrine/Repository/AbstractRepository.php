@@ -1,8 +1,5 @@
 <?php
-
-
 namespace EresNote\ThirdParty\Persistence\Doctrine\Repository;
-
 
 use Doctrine\ORM\EntityManagerInterface;
 use EresNote\Domain\Entity\AbstractEntity;

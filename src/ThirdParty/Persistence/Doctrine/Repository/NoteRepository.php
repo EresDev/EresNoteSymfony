@@ -1,6 +1,4 @@
 <?php
-
-
 namespace EresNote\ThirdParty\Persistence\Doctrine\Repository;
 
 use EresNote\Domain\Entity\Note;

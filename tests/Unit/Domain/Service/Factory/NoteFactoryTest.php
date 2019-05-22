@@ -1,8 +1,5 @@
 <?php
-
-
 namespace EresNote\Tests\Unit\Domain\Service\Factory;
-
 
 use EresNote\Domain\Entity\Note;
 use EresNote\Domain\Service\Factory\NoteFactory;
