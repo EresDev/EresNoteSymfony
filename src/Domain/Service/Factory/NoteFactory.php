@@ -1,6 +1,4 @@
 <?php
-
-
 namespace EresNote\Domain\Service\Factory;
 
 use EresNote\Domain\Entity\AbstractEntity;
