@@ -1,20 +1,20 @@
 <?php
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
-use App\Tests\Extra\DataFixture\NoteFixture;
+use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Integration\DbIntegrationTestCase;
-use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
+use App\ThirdParty\Persistence\Doctrine\Repository\UserRepository;
 
-class NoteRepositoryTest extends DbIntegrationTestCase
+class UserRepositoryTest extends DbIntegrationTestCase
 {
     private $repository;
 
     protected function setUp() : void
     {
         parent::setUp();
-        $this->repository = new NoteRepository(parent::getEntityManager());
+        $this->repository = new UserRepository(parent::getEntityManager());
 
-        $fixture = new NoteFixture();
+        $fixture = new UserFixture();
         $fixture->load(parent::getEntityManager());
     }
 

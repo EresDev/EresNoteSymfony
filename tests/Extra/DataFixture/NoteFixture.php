@@ -8,15 +8,20 @@ use App\Domain\Entity\Note;
 
 class NoteFixture extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager) : void
     {
         $note = new Note();
         $note->setTitle('A test title');
         $note->setContent('Some test content');
         $note->setCreationDatetime(new \DateTime());
-        $note->setUser(1);
+
+        $user = $this->getReference(UserFixture::USER_REFERENCE);
+
+        $note->setUser($user->getId());
 
         $manager->persist($note);
         $manager->flush();
     }
+
+
 }
