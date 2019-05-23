@@ -1,6 +1,6 @@
 <?php
 
-namespace EresNote\Domain\Entity;
+namespace App\Domain\Entity;
 
 abstract class AbstractEntity
 {

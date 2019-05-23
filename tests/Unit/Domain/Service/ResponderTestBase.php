@@ -1,15 +1,15 @@
 <?php
 
-namespace EresNote\Tests\Unit\Domain\Service;
+namespace App\Tests\Unit\Domain\Service;
 
-use EresNote\Domain\Entity\AbstractEntity;
-use EresNote\Domain\Repository\RepositoryInterface;
-use EresNote\Domain\Service\Factory\HttpResponseFactoryInterface;
-use EresNote\Domain\Service\Responder;
-use EresNote\Domain\Service\ValidatorInterface;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
-use EresNote\Domain\Service\ValueObject\ValidatorResponse;
+use App\Domain\Entity\AbstractEntity;
+use App\Domain\Repository\RepositoryInterface;
+use App\Domain\Service\Factory\HttpResponseFactoryInterface;
+use App\Domain\Service\Responder;
+use App\Domain\Service\ValidatorInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponse;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
 class ResponderTestBase extends TestCase

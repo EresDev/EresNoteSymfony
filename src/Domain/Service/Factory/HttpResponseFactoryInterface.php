@@ -1,10 +1,7 @@
 <?php
+namespace App\Domain\Service\Factory;
 
-
-namespace EresNote\Domain\Service\Factory;
-
-
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 interface HttpResponseFactoryInterface
 {

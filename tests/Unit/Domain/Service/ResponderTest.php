@@ -1,9 +1,9 @@
 <?php
 
-namespace EresNote\Tests\Unit\Domain\Service;
+namespace App\Tests\Unit\Domain\Service;
 
-use EresNote\Domain\Service\Responder;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\Responder;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class ResponderTest extends ResponderTestBase
 {

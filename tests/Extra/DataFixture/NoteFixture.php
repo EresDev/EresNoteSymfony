@@ -1,10 +1,10 @@
 <?php
 
-namespace EresNote\Tests\Extra\DataFixture;
+namespace App\Tests\Extra\DataFixture;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use EresNote\Domain\Entity\Note;
+use App\Domain\Entity\Note;
 
 class NoteFixture extends Fixture
 {

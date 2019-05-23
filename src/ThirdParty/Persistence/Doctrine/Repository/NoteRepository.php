@@ -1,8 +1,8 @@
 <?php
-namespace EresNote\ThirdParty\Persistence\Doctrine\Repository;
+namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
-use EresNote\Domain\Entity\Note;
-use EresNote\Domain\Repository\NoteRepositoryInterface;
+use App\Domain\Entity\Note;
+use App\Domain\Repository\NoteRepositoryInterface;
 
 class NoteRepository extends AbstractRepository implements NoteRepositoryInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace EresNote\UseCase;
+namespace App\UseCase;
 
-use EresNote\Domain\Service\Factory\EntityFactoryInterface;
-use EresNote\Domain\Service\ResponderInterface;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\Factory\EntityFactoryInterface;
+use App\Domain\Service\ResponderInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 abstract class CreatorTemplate
 {

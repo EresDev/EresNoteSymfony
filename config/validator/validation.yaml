@@ -1,4 +1,4 @@
-EresNote\Domain\Entity\Note:
+App\Domain\Entity\Note:
   properties:
     title:
       - NotBlank:

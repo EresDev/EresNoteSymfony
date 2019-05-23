@@ -1,12 +1,12 @@
 <?php
 
-namespace EresNote\Tests\Unit\UseCase;
+namespace App\Tests\Unit\UseCase;
 
-use EresNote\Domain\Service\Factory\EntityFactoryInterface;
-use EresNote\Domain\Service\ResponderInterface;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
-use EresNote\Domain\Entity\AbstractEntity;
+use App\Domain\Service\Factory\EntityFactoryInterface;
+use App\Domain\Service\ResponderInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponse;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Entity\AbstractEntity;
 use PHPUnit\Framework\TestCase;
 
 abstract class CreatorTestBase extends TestCase

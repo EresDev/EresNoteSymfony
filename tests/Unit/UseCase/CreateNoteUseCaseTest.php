@@ -1,8 +1,8 @@
 <?php
 
-namespace EresNote\Tests\Unit\UseCase;
+namespace App\Tests\Unit\UseCase;
 
-use EresNote\UseCase\CreateNoteUseCase;
+use App\UseCase\CreateNoteUseCase;
 
 class CreateNoteUseCaseTest extends CreatorTestBase
 {

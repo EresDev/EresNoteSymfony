@@ -1,7 +1,7 @@
 <?php
-namespace EresNote\ThirdParty\Adapter\Symfony;
+namespace App\ThirdParty\Adapter\Symfony;
 
-use EresNote\Domain\Service\TranslatorInterface;
+use App\Domain\Service\TranslatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface as SymfonyTranslator;
 
 class TranslatorAdapter implements TranslatorInterface

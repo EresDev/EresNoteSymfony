@@ -1,11 +1,11 @@
 <?php
 
 
-namespace EresNote\Domain\Service;
+namespace App\Domain\Service;
 
 
-use EresNote\Domain\Entity\AbstractEntity;
-use EresNote\Domain\Service\ValueObject\ValidatorResponseInterface;
+use App\Domain\Entity\AbstractEntity;
+use App\Domain\Service\ValueObject\ValidatorResponseInterface;
 
 interface ValidatorInterface
 {

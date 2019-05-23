@@ -1,6 +1,6 @@
 <?php
 
-namespace EresNote\Domain\Service\ValueObject;
+namespace App\Domain\Service\ValueObject;
 
 
 class ValidatorResponse implements ValidatorResponseInterface

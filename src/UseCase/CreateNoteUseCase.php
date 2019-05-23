@@ -1,6 +1,6 @@
 <?php
 
-namespace EresNote\UseCase;
+namespace App\UseCase;
 
 class CreateNoteUseCase extends CreatorTemplate
 {

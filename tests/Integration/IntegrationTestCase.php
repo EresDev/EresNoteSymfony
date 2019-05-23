@@ -1,5 +1,5 @@
 <?php
-namespace EresNote\Tests\Integration;
+namespace App\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

@@ -1,7 +1,7 @@
-EresNote\Domain\Entity\Note:
+App\Domain\Entity\Note:
   type: entity
   table: note
-  repositoryClass: EresNote\Persistence\Doctrine\Repository\NoteRepository
+  repositoryClass: App\Persistence\Doctrine\Repository\NoteRepository
 
   id:
     id:

@@ -1,10 +1,10 @@
 <?php
 
-namespace EresNote\Domain\Service\Factory;
+namespace App\Domain\Service\Factory;
 
-use EresNote\Domain\Service\SerializerInterface;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponse;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\SerializerInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponse;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class HttpResponseFactory implements HttpResponseFactoryInterface
 {

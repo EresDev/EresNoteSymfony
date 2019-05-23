@@ -1,9 +1,9 @@
 <?php
-namespace EresNote\Tests\Integration\ThirdParty\Adapter\Symfony;
+namespace App\Tests\Integration\ThirdParty\Adapter\Symfony;
 
-use EresNote\Tests\Extra\TestEntity;
-use EresNote\Tests\Integration\IntegrationTestCase;
-use EresNote\ThirdParty\Adapter\Symfony\ValidatorAdapter;
+use App\Tests\Extra\TestEntity;
+use App\Tests\Integration\IntegrationTestCase;
+use App\ThirdParty\Adapter\Symfony\ValidatorAdapter;
 
 class ValidatorAdapterTest extends IntegrationTestCase
 {

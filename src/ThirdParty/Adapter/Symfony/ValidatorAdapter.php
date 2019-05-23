@@ -1,12 +1,12 @@
 <?php
 
-namespace EresNote\ThirdParty\Adapter\Symfony;
+namespace App\ThirdParty\Adapter\Symfony;
 
-use EresNote\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\AbstractEntity;
 
-use EresNote\Domain\Service\ValidatorInterface;
-use EresNote\Domain\Service\ValueObject\ValidatorResponse;
-use EresNote\Domain\Service\ValueObject\ValidatorResponseInterface;
+use App\Domain\Service\ValidatorInterface;
+use App\Domain\Service\ValueObject\ValidatorResponse;
+use App\Domain\Service\ValueObject\ValidatorResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 

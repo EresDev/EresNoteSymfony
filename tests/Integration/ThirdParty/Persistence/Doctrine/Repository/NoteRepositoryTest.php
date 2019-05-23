@@ -1,9 +1,9 @@
 <?php
-namespace EresNote\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
+namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
-use EresNote\Tests\Extra\DataFixture\NoteFixture;
-use EresNote\Tests\Integration\IntegrationTestCase;
-use EresNote\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
+use App\Tests\Extra\DataFixture\NoteFixture;
+use App\Tests\Integration\IntegrationTestCase;
+use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
 
 class NoteRepositoryTest extends IntegrationTestCase
 {

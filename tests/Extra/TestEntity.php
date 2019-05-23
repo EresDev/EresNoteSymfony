@@ -1,7 +1,7 @@
 <?php
-namespace EresNote\Tests\Extra;
+namespace App\Tests\Extra;
 
-use EresNote\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\AbstractEntity;
 
 class TestEntity extends AbstractEntity
 {

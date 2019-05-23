@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EresNote\Domain\Repository;
+namespace App\Domain\Repository;
 
 
 interface NoteRepositoryInterface extends RepositoryInterface

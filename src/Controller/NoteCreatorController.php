@@ -1,9 +1,9 @@
 <?php
 
-namespace EresNote\Controller;
+namespace App\Controller;
 
-use EresNote\Domain\Service\TranslatorInterface;
-use EresNote\UseCase\CreateNoteUseCase;
+use App\Domain\Service\TranslatorInterface;
+use App\UseCase\CreateNoteUseCase;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class NoteCreatorController extends ControllerTemplate

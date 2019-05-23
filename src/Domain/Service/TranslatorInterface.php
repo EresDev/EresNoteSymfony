@@ -1,8 +1,5 @@
 <?php
-
-
-namespace EresNote\Domain\Service;
-
+namespace App\Domain\Service;
 
 interface TranslatorInterface
 {

@@ -1,4 +1,4 @@
-EresNote\Tests\Extra\TestEntity:
+App\Tests\Extra\TestEntity:
   properties:
     title:
       - NotBlank:

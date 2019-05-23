@@ -1,8 +1,8 @@
 <?php
 
-namespace EresNote\Domain\Service\ValueObject;
+namespace App\Domain\Service\ValueObject;
 
-use EresNote\Domain\Service\SerializerInterface;
+use App\Domain\Service\SerializerInterface;
 use http\Exception\InvalidArgumentException;
 
 

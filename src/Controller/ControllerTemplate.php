@@ -1,9 +1,7 @@
 <?php
+namespace App\Controller;
 
-
-namespace EresNote\Controller;
-
-use EresNote\Domain\Service\TranslatorInterface;
+use App\Domain\Service\TranslatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 

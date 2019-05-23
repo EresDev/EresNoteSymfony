@@ -1,11 +1,11 @@
 <?php
 
-namespace EresNote\Domain\Service;
+namespace App\Domain\Service;
 
-use EresNote\Domain\Entity\AbstractEntity;
-use EresNote\Domain\Repository\RepositoryInterface;
-use EresNote\Domain\Service\Factory\HttpResponseFactoryInterface;
-use EresNote\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Entity\AbstractEntity;
+use App\Domain\Repository\RepositoryInterface;
+use App\Domain\Service\Factory\HttpResponseFactoryInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class Responder implements ResponderInterface
 {

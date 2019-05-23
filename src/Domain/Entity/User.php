@@ -1,7 +1,6 @@
 <?php
 
-
-namespace EresNote\Domain\Entity;
+namespace App\Domain\Entity;
 
 
 class User extends AbstractEntity

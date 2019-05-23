@@ -1,7 +1,7 @@
-EresNote\Domain\Entity\User:
+App\Domain\Entity\User:
   type: entity
   table: user
-  #repositoryClass: EresNote\Persistence\Doctrine\Repository\UserRepository
+  #repositoryClass: App\Persistence\Doctrine\Repository\UserRepository
 
   id:
     id:

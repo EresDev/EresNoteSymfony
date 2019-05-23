@@ -1,8 +1,8 @@
 <?php
-namespace EresNote\Tests\Unit\Domain\Service\Factory;
+namespace App\Tests\Unit\Domain\Service\Factory;
 
-use EresNote\Domain\Entity\Note;
-use EresNote\Domain\Service\Factory\NoteFactory;
+use App\Domain\Entity\Note;
+use App\Domain\Service\Factory\NoteFactory;
 use PHPUnit\Framework\TestCase;
 
 class NoteFactoryTest extends TestCase

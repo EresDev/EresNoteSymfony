@@ -1,10 +1,10 @@
 <?php
 
 
-namespace EresNote\Domain\Service\Factory;
+namespace App\Domain\Service\Factory;
 
 
-use EresNote\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\AbstractEntity;
 
 interface EntityFactoryInterface
 {

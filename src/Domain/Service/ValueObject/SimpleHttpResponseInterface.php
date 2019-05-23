@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EresNote\Domain\Service\ValueObject;
+namespace App\Domain\Service\ValueObject;
 
 
 interface SimpleHttpResponseInterface

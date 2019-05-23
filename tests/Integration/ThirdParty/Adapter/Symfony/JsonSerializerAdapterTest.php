@@ -1,8 +1,8 @@
 <?php
-namespace EresNote\Tests\Integration\ThirdParty\Adapter\Symfony;
+namespace App\Tests\Integration\ThirdParty\Adapter\Symfony;
 
-use EresNote\Tests\Integration\IntegrationTestCase;
-use EresNote\ThirdParty\Adapter\Symfony\JsonSerializerAdapter;
+use App\Tests\Integration\IntegrationTestCase;
+use App\ThirdParty\Adapter\Symfony\JsonSerializerAdapter;
 
 class JsonSerializerAdapterTest extends IntegrationTestCase
 {

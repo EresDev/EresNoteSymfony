@@ -1,9 +1,9 @@
 <?php
-namespace EresNote\ThirdParty\Persistence\Doctrine\Repository;
+namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
-use EresNote\Domain\Entity\AbstractEntity;
-use EresNote\Domain\Repository\RepositoryInterface;
+use App\Domain\Entity\AbstractEntity;
+use App\Domain\Repository\RepositoryInterface;
 
 abstract class AbstractRepository implements RepositoryInterface
 {

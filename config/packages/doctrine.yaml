@@ -25,5 +25,5 @@ doctrine:
                 is_bundle: false
                 type: yml
                 dir: '%kernel.project_dir%/src/ThirdParty/Persistence/Doctrine/Mapping'
-                prefix: 'EresNote\Domain\Entity'
-                alias: EresNote
+                prefix: 'App\Domain\Entity'
+                alias: App

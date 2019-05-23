@@ -1,10 +1,7 @@
 <?php
+namespace App\Domain\Repository;
 
-
-namespace EresNote\Domain\Repository;
-
-
-use EresNote\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\AbstractEntity;
 
 interface RepositoryInterface
 {
