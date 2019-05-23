@@ -4,6 +4,7 @@ namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Integration\IntegrationTestCase;
 use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 class NoteRepositoryTest extends IntegrationTestCase
 {
@@ -15,17 +16,18 @@ class NoteRepositoryTest extends IntegrationTestCase
         $entityManager = $this->getService('doctrine')->getManager();
         $this->repository = new NoteRepository($entityManager);
 
+        $purger = new ORMPurger($entityManager);
+        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $purger->purge();
+
         $fixture = new NoteFixture();
         $fixture->load($entityManager);
     }
 
     public function testGetById() : void
     {
-        $this->markTestSkipped('must be revisited.');
-        $noteId = 1111;
+        $entity = $this->repository->getById(1);
 
-        $entity = $this->repository->getById(1111);
-        $this->assertEquals($noteId, $entity->getId());
-
+        $this->assertNotNull($entity);
     }
 }

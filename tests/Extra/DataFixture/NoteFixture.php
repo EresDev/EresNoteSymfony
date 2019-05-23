@@ -11,8 +11,7 @@ class NoteFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $note = new Note();
-        $note->setId(1111);
-        $note->setTitle('1A test title');
+        $note->setTitle('A test title');
         $note->setContent('Some test content');
         $note->setCreationDatetime(new \DateTime());
         $note->setUser(1);
