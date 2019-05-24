@@ -34,12 +34,12 @@ class User extends AbstractEntity
 
     public function getActivated() : bool
     {
-        return $this->active;
+        return $this->activated;
     }
 
     public function setActivated($active): void
     {
-        $this->active = $active;
+        $this->activated = $active;
     }
 
     public function getDeleted() : bool

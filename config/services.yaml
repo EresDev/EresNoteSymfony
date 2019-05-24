@@ -53,15 +53,19 @@ services:
     Symfony\Component\Validator\Validator\ValidatorInterface: '@validator'
 
 
+#    App\Tests\Extra\DataFixture\NoteFixture:
+#        calls:
+#            - [setReferenceRepository, ['@Doctrine\Common\DataFixtures\ProxyReferenceRepository']]
+#
+#    App\Tests\Extra\DataFixture\UserFixture:
+#        calls:
+#            - [setReferenceRepository, ['@Doctrine\Common\DataFixtures\ProxyReferenceRepository']]
+#
+#    Doctrine\Common\DataFixtures\ProxyReferenceRepository:
+#        autowire: true
+#        shared: true
+
     App\Tests\Extra\DataFixture\NoteFixture:
-        calls:
-            - [setReferenceRepository, ['@Doctrine\Common\DataFixtures\ProxyReferenceRepository']]
-
+        tags: ['doctrine.fixture.orm']
     App\Tests\Extra\DataFixture\UserFixture:
-        calls:
-            - [setReferenceRepository, ['@Doctrine\Common\DataFixtures\ProxyReferenceRepository']]
-
-    Doctrine\Common\DataFixtures\ProxyReferenceRepository:
-        autowire: true
-        shared: true
-
+        tags: ['doctrine.fixture.orm']

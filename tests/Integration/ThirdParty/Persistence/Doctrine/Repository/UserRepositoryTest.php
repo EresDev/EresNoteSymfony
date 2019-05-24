@@ -1,6 +1,7 @@
 <?php
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
+use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Integration\DbIntegrationTestCase;
 use App\ThirdParty\Persistence\Doctrine\Repository\UserRepository;
@@ -14,11 +15,9 @@ class UserRepositoryTest extends DbIntegrationTestCase
         parent::setUp();
         $this->repository = new UserRepository(parent::getEntityManager());
 
-        $fixture = $this->getService(
-          'App\Tests\Extra\DataFixture\UserFixture'
-        );
-            //new UserFixture();
-        $fixture->load(parent::getEntityManager());
+        $this->loadFixtures(array(
+            UserFixture::class
+        ));
     }
 
     public function testGetById() : void

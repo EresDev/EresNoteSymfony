@@ -20,7 +20,7 @@ class UserFixture extends FixtureTemplate
 
         $manager->flush();
 
-        $this->addReference("userfixture", $entity);
+        $this->setReference("userfixture", $entity);
 
     }
 

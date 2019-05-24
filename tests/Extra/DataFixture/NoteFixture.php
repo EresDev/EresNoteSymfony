@@ -7,7 +7,7 @@ use App\Domain\Entity\Note;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class NoteFixture extends FixtureTemplate implements DependentFixtureInterface
+class NoteFixture extends FixtureTemplate
 {
     public function load(ObjectManager $manager): void
     {
@@ -19,7 +19,6 @@ class NoteFixture extends FixtureTemplate implements DependentFixtureInterface
 
         $manager->flush();
 
-        $this->addReference(get_class($this), $entity);
     }
 
     public function getEntity() : AbstractEntity
@@ -36,12 +35,7 @@ class NoteFixture extends FixtureTemplate implements DependentFixtureInterface
         return $note;
     }
 
-    public function getDependencies()
-    {
-        return array(
-            UserFixture::class
-        );
-    }
+
 
 
 }
