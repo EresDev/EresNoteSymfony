@@ -4,6 +4,7 @@ namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Integration\DbIntegrationTestCase;
 use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class NoteRepositoryTest extends DbIntegrationTestCase
 {
@@ -14,8 +15,11 @@ class NoteRepositoryTest extends DbIntegrationTestCase
         parent::setUp();
         $this->repository = new NoteRepository(parent::getEntityManager());
 
-        $fixture = new NoteFixture();
+        $fixture = $this->getService(
+            'App\Tests\Extra\DataFixture\NoteFixture'
+        );//new NoteFixture();
         $fixture->load(parent::getEntityManager());
+
     }
 
     public function testGetById() : void

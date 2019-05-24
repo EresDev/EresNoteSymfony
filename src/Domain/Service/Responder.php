@@ -3,23 +3,23 @@
 namespace App\Domain\Service;
 
 use App\Domain\Entity\AbstractEntity;
-use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Service\Factory\HttpResponseFactoryInterface;
+use App\Domain\Service\Factory\RepositoryFactoryInterface;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class Responder implements ResponderInterface
 {
     private $validator;
-    private $repository;
+    private $repositoryFactory;
     private $httpResponseFactory;
 
     public function __construct(
         ValidatorInterface $validator,
-        RepositoryInterface $repository,
+        RepositoryFactoryInterface $repositoryFactory,
         HttpResponseFactoryInterface $httpResponseFactory
     ){
         $this->validator = $validator;
-        $this->repository = $repository;
+        $this->repositoryFactory = $repositoryFactory;
         $this->httpResponseFactory = $httpResponseFactory;
     }
 
@@ -28,7 +28,8 @@ class Responder implements ResponderInterface
         $validatorResponse = $this->validator->validate($entity);
         if ($validatorResponse->isValid()) {
 
-            $this->repository->persist($entity);
+            $repository = $this->repositoryFactory->create($entity);
+            $repository->persist($entity);
 
             return $this->getSuccessResponse($entity);
         }

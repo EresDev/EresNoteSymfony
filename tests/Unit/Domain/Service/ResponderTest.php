@@ -7,13 +7,14 @@ use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class ResponderTest extends ResponderTestBase
 {
-    public function testPrepare_withValid()
+    public function testPrepare_withValid() : void
     {
         $validator = $this->getValidator(
             true,
             [$this->responseContent]
         );
-        $repository = $this->getRepository();
+        $repositoryFactory = $this->getRepositoryFactory();
+
         $entity = $this->getEntity();
 
         $httpResponseFactory = $this->getHttpResponseFactory(
@@ -21,7 +22,7 @@ class ResponderTest extends ResponderTestBase
             $this->responseContent
         );
 
-        $responder = new Responder($validator, $repository, $httpResponseFactory);
+        $responder = new Responder($validator, $repositoryFactory, $httpResponseFactory);
         $response = $responder->prepare($entity);
 
         $this->assertInstanceOf(SimpleHttpResponseInterface::class, $response);
@@ -33,13 +34,13 @@ class ResponderTest extends ResponderTestBase
     }
 
 
-    public function testPrepare_withInvalid()
+    public function testPrepare_withInvalid() : void
     {
         $validator = $this->getValidator(
             false,
             [$this->responseContent]
         );
-        $repository = $this->getRepository();
+        $repositoryFactory = $this->getRepositoryFactory();
         $entity = $this->getEntity();
 
         $httpResponseFactory = $this->getHttpResponseFactory(
@@ -47,7 +48,7 @@ class ResponderTest extends ResponderTestBase
             $this->responseContent
         );
 
-        $responder = new Responder($validator, $repository, $httpResponseFactory);
+        $responder = new Responder($validator, $repositoryFactory, $httpResponseFactory);
         $response = $responder->prepare($entity);
 
         $this->assertInstanceOf(SimpleHttpResponseInterface::class, $response);

@@ -14,7 +14,10 @@ class UserRepositoryTest extends DbIntegrationTestCase
         parent::setUp();
         $this->repository = new UserRepository(parent::getEntityManager());
 
-        $fixture = new UserFixture();
+        $fixture = $this->getService(
+          'App\Tests\Extra\DataFixture\UserFixture'
+        );
+            //new UserFixture();
         $fixture->load(parent::getEntityManager());
     }
 

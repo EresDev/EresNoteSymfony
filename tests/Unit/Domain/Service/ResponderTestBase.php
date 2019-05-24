@@ -5,6 +5,7 @@ namespace App\Tests\Unit\Domain\Service;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Service\Factory\HttpResponseFactoryInterface;
+use App\Domain\Service\Factory\RepositoryFactoryInterface;
 use App\Domain\Service\Responder;
 use App\Domain\Service\ValidatorInterface;
 use App\Domain\Service\ValueObject\SimpleHttpResponse;
@@ -43,6 +44,20 @@ class ResponderTestBase extends TestCase
             ->willReturn(1);
 
         return $entityStub;
+    }
+
+    protected function getRepositoryFactory()
+    {
+        $repositoryMock = $this->createMock(
+            RepositoryFactoryInterface::class
+        );
+
+        $repositoryMock->expects($this->any())
+            ->method('create')
+            ->with($this->isInstanceOf(AbstractEntity::class))
+            ->willReturn($this->getRepository());
+
+        return $repositoryMock;
     }
 
     protected function getRepository()

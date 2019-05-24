@@ -1,37 +1,43 @@
 App\Domain\Entity\User:
   type: entity
   table: user
-  #repositoryClass: App\Persistence\Doctrine\Repository\UserRepository
+  repositoryClass: App\Persistence\Doctrine\Repository\UserRepository
 
   id:
     id:
       type: integer
       generator:
         strategy: AUTO
-#  fields:
-#    title:
-#      type: string
-#      length: 40
+  fields:
+    email:
+      type: string
+      length: 72
+      nullable: false
+    password:
+      type: binary
+      nullable: false
+    deleted:
+      type: boolean
+      nullable: false
+      options:
+        default: 0
+    activated:
+      type: boolean
+      nullable: false
+      options:
+        default: 0
+    memberSince:
+      type: datetime
+      column: memberSince
+      nullable: false
+
+#    user:
+#      type: integer
+#      column: user_id
 #      nullable: false
-#    content:
-#      type: string
-#      length: 40
-#      nullable: true
 #      options:
-#        default: ""
-#    creationTimestamp:
-#      type: timestamp
-#      column: creationTimestamp
-#      nullable: false
-#      options:
-#        default: 0
-##    user:
-##      type: integer
-##      column: user_id
-##      nullable: false
-##      options:
-##        unsigned: true
-#
+#        unsigned: true
+
 #  oneToOne:
 #    user:
 #      targetEntity: User

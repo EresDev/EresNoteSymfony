@@ -7,7 +7,7 @@ class User extends AbstractEntity
 {
     private $email;
     private $password;
-    private $active;
+    private $activated;
     private $deleted;
     private $memberSince;
 
@@ -32,12 +32,12 @@ class User extends AbstractEntity
         $this->password = $password;
     }
 
-    public function getActive() : bool
+    public function getActivated() : bool
     {
         return $this->active;
     }
 
-    public function setActive($active): void
+    public function setActivated($active): void
     {
         $this->active = $active;
     }
