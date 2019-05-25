@@ -65,7 +65,6 @@ services:
 #        autowire: true
 #        shared: true
 
-    App\Tests\Extra\DataFixture\NoteFixture:
-        tags: ['doctrine.fixture.orm']
-    App\Tests\Extra\DataFixture\UserFixture:
-        tags: ['doctrine.fixture.orm']
+    Doctrine\Common\DataFixtures\Loader:
+        autowire: true
+        public: true

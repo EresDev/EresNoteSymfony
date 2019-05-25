@@ -1,10 +1,9 @@
 <?php
 namespace App\Tests\Integration;
 
-use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-abstract class IntegrationTestCase extends WebTestCase
+abstract class IntegrationTestCase extends KernelTestCase
 {
     protected function setUp()
     {

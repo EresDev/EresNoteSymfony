@@ -13,7 +13,7 @@ abstract class DbIntegrationTestCase extends IntegrationTestCase
         parent::setUp();
         $this->entityManager = $this->getService('doctrine')->getManager();
 
-        //$this->truncateDatabaseTables();
+        $this->truncateDatabaseTables();
     }
 
     private function truncateDatabaseTables() : void
