@@ -1,4 +1,5 @@
 <?php
+
 namespace App\ThirdParty\Adapter\Symfony;
 
 use App\Domain\Service\SerializerInterface;
@@ -18,6 +19,5 @@ class JsonSerializerAdapter implements SerializerInterface
         $serializedJson = $this->serializer->serialize($data, 'json');
         return $serializedJson;
     }
-
 
 }

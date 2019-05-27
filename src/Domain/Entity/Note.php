@@ -40,9 +40,8 @@ class Note extends AbstractEntity
         $this->creationDatetime = $creationDatetime;
     }
 
-    public function getUser()
+    public function getUser() : User
     {
-        //TODO set return type when security user has been created
         return $this->user;
     }
 

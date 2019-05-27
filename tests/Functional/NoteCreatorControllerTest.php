@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Extra\DataFixture\UserFixture;
+use App\Tests\Extra\WebFixtureTestCase;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class NoteCreatorControllerTest extends WebTestCase
+class NoteCreatorControllerTest extends WebFixtureTestCase
 {
     /**
      * @var \Symfony\Component\BrowserKit\Client
@@ -20,6 +22,8 @@ class NoteCreatorControllerTest extends WebTestCase
     protected function setUp()
     {
         parent::setUp();
+
+        $this->loadFixture(UserFixture::class);
 
         $this->client = static::createClient();
     }
@@ -44,7 +48,7 @@ class NoteCreatorControllerTest extends WebTestCase
 
         $this->assertEquals($validNoteData['title'], $contentObject->title);
         $this->assertEquals($validNoteData['content'], $contentObject->content);
-        $this->assertEquals($validNoteData['user'], $contentObject->user);
+        $this->assertEquals($validNoteData['user'], $contentObject->user->id);
     }
 
     private function sendRequest($parameters) : void

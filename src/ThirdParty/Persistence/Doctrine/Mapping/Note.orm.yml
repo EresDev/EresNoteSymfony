@@ -23,17 +23,12 @@ App\Domain\Entity\Note:
       type: datetime
       column: creationDatetime
       nullable: false
-    user:
-      type: integer
-      column: user_id
-      nullable: false
-      options:
-        unsigned: true
 
-#  oneToOne:
-#    user:
-#      targetEntity: User
-#      joinColumn:
-#        name: id
-#        referencedColumnName: user_id
-#        onDelete: CASCADE
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: notes
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+

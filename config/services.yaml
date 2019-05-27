@@ -52,6 +52,15 @@ services:
     #Validator
     Symfony\Component\Validator\Validator\ValidatorInterface: '@validator'
 
+    #Create Note
+    App\Domain\Repository\UserRepositoryInterface: '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepository'
+
+
+    #TESTS
     Doctrine\Common\DataFixtures\Loader:
+        autowire: true
+        public: true
+
+    App\Tests\Extra\FixtureLoader:
         autowire: true
         public: true

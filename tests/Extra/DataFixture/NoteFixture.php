@@ -22,7 +22,7 @@ class NoteFixture extends FixtureTemplate implements DependentFixtureInterface
         $note->setCreationDatetime(new \DateTime());
 
         $user = $this->getReference(UserFixture::class);
-        $note->setUser($user->getId());
+        $note->setUser($user);
 
         return $note;
     }

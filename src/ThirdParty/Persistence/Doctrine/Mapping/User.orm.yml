@@ -30,18 +30,3 @@ App\Domain\Entity\User:
       type: datetime
       column: memberSince
       nullable: false
-
-#    user:
-#      type: integer
-#      column: user_id
-#      nullable: false
-#      options:
-#        unsigned: true
-
-#  oneToOne:
-#    user:
-#      targetEntity: User
-#      joinColumn:
-#        name: user_id
-#        referencedColumnName: id
-#        onDelete: CASCADE
