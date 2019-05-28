@@ -24,11 +24,12 @@ class FixtureLoader
         $this->entityManager = $entityManager;
         $this->loader = $loader;
         $this->registry = $registry;
+
+        $this->cleanDatabase();
     }
 
     public function loadFixture(string $className) : void
     {
-        $this->cleanDatabase();
         $this->loader->addFixture(new $className());
         $executor = new ORMExecutor($this->entityManager, new ORMPurger());
         $executor->execute($this->loader->getFixtures());
