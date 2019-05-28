@@ -31,4 +31,5 @@ App\Domain\Entity\Note:
       joinColumn:
         name: user_id
         referencedColumnName: id
+        onDelete: CASCADE
 
