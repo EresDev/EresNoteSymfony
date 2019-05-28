@@ -13,6 +13,20 @@ class User extends AbstractEntity
     private $deleted;
     private $memberSince;
 
+    public function __construct(
+        string $email,
+        string $password,
+        bool $activated,
+        bool $deleted,
+        \DateTime $memberSince
+    ){
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setActivated($activated);
+        $this->setDeleted($deleted);
+        $this->setMemberSince($memberSince);
+    }
+
     public function getEmail() : string
     {
         return $this->email;

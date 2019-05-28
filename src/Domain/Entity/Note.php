@@ -9,6 +9,18 @@ class Note extends AbstractEntity
     private $creationDatetime;
     private $user;
 
+    public function __construct(
+        string $title,
+        string $content,
+        \DateTime $creationDatetime,
+        User $user
+    ){
+        $this->setTitle($title);
+        $this->setContent($content);
+        $this->setCreationDatetime($creationDatetime);
+        $this->setUser($user);
+    }
+
     public function getTitle() : string
     {
         return $this->title;
@@ -45,7 +57,7 @@ class Note extends AbstractEntity
         return $this->user;
     }
 
-    public function setUser($user): void
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }

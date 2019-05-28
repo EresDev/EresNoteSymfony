@@ -1,4 +1,5 @@
 <?php
+
 namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
 use App\Domain\Entity\Note;

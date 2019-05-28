@@ -24,7 +24,11 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
         parent::setUp();
 
         $this->loadFixture(UserFixture::class);
-        $this->validNoteData['user'] = $this->getFixtureId(UserFixture::class);
+
+        $this->validNoteData['user'] = $this->getFixtureId(
+            UserFixture::class,
+            UserFixture::class.'_0'
+        );
 
         $this->client = static::createClient();
     }

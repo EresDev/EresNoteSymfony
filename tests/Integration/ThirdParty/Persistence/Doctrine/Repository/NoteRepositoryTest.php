@@ -8,6 +8,9 @@ use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
 
 class NoteRepositoryTest extends FixtureWebTestCase
 {
+    /**
+     * @var NoteRepository
+     */
     private $repository;
 
     protected function setUp() : void
@@ -20,10 +23,32 @@ class NoteRepositoryTest extends FixtureWebTestCase
 
     public function testGetById() : void
     {
-        $entityId = $this->getFixtureId(NoteFixture::class);
+        $entityId = $this->getFixtureId(
+            NoteFixture::class,
+            NoteFixture::class . '_0'
+
+        );
 
         $entity = $this->repository->getById($entityId);
 
         $this->assertNotNull($entity);
+    }
+
+    public function testGetAll(): void
+    {
+        $allNotes = $this->repository->getAll();
+        $this->assertCount(5, $allNotes);
+    }
+
+    public function testGetByTitle(): void
+    {
+        $note = $this->repository->getBy(['title' => 'Some title 0']);
+        $this->assertCount(1, $note);
+    }
+
+    public function testGetByContent(): void
+    {
+        $note = $this->repository->getBy(['content' => 'Some test content 0']);
+        $this->assertCount(1, $note);
     }
 }

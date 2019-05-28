@@ -4,31 +4,33 @@ namespace App\Tests\Extra\DataFixture;
 
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Entity\Note;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class NoteFixture extends FixtureTemplate implements DependentFixtureInterface
+class NoteFixture extends Fixture implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager) : void
+    public function load(ObjectManager $manager): void
     {
-        parent::load($manager);
+        foreach ($this->getNotes() as $i => $note) {
+            $manager->persist($note);
+
+            $this->setReference(self::class . "_$i", $note);
+        }
+        $manager->flush();
     }
 
-    public function getEntity() : AbstractEntity
+    public function getNotes()
     {
-        $note = new Note();
-        $note->setTitle('A test title');
-        $note->setContent('Some test content');
-        $note->setCreationDatetime(new \DateTime());
-
-        $user = $this->getReference(UserFixture::class);
-        $note->setUser($user);
-
-        $this->setReference(NoteFixture::class, $note);
-
-        return $note;
+        for ($i = 0; $i < 5; $i++) {
+            yield new Note(
+                "Some title $i",
+                "Some test content $i",
+                new \DateTime(),
+                $this->getReference(UserFixture::class.'_0')
+            );
+        }
     }
-
     public function getDependencies()
     {
         return array(

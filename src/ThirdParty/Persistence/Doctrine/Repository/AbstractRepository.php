@@ -1,11 +1,13 @@
 <?php
+
 namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Repository\RepositoryInterface;
+use Doctrine\ORM\EntityRepository;
 
-abstract class AbstractRepository implements RepositoryInterface
+abstract class AbstractRepository extends EntityRepository implements RepositoryInterface
 {
     protected $entityManager;
     protected $entityClass;
@@ -17,6 +19,12 @@ abstract class AbstractRepository implements RepositoryInterface
                 get_class($this) . '::$entityClass is not defined'
             );
         }
+
+        parent::__construct(
+            $entityManager,
+            $entityManager->getClassMetadata($this->entityClass)
+        );
+
         $this->entityManager = $entityManager;
     }
 
@@ -27,7 +35,8 @@ abstract class AbstractRepository implements RepositoryInterface
 
     public function getAll()
     {
-        return $this->entityManager->getRepository($this->entityClass)
+        return $this->entityManager
+            ->getRepository($this->entityClass)
             ->findAll();
     }
 

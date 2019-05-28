@@ -18,12 +18,12 @@ final class NoteFactory implements EntityFactoryInterface
 
     public function createFromParameters(array $parameters) : AbstractEntity
     {
-        $note = new Note();
-
-        $note->setTitle($parameters['title'] ?? '');
-        $note->setContent($parameters['content'] ?? '');
-        $note->setCreationDatetime(new \DateTime());
-        $note->setUser($this->getUser($parameters['user']));
+        $note = new Note(
+            $parameters['title'] ?? '',
+            $parameters['content'] ?? '',
+            new \DateTime(),
+            $this->getUser($parameters['user'])
+        );
 
         return $note;
     }

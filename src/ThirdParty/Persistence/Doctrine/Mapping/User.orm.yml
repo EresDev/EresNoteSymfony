@@ -1,7 +1,7 @@
 App\Domain\Entity\User:
   type: entity
   table: user
-  repositoryClass: App\Persistence\Doctrine\Repository\UserRepository
+  repositoryClass: 'App\ThirdParty\Persistence\Doctrine\Repository\UserRepository'
 
   id:
     id:

@@ -1,7 +1,7 @@
 App\Domain\Entity\Note:
   type: entity
   table: note
-  repositoryClass: App\Persistence\Doctrine\Repository\NoteRepository
+  repositoryClass: App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository
 
   id:
     id:
