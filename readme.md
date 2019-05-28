@@ -1,6 +1,6 @@
 # hqCRUD
 
-[![Build Status](https://travis-ci.org/EresDev/EresNoteSymfony.svg?branch=master)](https://travis-ci.org/EresDev/EresNoteSymfony)
+[![Build Status](https://travis-ci.org/EresDev/hqCRUD.svg?branch=master)](https://travis-ci.org/EresDev/EresNoteSymfony)
 
 This is a backend for a note taking application. The idea of its existence is to provide high quality CRUD code based on Symfony that can be reused for other applications easily. 
 
