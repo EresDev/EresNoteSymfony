@@ -36,7 +36,7 @@ class FixtureLoader
     private function getPurger() : ORMPurger
     {
         $purger = new ORMPurger($this->entityManager);
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_DELETE);
+        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
 
         return $purger;
     }

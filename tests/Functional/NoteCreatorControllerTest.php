@@ -32,6 +32,7 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
     public function testCreate_withValidData() : void
     {
         $validNoteData = $this->validNoteData;
+
         $this->sendRequest($validNoteData);
 
         $response = $this->client->getResponse();
