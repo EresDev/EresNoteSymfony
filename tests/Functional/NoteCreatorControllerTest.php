@@ -3,10 +3,10 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\UserFixture;
-use App\Tests\Extra\WebFixtureTestCase;
+use App\Tests\Extra\FixtureWebTestCase;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class NoteCreatorControllerTest extends WebFixtureTestCase
+class NoteCreatorControllerTest extends FixtureWebTestCase
 {
     /**
      * @var \Symfony\Component\BrowserKit\Client

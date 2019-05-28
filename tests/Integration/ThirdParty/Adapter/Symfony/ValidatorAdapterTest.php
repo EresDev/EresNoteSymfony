@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Tests\Integration\ThirdParty\Adapter\Symfony;
 
+use App\Tests\Extra\FixtureWebTestCase;
 use App\Tests\Extra\TestEntity;
-use App\Tests\Integration\IntegrationTestCase;
 use App\ThirdParty\Adapter\Symfony\ValidatorAdapter;
 
-class ValidatorAdapterTest extends IntegrationTestCase
+class ValidatorAdapterTest extends FixtureWebTestCase
 {
     private $validator;
 

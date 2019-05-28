@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Tests\Integration\ThirdParty\Adapter\Symfony;
 
-use App\Tests\Integration\IntegrationTestCase;
+use App\Tests\Extra\FixtureWebTestCase;
 use App\ThirdParty\Adapter\Symfony\JsonSerializerAdapter;
 
-class JsonSerializerAdapterTest extends IntegrationTestCase
+class JsonSerializerAdapterTest extends FixtureWebTestCase
 {
     private $serializer;
 

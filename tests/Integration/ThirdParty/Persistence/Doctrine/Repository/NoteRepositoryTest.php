@@ -3,10 +3,10 @@
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
 use App\Tests\Extra\DataFixture\NoteFixture;
-use App\Tests\Integration\DbIntegrationTestCase;
+use App\Tests\Extra\FixtureWebTestCase;
 use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
 
-class NoteRepositoryTest extends DbIntegrationTestCase
+class NoteRepositoryTest extends FixtureWebTestCase
 {
     private $repository;
 
@@ -14,7 +14,7 @@ class NoteRepositoryTest extends DbIntegrationTestCase
     {
         parent::setUp();
 
-        $this->repository = new NoteRepository(parent::getEntityManager());
+        $this->repository = new NoteRepository($this->getEntityManager());
         $this->loadFixture(NoteFixture::class);
     }
 

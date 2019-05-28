@@ -2,9 +2,10 @@
 
 namespace App\Tests\Extra;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-abstract class WebFixtureTestCase extends WebTestCase
+abstract class FixtureWebTestCase extends WebTestCase
 {
     protected function setUp()
     {
@@ -20,5 +21,10 @@ abstract class WebFixtureTestCase extends WebTestCase
     {
         $fixtureLoader = $this->getService('App\Tests\Extra\FixtureLoader');
         $fixtureLoader->loadFixture($className);
+    }
+
+    protected function getEntityManager(): EntityManagerInterface
+    {
+        return $this->getService('doctrine')->getManager();
     }
 }

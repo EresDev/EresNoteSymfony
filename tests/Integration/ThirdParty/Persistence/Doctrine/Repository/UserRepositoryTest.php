@@ -3,10 +3,10 @@
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
 use App\Tests\Extra\DataFixture\UserFixture;
-use App\Tests\Integration\DbIntegrationTestCase;
+use App\Tests\Extra\FixtureWebTestCase;
 use App\ThirdParty\Persistence\Doctrine\Repository\UserRepository;
 
-class UserRepositoryTest extends DbIntegrationTestCase
+class UserRepositoryTest extends FixtureWebTestCase
 {
     private $repository;
 
