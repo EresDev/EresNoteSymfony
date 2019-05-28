@@ -20,7 +20,9 @@ class NoteRepositoryTest extends FixtureWebTestCase
 
     public function testGetById() : void
     {
-        $entity = $this->repository->getById(1);
+        $entityId = $this->getFixtureId(NoteFixture::class);
+
+        $entity = $this->repository->getById($entityId);
 
         $this->assertNotNull($entity);
     }

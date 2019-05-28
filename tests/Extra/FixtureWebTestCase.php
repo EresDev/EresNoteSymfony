@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FixtureWebTestCase extends WebTestCase
 {
+    private $fixtureLoader;
+
     protected function setUp()
     {
         self::bootKernel();
@@ -19,8 +21,20 @@ abstract class FixtureWebTestCase extends WebTestCase
 
     protected function loadFixture(string $className) : void
     {
-        $fixtureLoader = $this->getService('App\Tests\Extra\FixtureLoader');
-        $fixtureLoader->loadFixture($className);
+        $this->fixtureLoader = $this->getService('App\Tests\Extra\FixtureLoader');
+        $this->fixtureLoader->loadFixture($className);
+    }
+
+    protected function getFixtureId(string $fixtureClassName, string $fixtureReference = null) : int
+    {
+        if (is_null($fixtureReference)) {
+            $fixtureReference = $fixtureClassName;
+        }
+
+        return $this->fixtureLoader
+            ->getFixture($fixtureClassName)
+            ->getReference($fixtureReference)
+            ->getId();
     }
 
     protected function getEntityManager(): EntityManagerInterface

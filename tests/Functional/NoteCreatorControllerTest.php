@@ -15,7 +15,7 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
     private $validNoteData = [
         "title" => "A sample title",
         "content" => "Some test content",
-        "user" => 1
+        "user" => null //to be loaded via fixture
     ];
     private $contentType = 'application/json';
 
@@ -24,6 +24,7 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
         parent::setUp();
 
         $this->loadFixture(UserFixture::class);
+        $this->validNoteData['user'] = $this->getFixtureId(UserFixture::class);
 
         $this->client = static::createClient();
     }

@@ -24,6 +24,8 @@ class NoteFixture extends FixtureTemplate implements DependentFixtureInterface
         $user = $this->getReference(UserFixture::class);
         $note->setUser($user);
 
+        $this->setReference(NoteFixture::class, $note);
+
         return $note;
     }
 
