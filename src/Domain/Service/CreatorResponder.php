@@ -5,20 +5,22 @@ namespace App\Domain\Service;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Service\Factory\HttpResponseFactoryInterface;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
-use App\Domain\Service\ValueObject\SimpleHttpResponse;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 class CreatorResponder implements ResponderInterface
 {
     private $validator;
     private $repositoryFactory;
+    private $httpResponseFactory;
 
     public function __construct(
         ValidatorInterface $validator,
-        RepositoryFactoryInterface $repositoryFactory
+        RepositoryFactoryInterface $repositoryFactory,
+        HttpResponseFactoryInterface $httpResponseFactory
     ){
         $this->validator = $validator;
         $this->repositoryFactory = $repositoryFactory;
+        $this->httpResponseFactory = $httpResponseFactory;
     }
 
     public function prepare(AbstractEntity $entity) : SimpleHttpResponseInterface
@@ -36,11 +38,13 @@ class CreatorResponder implements ResponderInterface
 
     protected function getSuccessResponse(AbstractEntity $entity): SimpleHttpResponseInterface
     {
-        return new SimpleHttpResponse(200, $entity);
+        $response = $this->httpResponseFactory->create(200, $entity);
+        return $response;
     }
 
     protected function getFailureResponse(array $errors): SimpleHttpResponseInterface
     {
-        return new SimpleHttpResponse(422, $errors);
+        $response = $this->httpResponseFactory->create(422, $errors);
+        return $response;
     }
 }

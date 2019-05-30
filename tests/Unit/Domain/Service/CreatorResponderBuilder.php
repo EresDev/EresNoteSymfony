@@ -5,8 +5,10 @@ namespace App\Tests\Unit\Domain\Service;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Service\CreatorResponder;
+use App\Domain\Service\Factory\HttpResponseFactoryInterface;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
 use App\Domain\Service\ValidatorInterface;
+use App\Domain\Service\ValueObject\SimpleHttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -14,6 +16,7 @@ class CreatorResponderBuilder extends TestCase
 {
     private $validator;
     private $repositoryFactory;
+    private $httpResponseFactory;
 
     public static function getInstance(): CreatorResponderBuilder
     {
@@ -26,8 +29,11 @@ class CreatorResponderBuilder extends TestCase
         $this->repositoryFactory = $this->createMock(
             RepositoryFactoryInterface::class
         );
-        $this->withValidValidatorResponse();
-        $this->withRepositoryFactory();
+        $this->httpResponseFactory = $this->createMock(
+            HttpResponseFactoryInterface::class
+        );
+
+
     }
 
     public function withValidValidatorResponse() : self
@@ -37,17 +43,34 @@ class CreatorResponderBuilder extends TestCase
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
+        $this->withHttpResponseFactoryForValidResponse();
+
         return $this;
+    }
+
+    private function withHttpResponseFactoryForValidResponse(): void
+    {
+        $this->httpResponseFactory->method('create')
+            ->willReturn(new SimpleHttpResponse(200, 'Test content.'));
+
     }
 
     public function withInvalidValidatorResponse(): self
     {
-        $validatorResponse = new ValidatorResponse(false, ['This is a test error.']);
+        $validatorResponse = new ValidatorResponse(false, ['An error message.']);
 
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
+        $this->withHttpResponseFactoryForInvalidResponse();
+
         return $this;
+    }
+
+    private function withHttpResponseFactoryForInvalidResponse(): void
+    {
+        $this->httpResponseFactory->method('create')
+            ->willReturn(new SimpleHttpResponse(422, 'An error message.'));
     }
 
     public function withRepositoryFactory() : self
@@ -64,9 +87,13 @@ class CreatorResponderBuilder extends TestCase
 
     public function build() : CreatorResponder
     {
+        $this->withValidValidatorResponse()
+            ->withRepositoryFactory();
+
         return new CreatorResponder(
             $this->validator,
-            $this->repositoryFactory
+            $this->repositoryFactory,
+            $this->httpResponseFactory
         );
     }
 }

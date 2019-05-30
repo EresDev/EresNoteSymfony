@@ -20,5 +20,20 @@ class CreatorResponderTest extends TestCase
 
         $this->assertInstanceOf(SimpleHttpResponseInterface::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('Test content.', $response->getContent());
+    }
+
+    public function testPrepareForInvalidEntity(): void
+    {
+        $creatorResponder = CreatorResponderBuilder::getInstance()
+            ->withInvalidValidatorResponse()
+            ->build();
+
+        $response = $creatorResponder->prepare(
+            $this->createMock(AbstractEntity::class)
+        );
+
+        $this->assertEquals(422, $response->getStatusCode());
+        $this->assertEquals('An error message.', $response->getContent());
     }
 }
