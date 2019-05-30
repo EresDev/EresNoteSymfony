@@ -8,13 +8,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 abstract class ControllerTemplate
 {
     protected $translator;
-    protected $request;
     protected $response;
 
-    public function __construct(TranslatorInterface $translator, RequestStack $requestStack)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
-        $this->request = $requestStack->getCurrentRequest();
         $this->response = new JsonResponse();
     }
 

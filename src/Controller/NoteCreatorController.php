@@ -2,26 +2,35 @@
 
 namespace App\Controller;
 
+use App\Domain\Service\Http\RequestAdapterInterface;
 use App\Domain\Service\TranslatorInterface;
 use App\UseCase\CreateNoteUseCase;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class NoteCreatorController extends ControllerTemplate
 {
+    /**
+     * @var CreateNoteUseCase
+     */
     private $createNoteUseCase;
+    /**
+     * @var RequestAdapterInterface
+     */
+    private $requestAdapter;
 
     public function __construct(
         TranslatorInterface $translator,
-        RequestStack $requestStack,
-        CreateNoteUseCase $createNoteUseCase
+        CreateNoteUseCase $createNoteUseCase,
+        RequestAdapterInterface $requestAdapter
     ) {
-        parent::__construct($translator, $requestStack);
+        parent::__construct($translator);
+
+        $this->requestAdapter = $requestAdapter;
         $this->createNoteUseCase = $createNoteUseCase;
     }
 
     protected function prepareResponse(): void
     {
-        $requestParameters = $this->request->request->all();
+        $requestParameters = $this->requestAdapter->getAllPostData();
         $simpleResponse = $this->createNoteUseCase->execute($requestParameters);
 
         $this->response->setStatusCode($simpleResponse->getStatusCode());
