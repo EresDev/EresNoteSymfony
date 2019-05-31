@@ -3,9 +3,9 @@
 namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
 use App\Domain\Entity\Note;
-use App\Domain\Repository\NoteRepositoryInterface;
+use App\Domain\Repository\NoteRepository;
 
-class NoteRepository extends AbstractRepository implements NoteRepositoryInterface
+class NoteRepositoryImpl extends AbstractRepository implements NoteRepository
 {
     protected $entityClass = Note::class;
 }

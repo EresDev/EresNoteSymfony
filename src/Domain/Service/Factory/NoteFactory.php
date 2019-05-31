@@ -5,13 +5,13 @@ namespace App\Domain\Service\Factory;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
-use App\Domain\Repository\UserRepositoryInterface;
+use App\Domain\Repository\UserRepository;
 
 final class NoteFactory implements EntityFactoryInterface
 {
     private $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }

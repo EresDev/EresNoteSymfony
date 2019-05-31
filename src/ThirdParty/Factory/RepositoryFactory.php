@@ -7,8 +7,8 @@ use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
 use App\Domain\Repository\RepositoryInterface;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
-use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepository;
-use App\ThirdParty\Persistence\Doctrine\Repository\UserRepository;
+use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl;
+use App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl;
 use Doctrine\ORM\EntityManagerInterface;
 
 class RepositoryFactory implements RepositoryFactoryInterface
@@ -26,9 +26,9 @@ class RepositoryFactory implements RepositoryFactoryInterface
 
         switch ($class) {
             case Note::class:
-                return new NoteRepository($this->entityManager);
+                return new NoteRepositoryImpl($this->entityManager);
             case User::class:
-                return new UserRepository($this->entityManager);
+                return new UserRepositoryImpl($this->entityManager);
         }
 
         throw new \UnexpectedValueException(

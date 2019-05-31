@@ -53,7 +53,7 @@ services:
     Symfony\Component\Validator\Validator\ValidatorInterface: '@validator'
 
     #Create Note
-    App\Domain\Repository\UserRepositoryInterface: '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepository'
+    App\Domain\Repository\UserRepository: '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl'
 
 
     #TESTS

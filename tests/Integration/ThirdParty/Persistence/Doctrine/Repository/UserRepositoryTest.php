@@ -2,22 +2,22 @@
 
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
-use App\Domain\Repository\UserRepositoryInterface;
+use App\Domain\Repository\UserRepository;
 use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Extra\FixtureWebTestCase;
-use App\ThirdParty\Persistence\Doctrine\Repository\UserRepository;
+use App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl;
 
 class UserRepositoryTest extends FixtureWebTestCase
 {
     /**
-     * @var UserRepositoryInterface
+     * @var UserRepository
      */
     private $repository;
 
     protected function setUp() : void
     {
         parent::setUp();
-        $this->repository = new UserRepository(
+        $this->repository = new UserRepositoryImpl(
             parent::getEntityManager()
         );
 
