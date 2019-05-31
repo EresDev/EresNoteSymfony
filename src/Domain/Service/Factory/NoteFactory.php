@@ -7,7 +7,7 @@ use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepository;
 
-final class NoteFactory implements EntityFactoryInterface
+final class NoteFactory implements EntityFactory
 {
     private $userRepository;
 

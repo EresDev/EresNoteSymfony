@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\UseCase;
 
-use App\Domain\Service\Factory\EntityFactoryInterface;
+use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\ResponderInterface;
 use App\Domain\Service\ValueObject\SimpleHttpResponse;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
@@ -16,7 +16,7 @@ abstract class CreatorTestBase extends TestCase
     protected function getEntityFactory(AbstractEntity $entity)
     {
         $factoryMock = $this->createMock(
-            EntityFactoryInterface::class
+            EntityFactory::class
         );
 
         $factoryMock->expects($this->once())

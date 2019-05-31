@@ -3,7 +3,7 @@
 namespace App\Domain\Service;
 
 use App\Domain\Entity\AbstractEntity;
-use App\Domain\Service\Factory\HttpResponseFactoryInterface;
+use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
@@ -16,7 +16,7 @@ class CreatorResponder implements ResponderInterface
     public function __construct(
         ValidatorInterface $validator,
         RepositoryFactoryInterface $repositoryFactory,
-        HttpResponseFactoryInterface $httpResponseFactory
+        HttpResponseFactory $httpResponseFactory
     ){
         $this->validator = $validator;
         $this->repositoryFactory = $repositoryFactory;

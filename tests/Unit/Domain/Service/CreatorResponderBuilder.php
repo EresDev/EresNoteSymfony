@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Domain\Service;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Repository\Repository;
 use App\Domain\Service\CreatorResponder;
-use App\Domain\Service\Factory\HttpResponseFactoryInterface;
+use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
 use App\Domain\Service\ValidatorInterface;
 use App\Domain\Service\ValueObject\SimpleHttpResponse;
@@ -30,7 +30,7 @@ class CreatorResponderBuilder extends TestCase
             RepositoryFactoryInterface::class
         );
         $this->httpResponseFactory = $this->createMock(
-            HttpResponseFactoryInterface::class
+            HttpResponseFactory::class
         );
 
 
