@@ -2,21 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Domain\Service\Http\Response;
 
 abstract class ControllerTemplate
 {
-    protected $response;
-
-    public function __construct()
+    public function handleRequest() : Response
     {
-        $this->response = new JsonResponse();
+        return $this->getResponse();
     }
 
-    public function handleRequest() : JsonResponse {
-        $this->prepareResponse();
-        return $this->response;
-    }
-
-    protected abstract function prepareResponse() : void;
+    protected abstract function getResponse() : Response;
 }

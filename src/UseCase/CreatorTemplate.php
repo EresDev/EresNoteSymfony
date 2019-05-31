@@ -3,10 +3,10 @@
 namespace App\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
+use App\Domain\Service\Http\Response;
 use App\Domain\Service\Responder;
-use App\Domain\Service\ValueObject\HttpResponse;
 
-abstract class CreatorTemplate
+abstract class CreatorTemplate implements UseCase
 {
     private $entityFactory;
     private $responder;
@@ -19,7 +19,7 @@ abstract class CreatorTemplate
         $this->responder = $responder;
     }
 
-    public function execute(array $requestParameters) : HttpResponse
+    public function execute(array $requestParameters) : Response
     {
         $entity = $this->entityFactory->createFromParameters($requestParameters);
         $response = $this->responder->prepare($entity);
