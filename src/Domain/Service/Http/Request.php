@@ -2,7 +2,7 @@
 
 namespace App\Domain\Service\Http;
 
-interface RequestAdapterInterface
+interface Request
 {
     public function getAllPostData() : array;
 }

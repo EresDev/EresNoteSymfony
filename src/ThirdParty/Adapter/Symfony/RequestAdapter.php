@@ -2,14 +2,14 @@
 
 namespace App\ThirdParty\Adapter\Symfony;
 
-use App\Domain\Service\Http\RequestAdapterInterface;
-use Symfony\Component\HttpFoundation\Request;
+use App\Domain\Service\Http\Request;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class RequestAdapter implements RequestAdapterInterface
+class RequestAdapter implements Request
 {
     /**
-     * @var Request
+     * @var SymfonyRequest
      */
     private $request;
 

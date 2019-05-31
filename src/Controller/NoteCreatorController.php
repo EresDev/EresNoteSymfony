@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Domain\Service\Http\RequestAdapterInterface;
+use App\Domain\Service\Http\Request;
 use App\UseCase\CreateNoteUseCase;
 
 class NoteCreatorController extends ControllerTemplate
@@ -12,13 +12,13 @@ class NoteCreatorController extends ControllerTemplate
      */
     private $createNoteUseCase;
     /**
-     * @var RequestAdapterInterface
+     * @var Request
      */
     private $requestAdapter;
 
     public function __construct(
         CreateNoteUseCase $createNoteUseCase,
-        RequestAdapterInterface $requestAdapter
+        Request $requestAdapter
     ) {
         parent::__construct();
 
