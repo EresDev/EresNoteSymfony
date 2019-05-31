@@ -4,8 +4,7 @@ namespace App\Tests\Unit\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Responder;
-use App\Domain\Service\ValueObject\SimpleHttpResponse;
-use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Entity\AbstractEntity;
 use PHPUnit\Framework\TestCase;
 
@@ -38,7 +37,7 @@ abstract class CreatorTestBase extends TestCase
 
     protected function getResponder(
         AbstractEntity $entity,
-        SimpleHttpResponseInterface $simpleHttpResponse
+        HttpResponse $simpleHttpResponse
     ){
         $responderMock = $this->createMock(Responder::class);
 
@@ -52,6 +51,6 @@ abstract class CreatorTestBase extends TestCase
 
     protected function getSimpleHttpResponse()
     {
-        return new SimpleHttpResponse(200, 'Some test content!');
+        return new HttpResponse(200, 'Some test content!');
     }
 }

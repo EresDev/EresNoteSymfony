@@ -3,9 +3,9 @@
 namespace App\Domain\Service;
 
 use App\Domain\Entity\AbstractEntity;
-use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\HttpResponse;
 
 interface Responder
 {
-    public function prepare(AbstractEntity $entity) : SimpleHttpResponseInterface;
+    public function prepare(AbstractEntity $entity) : HttpResponse;
 }

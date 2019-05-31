@@ -2,8 +2,7 @@
 
 namespace App\Domain\Service\ValueObject;
 
-
-class ValidatorResponse implements ValidatorResponseInterface
+class ValidatorResponse
 {
     private $valid;
     private $errors;

@@ -3,10 +3,8 @@
 namespace App\ThirdParty\Adapter\Symfony;
 
 use App\Domain\Entity\AbstractEntity;
-
 use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\ValidatorResponse;
-use App\Domain\Service\ValueObject\ValidatorResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -19,7 +17,7 @@ class ValidatorAdapter implements Validator
         $this->validator = $validator;
     }
 
-    public function validate(AbstractEntity $entity): ValidatorResponseInterface
+    public function validate(AbstractEntity $entity): ValidatorResponse
     {
         $constraintViolationList = $this->validator->validate($entity);
 
@@ -31,8 +29,9 @@ class ValidatorAdapter implements Validator
         return $validatorResponse;
     }
 
-    private function extractErrors(ConstraintViolationListInterface $constraintViolationList): array
-    {
+    private function extractErrors(
+        ConstraintViolationListInterface $constraintViolationList
+    ): array {
         $errors = [];
         foreach ($constraintViolationList as $index => $constraintViolation) {
             $propertyNameOfEntity = $constraintViolation->getPropertyPath();

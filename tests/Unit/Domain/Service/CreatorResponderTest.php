@@ -3,7 +3,7 @@
 namespace App\Tests\Unit\Domain\Service;
 
 use App\Domain\Entity\AbstractEntity;
-use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
 class CreatorResponderTest extends TestCase
@@ -18,7 +18,7 @@ class CreatorResponderTest extends TestCase
             $this->createMock(AbstractEntity::class)
         );
 
-        $this->assertInstanceOf(SimpleHttpResponseInterface::class, $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Test content.', $response->getContent());
     }

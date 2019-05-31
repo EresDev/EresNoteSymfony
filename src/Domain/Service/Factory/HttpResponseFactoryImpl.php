@@ -3,8 +3,7 @@
 namespace App\Domain\Service\Factory;
 
 use App\Domain\Service\Serializer;
-use App\Domain\Service\ValueObject\SimpleHttpResponse;
-use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\HttpResponse;
 
 class HttpResponseFactoryImpl implements HttpResponseFactory
 {
@@ -15,7 +14,7 @@ class HttpResponseFactoryImpl implements HttpResponseFactory
         $this->serializer = $serializer;
     }
 
-    public function create(int $httpStatusCode, $data): SimpleHttpResponseInterface
+    public function create(int $httpStatusCode, $data): HttpResponse
     {
         if (!$this->isValid($httpStatusCode)) {
             throw new InvalidArgumentException(
@@ -27,7 +26,7 @@ class HttpResponseFactoryImpl implements HttpResponseFactory
             $data = $this->convertToString($data);
         }
 
-        $simpleHttpResponse = new SimpleHttpResponse($httpStatusCode, $data);
+        $simpleHttpResponse = new HttpResponse($httpStatusCode, $data);
 
         return $simpleHttpResponse;
     }

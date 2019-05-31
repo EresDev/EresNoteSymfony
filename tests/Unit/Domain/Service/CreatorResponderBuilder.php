@@ -8,7 +8,7 @@ use App\Domain\Service\CreatorResponder;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Factory\RepositoryFactory;
 use App\Domain\Service\Validator;
-use App\Domain\Service\ValueObject\SimpleHttpResponse;
+use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -51,7 +51,7 @@ class CreatorResponderBuilder extends TestCase
     private function withHttpResponseFactoryForValidResponse(): void
     {
         $this->httpResponseFactory->method('create')
-            ->willReturn(new SimpleHttpResponse(200, 'Test content.'));
+            ->willReturn(new HttpResponse(200, 'Test content.'));
 
     }
 
@@ -70,7 +70,7 @@ class CreatorResponderBuilder extends TestCase
     private function withHttpResponseFactoryForInvalidResponse(): void
     {
         $this->httpResponseFactory->method('create')
-            ->willReturn(new SimpleHttpResponse(422, 'An error message.'));
+            ->willReturn(new HttpResponse(422, 'An error message.'));
     }
 
     public function withRepositoryFactory() : self

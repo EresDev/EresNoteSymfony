@@ -4,7 +4,7 @@ namespace App\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Responder;
-use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
+use App\Domain\Service\ValueObject\HttpResponse;
 
 abstract class CreatorTemplate
 {
@@ -19,7 +19,7 @@ abstract class CreatorTemplate
         $this->responder = $responder;
     }
 
-    public function execute(array $requestParameters) : SimpleHttpResponseInterface
+    public function execute(array $requestParameters) : HttpResponse
     {
         $entity = $this->entityFactory->createFromParameters($requestParameters);
         $response = $this->responder->prepare($entity);
