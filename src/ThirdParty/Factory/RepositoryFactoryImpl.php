@@ -6,12 +6,12 @@ use App\Domain\Entity\AbstractEntity;
 use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
 use App\Domain\Repository\Repository;
-use App\Domain\Service\Factory\RepositoryFactoryInterface;
+use App\Domain\Service\Factory\RepositoryFactory;
 use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl;
 use App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl;
 use Doctrine\ORM\EntityManagerInterface;
 
-class RepositoryFactory implements RepositoryFactoryInterface
+class RepositoryFactoryImpl implements RepositoryFactory
 {
     private $entityManager;
 

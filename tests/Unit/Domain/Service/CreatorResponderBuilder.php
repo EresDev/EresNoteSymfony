@@ -6,7 +6,7 @@ use App\Domain\Entity\AbstractEntity;
 use App\Domain\Repository\Repository;
 use App\Domain\Service\CreatorResponder;
 use App\Domain\Service\Factory\HttpResponseFactory;
-use App\Domain\Service\Factory\RepositoryFactoryInterface;
+use App\Domain\Service\Factory\RepositoryFactory;
 use App\Domain\Service\ValidatorInterface;
 use App\Domain\Service\ValueObject\SimpleHttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
@@ -27,7 +27,7 @@ class CreatorResponderBuilder extends TestCase
     {
         $this->validator = $this->createMock(ValidatorInterface::class);
         $this->repositoryFactory = $this->createMock(
-            RepositoryFactoryInterface::class
+            RepositoryFactory::class
         );
         $this->httpResponseFactory = $this->createMock(
             HttpResponseFactory::class
