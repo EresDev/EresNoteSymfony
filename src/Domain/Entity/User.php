@@ -5,7 +5,7 @@ namespace App\Domain\Entity;
 
 use http\Encoding\Stream;
 
-class User extends AbstractEntity
+class User extends Entity
 {
     private $email;
     private $password;

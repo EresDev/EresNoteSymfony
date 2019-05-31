@@ -2,7 +2,7 @@
 
 namespace App\Domain\Entity;
 
-abstract class AbstractEntity
+abstract class Entity
 {
     protected $id;
 

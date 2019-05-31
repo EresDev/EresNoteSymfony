@@ -2,7 +2,7 @@
 
 namespace App\Domain\Entity;
 
-class Note extends AbstractEntity
+class Note extends Entity
 {
     private $title;
     private $content;

@@ -5,14 +5,14 @@ namespace App\Tests\Unit\UseCase;
 use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use PHPUnit\Framework\TestCase;
 
 abstract class CreatorTestBase extends TestCase
 {
     protected $dummyRequestParameters = [];
 
-    protected function getEntityFactory(AbstractEntity $entity)
+    protected function getEntityFactory(Entity $entity)
     {
         $factoryMock = $this->createMock(
             EntityFactory::class
@@ -27,7 +27,7 @@ abstract class CreatorTestBase extends TestCase
 
     protected function getEntity(int $entity_id)
     {
-        $entityStub = $this->createMock(AbstractEntity::class);
+        $entityStub = $this->createMock(Entity::class);
 
         $entityStub->method('getId')
             ->willReturn($entity_id);
@@ -36,7 +36,7 @@ abstract class CreatorTestBase extends TestCase
     }
 
     protected function getResponder(
-        AbstractEntity $entity,
+        Entity $entity,
         HttpResponse $simpleHttpResponse
     ){
         $responderMock = $this->createMock(Responder::class);

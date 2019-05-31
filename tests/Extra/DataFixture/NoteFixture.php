@@ -2,7 +2,7 @@
 
 namespace App\Tests\Extra\DataFixture;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Entity\Note;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

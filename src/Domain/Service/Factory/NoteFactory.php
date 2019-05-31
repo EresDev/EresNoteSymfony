@@ -2,7 +2,7 @@
 
 namespace App\Domain\Service\Factory;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepository;
@@ -16,7 +16,7 @@ final class NoteFactory implements EntityFactory
         $this->userRepository = $userRepository;
     }
 
-    public function createFromParameters(array $parameters) : AbstractEntity
+    public function createFromParameters(array $parameters) : Entity
     {
         $note = new Note(
             $parameters['title'] ?? '',

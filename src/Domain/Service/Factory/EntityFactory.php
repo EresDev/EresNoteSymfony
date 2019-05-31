@@ -2,9 +2,9 @@
 
 namespace App\Domain\Service\Factory;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 
 interface EntityFactory
 {
-    public function createFromParameters(array $parameters) : AbstractEntity;
+    public function createFromParameters(array $parameters) : Entity;
 }

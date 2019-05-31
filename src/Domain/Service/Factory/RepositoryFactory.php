@@ -2,10 +2,10 @@
 
 namespace App\Domain\Service\Factory;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Repository\Repository;
 
 interface RepositoryFactory
 {
-    public function create(AbstractEntity $entity) : Repository;
+    public function create(Entity $entity) : Repository;
 }

@@ -2,7 +2,7 @@
 
 namespace App\ThirdParty\Factory;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
 use App\Domain\Repository\Repository;
@@ -20,7 +20,7 @@ class RepositoryFactoryImpl implements RepositoryFactory
         $this->entityManager = $entityManager;
     }
 
-    public function create(AbstractEntity $entity): Repository
+    public function create(Entity $entity): Repository
     {
         $class = get_class($entity);
 

@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Domain\Service;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Service\ValueObject\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class CreatorResponderTest extends TestCase
             ->build();
 
         $response = $creatorResponder->prepare(
-            $this->createMock(AbstractEntity::class)
+            $this->createMock(Entity::class)
         );
 
         $this->assertInstanceOf(HttpResponse::class, $response);
@@ -30,7 +30,7 @@ class CreatorResponderTest extends TestCase
             ->build();
 
         $response = $creatorResponder->prepare(
-            $this->createMock(AbstractEntity::class)
+            $this->createMock(Entity::class)
         );
 
         $this->assertEquals(422, $response->getStatusCode());

@@ -3,7 +3,7 @@
 namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Repository\Repository;
 use Doctrine\ORM\EntityRepository;
 
@@ -58,7 +58,7 @@ abstract class AbstractRepository extends EntityRepository implements Repository
         return $results;
     }
 
-    public function persist(AbstractEntity $entity)
+    public function persist(Entity $entity)
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();

@@ -1,9 +1,9 @@
 <?php
 namespace App\Tests\Extra;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 
-class TestEntity extends AbstractEntity
+class TestEntity extends Entity
 {
     private $title;
 

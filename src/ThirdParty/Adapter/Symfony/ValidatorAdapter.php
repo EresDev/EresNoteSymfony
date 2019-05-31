@@ -2,7 +2,7 @@
 
 namespace App\ThirdParty\Adapter\Symfony;
 
-use App\Domain\Entity\AbstractEntity;
+use App\Domain\Entity\Entity;
 use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
@@ -17,7 +17,7 @@ class ValidatorAdapter implements Validator
         $this->validator = $validator;
     }
 
-    public function validate(AbstractEntity $entity): ValidatorResponse
+    public function validate(Entity $entity): ValidatorResponse
     {
         $constraintViolationList = $this->validator->validate($entity);
 
