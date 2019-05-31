@@ -4,13 +4,13 @@ namespace App\ThirdParty\Adapter\Symfony;
 
 use App\Domain\Entity\AbstractEntity;
 
-use App\Domain\Service\ValidatorInterface;
+use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use App\Domain\Service\ValueObject\ValidatorResponseInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-class ValidatorAdapter implements ValidatorInterface
+class ValidatorAdapter implements Validator
 {
     private $validator;
 

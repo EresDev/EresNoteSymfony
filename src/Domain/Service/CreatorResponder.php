@@ -14,7 +14,7 @@ class CreatorResponder implements Responder
     private $httpResponseFactory;
 
     public function __construct(
-        ValidatorInterface $validator,
+        Validator $validator,
         RepositoryFactory $repositoryFactory,
         HttpResponseFactory $httpResponseFactory
     ){
