@@ -7,7 +7,7 @@ use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Factory\RepositoryFactory;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
-class CreatorResponder implements ResponderInterface
+class CreatorResponder implements Responder
 {
     private $validator;
     private $repositoryFactory;

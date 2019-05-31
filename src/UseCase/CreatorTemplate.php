@@ -3,7 +3,7 @@
 namespace App\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
-use App\Domain\Service\ResponderInterface;
+use App\Domain\Service\Responder;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
 abstract class CreatorTemplate
@@ -13,7 +13,7 @@ abstract class CreatorTemplate
 
     public function __construct(
         EntityFactory $entityFactory,
-        ResponderInterface $responder
+        Responder $responder
     ){
         $this->entityFactory = $entityFactory;
         $this->responder = $responder;

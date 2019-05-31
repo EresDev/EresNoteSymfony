@@ -3,7 +3,7 @@
 namespace App\Tests\Unit\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
-use App\Domain\Service\ResponderInterface;
+use App\Domain\Service\Responder;
 use App\Domain\Service\ValueObject\SimpleHttpResponse;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 use App\Domain\Entity\AbstractEntity;
@@ -40,7 +40,7 @@ abstract class CreatorTestBase extends TestCase
         AbstractEntity $entity,
         SimpleHttpResponseInterface $simpleHttpResponse
     ){
-        $responderMock = $this->createMock(ResponderInterface::class);
+        $responderMock = $this->createMock(Responder::class);
 
         $responderMock->expects($this->once())
             ->method('prepare')

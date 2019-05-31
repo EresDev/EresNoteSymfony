@@ -5,7 +5,7 @@ namespace App\Domain\Service;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
-interface ResponderInterface
+interface Responder
 {
     public function prepare(AbstractEntity $entity) : SimpleHttpResponseInterface;
 }
