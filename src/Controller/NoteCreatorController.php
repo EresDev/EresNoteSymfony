@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\Service\Http\RequestAdapterInterface;
-use App\Domain\Service\TranslatorInterface;
 use App\UseCase\CreateNoteUseCase;
 
 class NoteCreatorController extends ControllerTemplate
@@ -18,11 +17,10 @@ class NoteCreatorController extends ControllerTemplate
     private $requestAdapter;
 
     public function __construct(
-        TranslatorInterface $translator,
         CreateNoteUseCase $createNoteUseCase,
         RequestAdapterInterface $requestAdapter
     ) {
-        parent::__construct($translator);
+        parent::__construct();
 
         $this->requestAdapter = $requestAdapter;
         $this->createNoteUseCase = $createNoteUseCase;
