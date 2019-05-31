@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Domain\Service\Http\Request;
+use App\Domain\Service\ValueObject\HttpResponse;
 use App\UseCase\CreateNoteUseCase;
 
-class NoteCreatorController extends ControllerTemplate
+class NoteCreatorController extends Controller
 {
     /**
      * @var CreateNoteUseCase
@@ -20,18 +21,15 @@ class NoteCreatorController extends ControllerTemplate
         CreateNoteUseCase $createNoteUseCase,
         Request $requestAdapter
     ) {
-        parent::__construct();
-
         $this->requestAdapter = $requestAdapter;
         $this->createNoteUseCase = $createNoteUseCase;
     }
 
-    protected function prepareResponse(): void
+    protected function getResponse(): HttpResponse
     {
         $requestParameters = $this->requestAdapter->getAllPostData();
-        $simpleResponse = $this->createNoteUseCase->execute($requestParameters);
+        $response = $this->createNoteUseCase->execute($requestParameters);
 
-        $this->response->setStatusCode($simpleResponse->getStatusCode());
-        $this->response->setContent($simpleResponse->getContent());
+        return $response;
     }
 }
