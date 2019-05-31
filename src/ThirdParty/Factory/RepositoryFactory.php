@@ -5,7 +5,7 @@ namespace App\ThirdParty\Factory;
 use App\Domain\Entity\AbstractEntity;
 use App\Domain\Entity\Note;
 use App\Domain\Entity\User;
-use App\Domain\Repository\RepositoryInterface;
+use App\Domain\Repository\Repository;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
 use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl;
 use App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl;
@@ -20,7 +20,7 @@ class RepositoryFactory implements RepositoryFactoryInterface
         $this->entityManager = $entityManager;
     }
 
-    public function create(AbstractEntity $entity): RepositoryInterface
+    public function create(AbstractEntity $entity): Repository
     {
         $class = get_class($entity);
 

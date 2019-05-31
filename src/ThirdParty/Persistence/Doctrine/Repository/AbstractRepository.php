@@ -4,10 +4,10 @@ namespace App\ThirdParty\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Domain\Entity\AbstractEntity;
-use App\Domain\Repository\RepositoryInterface;
+use App\Domain\Repository\Repository;
 use Doctrine\ORM\EntityRepository;
 
-abstract class AbstractRepository extends EntityRepository implements RepositoryInterface
+abstract class AbstractRepository extends EntityRepository implements Repository
 {
     protected $entityManager;
     protected $entityClass;

@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Entity\AbstractEntity;
 
-interface RepositoryInterface
+interface Repository
 {
     public function getById($id);
     public function getAll();

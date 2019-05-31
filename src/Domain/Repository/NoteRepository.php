@@ -4,7 +4,7 @@
 namespace App\Domain\Repository;
 
 
-interface NoteRepository extends RepositoryInterface
+interface NoteRepository extends Repository
 {
 
 }

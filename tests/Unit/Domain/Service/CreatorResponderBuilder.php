@@ -3,7 +3,7 @@
 namespace App\Tests\Unit\Domain\Service;
 
 use App\Domain\Entity\AbstractEntity;
-use App\Domain\Repository\RepositoryInterface;
+use App\Domain\Repository\Repository;
 use App\Domain\Service\CreatorResponder;
 use App\Domain\Service\Factory\HttpResponseFactoryInterface;
 use App\Domain\Service\Factory\RepositoryFactoryInterface;
@@ -79,7 +79,7 @@ class CreatorResponderBuilder extends TestCase
             ->method('create')
             ->with($this->isInstanceOf(AbstractEntity::class))
             ->willReturn(
-                $this->createMock(RepositoryInterface::class)
+                $this->createMock(Repository::class)
             );
 
         return $this;
