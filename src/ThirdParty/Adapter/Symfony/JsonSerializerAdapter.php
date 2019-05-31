@@ -2,10 +2,10 @@
 
 namespace App\ThirdParty\Adapter\Symfony;
 
-use App\Domain\Service\SerializerInterface;
+use App\Domain\Service\Serializer;
 use Symfony\Component\Serializer\SerializerInterface as SymfonySerializerInterface;
 
-class JsonSerializerAdapter implements SerializerInterface
+class JsonSerializerAdapter implements Serializer
 {
     private $serializer;
 

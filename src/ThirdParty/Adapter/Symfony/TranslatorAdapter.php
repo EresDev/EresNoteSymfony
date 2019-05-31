@@ -1,10 +1,10 @@
 <?php
 namespace App\ThirdParty\Adapter\Symfony;
 
-use App\Domain\Service\TranslatorInterface;
+use App\Domain\Service\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface as SymfonyTranslator;
 
-class TranslatorAdapter implements TranslatorInterface
+class TranslatorAdapter implements Translator
 {
     private $translator;
 

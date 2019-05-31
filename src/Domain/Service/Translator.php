@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Service;
 
-interface TranslatorInterface
+interface Translator
 {
     public function translate(string $text) : string;
 }

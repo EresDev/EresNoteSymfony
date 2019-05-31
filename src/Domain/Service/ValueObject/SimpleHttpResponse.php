@@ -2,7 +2,7 @@
 
 namespace App\Domain\Service\ValueObject;
 
-use App\Domain\Service\SerializerInterface;
+use App\Domain\Service\Serializer;
 use http\Exception\InvalidArgumentException;
 
 

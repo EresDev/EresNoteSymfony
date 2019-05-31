@@ -2,7 +2,7 @@
 
 namespace App\Domain\Service\Factory;
 
-use App\Domain\Service\SerializerInterface;
+use App\Domain\Service\Serializer;
 use App\Domain\Service\ValueObject\SimpleHttpResponse;
 use App\Domain\Service\ValueObject\SimpleHttpResponseInterface;
 
@@ -10,7 +10,7 @@ class HttpResponseFactoryImpl implements HttpResponseFactory
 {
     private $serializer;
 
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(Serializer $serializer)
     {
         $this->serializer = $serializer;
     }
