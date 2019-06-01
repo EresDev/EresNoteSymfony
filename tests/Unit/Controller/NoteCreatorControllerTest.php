@@ -4,7 +4,7 @@ namespace App\Tests\Unit\Controller;
 
 use App\Controller\NoteCreatorController;
 use App\Domain\Service\Http\Request;
-use App\ThirdParty\Proxy\ResponseProxy;
+use App\Domain\Service\ValueObject\HttpResponse;
 use App\UseCase\UseCase;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class NoteCreatorControllerTest extends TestCase
         $useCase = $this->createMock(UseCase::class);
         $useCase->expects($this->any())
             ->method('execute')
-            ->willReturn(new ResponseProxy(200, 'Some content.'));
+            ->willReturn(new HttpResponse(200, 'Some content.'));
 
         $request = $this->createMock(Request::class);
         $request->expects($this->any())
@@ -28,6 +28,5 @@ class NoteCreatorControllerTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Some content.', $response->getContent());
-
     }
 }

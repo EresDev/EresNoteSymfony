@@ -2,9 +2,9 @@
 
 namespace App\UseCase;
 
-use App\Domain\Service\Http\Response;
+use App\Domain\Service\ValueObject\HttpResponse;
 
 interface UseCase
 {
-    public function execute(array $data) : Response;
+    public function execute(array $data) : HttpResponse;
 }
