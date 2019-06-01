@@ -6,7 +6,7 @@ use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-abstract class CreatorTemplate
+abstract class CreatorTemplate implements UseCase
 {
     private $entityFactory;
     private $responder;

@@ -66,3 +66,11 @@ services:
         public: true
 
 
+
+    #Create Note
+    App\Controller\NoteCreatorController:
+        public: true
+        arguments:
+            - '@App\UseCase\CreateNoteUseCase'
+            - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
+
