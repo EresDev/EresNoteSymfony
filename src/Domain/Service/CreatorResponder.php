@@ -3,27 +3,27 @@
 namespace App\Domain\Service;
 
 use App\Domain\Entity\Entity;
-use App\Domain\Service\Factory\ResponseFactory;
+use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Factory\RepositoryFactory;
-use App\Domain\Service\Http\Response;
+use App\Domain\Service\ValueObject\HttpResponse;
 
 class CreatorResponder implements Responder
 {
     private $validator;
     private $repositoryFactory;
-    private $responseFactory;
+    private $httpResponseFactory;
 
     public function __construct(
         Validator $validator,
         RepositoryFactory $repositoryFactory,
-        ResponseFactory $responseFactory
+        HttpResponseFactory $httpResponseFactory
     ){
         $this->validator = $validator;
         $this->repositoryFactory = $repositoryFactory;
-        $this->responseFactory = $responseFactory;
+        $this->httpResponseFactory = $httpResponseFactory;
     }
 
-    public function prepare(Entity $entity) : Response
+    public function prepare(Entity $entity) : HttpResponse
     {
         $validatorResponse = $this->validator->validate($entity);
         if ($validatorResponse->isValid()) {
@@ -36,15 +36,15 @@ class CreatorResponder implements Responder
         return $this->getFailureResponse($validatorResponse->getErrors());
     }
 
-    protected function getSuccessResponse(Entity $entity): Response
+    protected function getSuccessResponse(Entity $entity): HttpResponse
     {
-        $response = $this->responseFactory->create(200, $entity);
+        $response = $this->httpResponseFactory->create(200, $entity);
         return $response;
     }
 
-    protected function getFailureResponse(array $errors): Response
+    protected function getFailureResponse(array $errors): HttpResponse
     {
-        $response = $this->responseFactory->create(422, $errors);
+        $response = $this->httpResponseFactory->create(422, $errors);
         return $response;
     }
 }

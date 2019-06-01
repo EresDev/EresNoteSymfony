@@ -2,11 +2,10 @@
 
 namespace App\Domain\Service\Factory;
 
-use App\Domain\Service\Http\Response;
 use App\Domain\Service\Serializer;
-use App\ThirdParty\Proxy\ResponseProxy;
+use App\Domain\Service\ValueObject\HttpResponse;
 
-class ResponseFactoryImpl implements ResponseFactory
+class HttpResponseFactoryImpl implements HttpResponseFactory
 {
     private $serializer;
 
@@ -15,7 +14,7 @@ class ResponseFactoryImpl implements ResponseFactory
         $this->serializer = $serializer;
     }
 
-    public function create(int $httpStatusCode, $data): Response
+    public function create(int $httpStatusCode, $data): HttpResponse
     {
         if (!$this->isValid($httpStatusCode)) {
             throw new InvalidArgumentException(
@@ -27,9 +26,9 @@ class ResponseFactoryImpl implements ResponseFactory
             $data = $this->convertToString($data);
         }
 
-        $response = new ResponseProxy($httpStatusCode, $data);
+        $simpleHttpResponse = new HttpResponse($httpStatusCode, $data);
 
-        return $response;
+        return $simpleHttpResponse;
     }
 
 

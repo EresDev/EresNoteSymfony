@@ -3,10 +3,9 @@
 namespace App\Tests\Unit\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
-use App\Domain\Service\Http\Response;
 use App\Domain\Service\Responder;
+use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Entity\Entity;
-use App\ThirdParty\Proxy\ResponseProxy;
 use PHPUnit\Framework\TestCase;
 
 abstract class CreatorTestBase extends TestCase
@@ -38,20 +37,20 @@ abstract class CreatorTestBase extends TestCase
 
     protected function getResponder(
         Entity $entity,
-        Response $response
+        HttpResponse $simpleHttpResponse
     ){
         $responderMock = $this->createMock(Responder::class);
 
         $responderMock->expects($this->once())
             ->method('prepare')
             ->with($entity)
-            ->willReturn($response);
+            ->willReturn($simpleHttpResponse);
 
         return $responderMock;
     }
 
-    protected function getResponse()
+    protected function getSimpleHttpResponse()
     {
-        return new ResponseProxy(200, 'Some test content!');
+        return new HttpResponse(200, 'Some test content!');
     }
 }

@@ -11,8 +11,8 @@ class CreateNoteUseCaseTest extends CreatorTestBase
         $entity = $this->getEntity(1);
         $entityFactory = $this->getEntityFactory($entity);
 
-        $response = $this->getResponse();
-        $responder = $this->getResponder($entity, $response);
+        $simpleHttpResponse = $this->getSimpleHttpResponse();
+        $responder = $this->getResponder($entity, $simpleHttpResponse);
 
         $createNoteUseCase = new CreateNoteUseCase($entityFactory, $responder);
 
@@ -20,12 +20,12 @@ class CreateNoteUseCaseTest extends CreatorTestBase
 
         $this->assertEquals(
             $response->getStatusCode(),
-            $response->getStatusCode()
+            $simpleHttpResponse->getStatusCode()
         );
 
         $this->assertEquals(
             $response->getContent(),
-            $response->getContent()
+            $simpleHttpResponse->getContent()
         );
     }
 
