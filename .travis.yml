@@ -1,29 +1,21 @@
 language: php
-# Allows use container-based infrastructure
 sudo: false
 php:
-  - 7.3
-
+- 7.3
 cache:
   directories:
-    - $HOME/.composer/cache/files
-
+  - "$HOME/.composer/cache/files"
 env:
-  - SYMFONY_VERSION="4.2.*" DB=mysql
-#before_script:
-#  - composer install --no-interaction
-
+- SYMFONY_VERSION="4.2.*" DB=mysql
 script:
-  - php bin/phpunit
-
+- php bin/phpunit
 services:
-  - mysql
-
-# Install composer dependencies,
-# Create database, schema and fixtures
+- mysql
 install:
-  - composer install
-  - cp .env.travis .env
-  - php bin/console doctrine:database:create --env=test
-  - php bin/console doctrine:schema:create --env=test
-#  - php bin/console doctrine:fixtures:load -n --env=test
+- composer install
+- cp .env.travis .env
+- php bin/console doctrine:database:create --env=test
+- php bin/console doctrine:schema:create --env=test
+before_install:
+- openssl aes-256-cbc -K $encrypted_3b4824445f26_key -iv $encrypted_3b4824445f26_iv
+  -in deploy_key.enc -out ./deploy_key -d
