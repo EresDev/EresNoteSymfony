@@ -24,7 +24,7 @@ before_deploy:
 - echo -e "Host 104.219.248.53\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
 - ssh -i ./deploy_key arslvsec@104.219.248.53 -p 21098 pwd
-after_success:
+deploy:
   provider: script
   skip_cleanup: true
   script: rsync -rvz -e 'ssh -p 21098' --progress ./hqCRUD arslvsec@104.219.248.53:/home/arslvsec/public_html/hqCRUD
