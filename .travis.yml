@@ -19,3 +19,8 @@ install:
 before_install:
 - openssl aes-256-cbc -K $encrypted_3b4824445f26_key -iv $encrypted_3b4824445f26_iv
   -in deploy_key.enc -out ./deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 ./deploy_key
+- echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- ssh-add ./deploy_key
+- ssh -i ./deploy_key arslvsec@104.219.248.53 -p 21098 pwd
