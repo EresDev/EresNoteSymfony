@@ -27,6 +27,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ssh -p 21098 arslvsec@104.219.248.53 "mkdir -p /home/arslvsec/public_html/_tmp-hqCRUD"&& ssh -p 21098 arslvsec@104.219.248.53 "mkdir -p /home/arslvsec/public_html/hqCRUD" && rsync -rav -e ssh --exclude='.git/' --exclude=scripts/ --exclude='.travis.yml' --delete-excluded ./ arslvsec@104.219.248.53:/home/arslvsec/public_html/_tmp-hqCRUD && ssh -p 21098 arslvsec@104.219.248.53 "mv /home/arslvsec/public_html/hqCRUD /home/arslvsec/public_html/_old-hqCRUD && mv /home/arslvsec/public_html/_tmp-hqCRUD /home/arslvsec/public_html/hqCRUD" && ssh -p 21098 arslvsec@104.219.248.53 "rm -rf /home/arslvsec/public_html/_old-hqCRUD"
+  script: ./deploy.sh
   on:
     branch: master
