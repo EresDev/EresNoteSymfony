@@ -4,9 +4,6 @@ namespace App\Domain\Repository;
 
 use App\Domain\Entity\Entity;
 
-interface Repository
+interface Repository extends EntitySingleGetter, EntityAllGetter, EntitySaver
 {
-    public function getById($id);
-    public function getAll();
-    public function persist(Entity $entity);
 }
