@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Domain\Service\Responder;
 use App\Domain\Service\Responder\CreatorResponder;
 use App\Domain\Service\Responder\NoteCreatorResponder;
 
-class NoteCreatorResponderBuilderTemplate extends CreatorResponderBuilderTemplate
+class NoteCreatorResponderBuilder extends CreatorResponderBuilderTemplate
 {
     public function getCreatorResponderInstance(): CreatorResponder
     {
