@@ -53,7 +53,7 @@ abstract class AbstractRepository extends EntityRepository implements Repository
         return $results;
     }
 
-    public function persist(Entity $entity)
+    public function save(Entity $entity)
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();

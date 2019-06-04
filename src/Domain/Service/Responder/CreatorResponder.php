@@ -3,37 +3,48 @@
 namespace App\Domain\Service\Responder;
 
 use App\Domain\Entity\Entity;
+use App\Domain\Repository\EntitySaver;
 use App\Domain\Service\Factory\HttpResponseFactory;
-use App\Domain\Service\Factory\RepositoryFactory;
 use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-class CreatorResponder implements Responder
+abstract class CreatorResponder implements Responder
 {
+    /**
+     * @var Validator
+     */
     private $validator;
-    private $repositoryFactory;
+
+    /**
+     * @var HttpResponseFactory
+     */
     private $httpResponseFactory;
+
+    /**
+     * @var EntitySaver
+     */
+    private $entitySaver;
 
     public function __construct(
         Validator $validator,
         HttpResponseFactory $httpResponseFactory,
-        RepositoryFactory $repositoryFactory
+        EntitySaver $entitySaver
     ){
         $this->validator = $validator;
-        $this->repositoryFactory = $repositoryFactory;
         $this->httpResponseFactory = $httpResponseFactory;
+        $this->entitySaver = $entitySaver;
     }
 
     public function prepare(Entity $entity) : HttpResponse
     {
         $validatorResponse = $this->validator->validate($entity);
-        if ($validatorResponse->isValid()) {
 
-            $repository = $this->repositoryFactory->create($entity);
-            $repository->persist($entity);
+        if ($validatorResponse->isValid()) {
+            $this->entitySaver->save($entity);
 
             return $this->getSuccessResponse($entity);
         }
+
         return $this->getFailureResponse($validatorResponse->getErrors());
     }
 

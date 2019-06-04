@@ -2,20 +2,20 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Entity\Entity;
+use App\Domain\Entity\Note;
 use App\Domain\Service\ValueObject\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
-class CreatorResponderTest extends TestCase
+class NoteCreatorResponderTest extends TestCase
 {
     public function testPrepareForValidEntity(): void
     {
-        $creatorResponder = CreatorResponderBuilder::getInstance()
+        $creatorResponder = NoteCreatorResponderBuilder::getInstance()
             ->withValidValidatorResponse()
             ->build();
 
         $response = $creatorResponder->prepare(
-            $this->createMock(Entity::class)
+            $this->createMock(Note::class)
         );
 
         $this->assertInstanceOf(HttpResponse::class, $response);
@@ -25,12 +25,12 @@ class CreatorResponderTest extends TestCase
 
     public function testPrepareForInvalidEntity(): void
     {
-        $creatorResponder = CreatorResponderBuilder::getInstance()
+        $creatorResponder = NoteCreatorResponderBuilder::getInstance()
             ->withInvalidValidatorResponse()
             ->build();
 
         $response = $creatorResponder->prepare(
-            $this->createMock(Entity::class)
+            $this->createMock(Note::class)
         );
 
         $this->assertEquals(422, $response->getStatusCode());
