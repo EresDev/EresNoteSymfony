@@ -7,5 +7,8 @@ use App\Domain\Repository\NoteRepository;
 
 class NoteRepositoryImpl extends AbstractRepository implements NoteRepository
 {
-    protected $entityClass = Note::class;
+    public function getEntityClass(): string
+    {
+        return Note::class;
+    }
 }

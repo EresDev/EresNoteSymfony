@@ -7,6 +7,9 @@ use App\Domain\Repository\UserRepository;
 
 class UserRepositoryImpl extends AbstractRepository implements UserRepository
 {
-    protected $entityClass = User::class;
+    public function getEntityClass(): string
+    {
+        return User::class;
+    }
 }
 

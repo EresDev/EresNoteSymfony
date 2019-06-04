@@ -16,8 +16,8 @@ class CreatorResponder implements Responder
 
     public function __construct(
         Validator $validator,
-        RepositoryFactory $repositoryFactory,
-        HttpResponseFactory $httpResponseFactory
+        HttpResponseFactory $httpResponseFactory,
+        RepositoryFactory $repositoryFactory
     ){
         $this->validator = $validator;
         $this->repositoryFactory = $repositoryFactory;

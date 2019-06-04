@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Domain\Service;
+namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Service\ValueObject\HttpResponse;

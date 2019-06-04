@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Domain\Service;
+namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Repository\Repository;
@@ -92,8 +92,8 @@ class CreatorResponderBuilder extends TestCase
 
         return new CreatorResponder(
             $this->validator,
-            $this->repositoryFactory,
-            $this->httpResponseFactory
+            $this->httpResponseFactory,
+            $this->repositoryFactory
         );
     }
 }
