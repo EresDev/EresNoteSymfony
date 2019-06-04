@@ -70,6 +70,6 @@ services:
     App\Controller\NoteCreatorController:
         public: true
         arguments:
-            - '@App\Domain\UseCase\CreateNoteUseCase'
+            - '@App\Domain\UseCase\CreateNote'
             - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
 

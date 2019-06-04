@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Domain\UseCase;
 
-use App\Domain\UseCase\CreateNoteUseCase;
+use App\Domain\UseCase\CreateNote;
 
 class CreateNoteUseCaseTest extends CreatorTestBase
 {
@@ -14,7 +14,7 @@ class CreateNoteUseCaseTest extends CreatorTestBase
         $simpleHttpResponse = $this->getSimpleHttpResponse();
         $responder = $this->getResponder($entity, $simpleHttpResponse);
 
-        $createNoteUseCase = new CreateNoteUseCase($entityFactory, $responder);
+        $createNoteUseCase = new CreateNote($entityFactory, $responder);
 
         $response = $createNoteUseCase->execute($this->dummyRequestParameters);
 

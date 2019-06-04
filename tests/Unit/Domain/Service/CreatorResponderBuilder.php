@@ -4,7 +4,7 @@ namespace App\Tests\Unit\Domain\Service;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Repository\Repository;
-use App\Domain\Service\CreatorResponder;
+use App\Domain\Service\Responder\CreatorResponder;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Factory\RepositoryFactory;
 use App\Domain\Service\Validator;

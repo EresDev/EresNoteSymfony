@@ -3,10 +3,10 @@
 namespace App\Domain\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
-use App\Domain\Service\Responder;
+use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-abstract class CreatorTemplate implements UseCase
+abstract class Creator implements UseCase
 {
     private $entityFactory;
     private $responder;

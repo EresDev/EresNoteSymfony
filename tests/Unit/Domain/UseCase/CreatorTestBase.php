@@ -3,7 +3,7 @@
 namespace App\Tests\Unit\Domain\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
-use App\Domain\Service\Responder;
+use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Entity\Entity;
 use PHPUnit\Framework\TestCase;
