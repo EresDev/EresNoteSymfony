@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase;
+namespace App\Domain\UseCase;
 
 class CreateNoteUseCase extends CreatorTemplate
 {

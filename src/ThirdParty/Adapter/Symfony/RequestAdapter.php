@@ -2,11 +2,11 @@
 
 namespace App\ThirdParty\Adapter\Symfony;
 
-use App\Domain\Service\Http\Request;
+use App\Domain\Service\Http\Request\PostParametersGetter;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class RequestAdapter implements Request
+class RequestAdapter implements PostParametersGetter
 {
     /**
      * @var SymfonyRequest
@@ -18,7 +18,7 @@ class RequestAdapter implements Request
         $this->request = $requestStack->getCurrentRequest();
     }
 
-    public function getAllPostData(): array
+    public function getAll(): array
     {
         return $this->request->request->all();
     }

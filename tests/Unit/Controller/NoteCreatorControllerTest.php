@@ -3,9 +3,9 @@
 namespace App\Tests\Unit\Controller;
 
 use App\Controller\NoteCreatorController;
-use App\Domain\Service\Http\Request;
+use App\Domain\Service\Http\Request\PostParametersGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
-use App\UseCase\UseCase;
+use App\Domain\UseCase\UseCase;
 use PHPUnit\Framework\TestCase;
 
 class NoteCreatorControllerTest extends TestCase
@@ -17,9 +17,9 @@ class NoteCreatorControllerTest extends TestCase
             ->method('execute')
             ->willReturn(new HttpResponse(200, 'Some content.'));
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(PostParametersGetter::class);
         $request->expects($this->any())
-            ->method('getAllPostData')
+            ->method('getAll')
             ->willReturn(['post_data_key', 'post_data_value']);
 
         $controller = new NoteCreatorController($useCase, $request);

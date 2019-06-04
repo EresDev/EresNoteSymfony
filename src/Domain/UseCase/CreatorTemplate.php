@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase;
+namespace App\Domain\UseCase;
 
 use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Responder;

@@ -31,11 +31,11 @@ class RequestAdapterTest extends FixtureWebTestCase
         $this->requestStack->push($request);
     }
 
-    public function testGetAllPostData() : void
+    public function testGetAll() : void
     {
         $requestAdapter = new RequestAdapter($this->requestStack);
 
-        $postData = $requestAdapter->getAllPostData();
+        $postData = $requestAdapter->getAll();
 
         $this->assertArrayHasKey('test_key1', $postData);
     }
