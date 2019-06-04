@@ -6,5 +6,5 @@ use App\Domain\Entity\Entity;
 
 interface EntitySaver
 {
-    public function save(Entity $entity);
+    public function save(Entity $entity) : void;
 }

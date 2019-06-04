@@ -23,12 +23,12 @@ abstract class AbstractRepository extends EntityRepository implements Repository
     
     abstract public function getEntityClass() : string;
 
-    public function getById($id)
+    public function getById($id) : Entity
     {
         return $this->entityManager->find($this->getEntityClass(), $id);
     }
 
-    public function getAll()
+    public function getAll() : array
     {
         return $this->entityManager
             ->getRepository($this->getEntityClass())
@@ -40,7 +40,7 @@ abstract class AbstractRepository extends EntityRepository implements Repository
         $order = [],
         $limit = null,
         $offset = null
-    ) {
+    ) : array {
         $repository = $this->entityManager->getRepository(
             $this->getEntityClass()
         );
@@ -53,7 +53,7 @@ abstract class AbstractRepository extends EntityRepository implements Repository
         return $results;
     }
 
-    public function save(Entity $entity)
+    public function save(Entity $entity) : void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
