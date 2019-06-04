@@ -10,7 +10,7 @@ class NoteCreatorResponderTest extends TestCase
 {
     public function testPrepareForValidEntity(): void
     {
-        $creatorResponder = NoteCreatorResponderBuilder::getInstance()
+        $creatorResponder = NoteCreatorResponderBuilderTemplate::getInstance()
             ->withValidValidatorResponse()
             ->build();
 
@@ -25,7 +25,7 @@ class NoteCreatorResponderTest extends TestCase
 
     public function testPrepareForInvalidEntity(): void
     {
-        $creatorResponder = NoteCreatorResponderBuilder::getInstance()
+        $creatorResponder = NoteCreatorResponderBuilderTemplate::getInstance()
             ->withInvalidValidatorResponse()
             ->build();
 

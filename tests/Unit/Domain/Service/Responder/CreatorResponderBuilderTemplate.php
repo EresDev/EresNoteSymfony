@@ -10,13 +10,13 @@ use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
-abstract class CreatorResponderBuilder extends TestCase
+abstract class CreatorResponderBuilderTemplate extends TestCase
 {
     protected $validator;
     protected $httpResponseFactory;
     protected $entitySaver;
 
-    public static function getInstance(): CreatorResponderBuilder
+    public static function getInstance(): CreatorResponderBuilderTemplate
     {
         return new static();
     }
