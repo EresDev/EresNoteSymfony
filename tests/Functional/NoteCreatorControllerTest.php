@@ -3,21 +3,15 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\UserFixture;
-use App\Tests\Extra\FixtureWebTestCase;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class NoteCreatorControllerTest extends FixtureWebTestCase
+class NoteCreatorControllerTest extends FunctionalTestCase
 {
-    /**
-     * @var \Symfony\Component\BrowserKit\Client
-     */
-    private $client;
     private $validNoteData = [
         "title" => "A sample title",
         "content" => "Some test content",
-        "user" => null //to be loaded via fixture
+        "user" => null //to be loaded via fixture in setUp
     ];
-    private $contentType = 'application/json';
 
     protected function setUp()
     {
@@ -29,25 +23,21 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
             UserFixture::class,
             UserFixture::class.'_0'
         );
-
-        $this->client = static::createClient();
     }
 
-    public function testCreate_withValidData() : void
+    public function testHandleRequestWithValidData() : void
     {
         $validNoteData = $this->validNoteData;
 
         $this->sendRequest($validNoteData);
 
-        $response = $this->client->getResponse();
+        $response = $this->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
 
         /**
          * @var $headers ResponseHeaderBag
          */
-        $headers = $response->headers;
-        $this->assertEquals($this->contentType, $headers->get('content-type'));
 
         $contentJson = $response->getContent();
         $contentObject = json_decode($contentJson);
@@ -59,45 +49,39 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
 
     private function sendRequest($parameters) : void
     {
-        $this->client->request(
+        $this->request(
             'post',
             '/note',
             $parameters,
             [],
-            ['content-type' => $this->contentType]
+            []//['content-type' => $this->contentType]
         );
     }
 
-    public function testCreate_withEmptyTitle() : void
+    public function testHandleRequestWithEmptyTitle() : void
     {
         $noteData = $this->validNoteData;
         $noteData['title'] = '';
 
         $this->sendRequest($noteData);
 
-        $response = $this->client->getResponse();
+        $response = $this->getResponse();
         $this->assertEquals(422, $response->getStatusCode());
-
-        $headers = $response->headers;
-        $this->assertEquals($this->contentType, $headers->get('content-type'));
 
         $contentJson = $response->getContent();
         $contentMultiArray = json_decode($contentJson, true);
         $this->assertArrayHasKey('title', $contentMultiArray[0]);
     }
 
-    public function testCreate_withTooBigTitle() : void
+    public function testHandleRequestWithTooBigTitle() : void
     {
         $noteData = $this->validNoteData;
         $noteData['title'] = $this->generateRandomString(51);
 
         $this->sendRequest($noteData);
 
-        $response = $this->client->getResponse();
+        $response = $this->getResponse();
         $this->assertEquals(422, $response->getStatusCode());
-
-        $headers = $response->headers;
-        $this->assertEquals($this->contentType, $headers->get('content-type'));
 
         $contentJson = $response->getContent();
         $contentMultiArray = json_decode($contentJson, true);
@@ -116,6 +100,4 @@ class NoteCreatorControllerTest extends FixtureWebTestCase
         }
         return $randomString;
     }
-
-
 }

@@ -19,7 +19,7 @@ abstract class Creator implements UseCase
         $this->responder = $responder;
     }
 
-    public function execute(array $requestParameters) : HttpResponse
+    public function execute($requestParameters) : HttpResponse
     {
         $entity = $this->entityFactory->createFromParameters($requestParameters);
         $response = $this->responder->prepare($entity);

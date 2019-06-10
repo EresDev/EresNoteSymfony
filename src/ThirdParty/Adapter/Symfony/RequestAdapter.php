@@ -2,11 +2,12 @@
 
 namespace App\ThirdParty\Adapter\Symfony;
 
+use App\Domain\Service\Http\Request\GetParameterGetter;
 use App\Domain\Service\Http\Request\PostParametersGetter;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class RequestAdapter implements PostParametersGetter
+class RequestAdapter implements PostParametersGetter, GetParameterGetter
 {
     /**
      * @var SymfonyRequest
@@ -22,4 +23,11 @@ class RequestAdapter implements PostParametersGetter
     {
         return $this->request->request->all();
     }
+
+    public function get(string $key, string $defaultValue = null): string
+    {
+        return $this->request->get($key, $defaultValue);
+    }
+
+
 }

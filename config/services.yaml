@@ -85,3 +85,11 @@ services:
             - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
+
+
+    #Single Note Getter
+    App\Controller\SingleNoteGetterController:
+        public: true
+        arguments:
+            - '@App\Domain\UseCase\NoteGetter'
+            - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'

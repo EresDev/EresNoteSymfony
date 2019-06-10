@@ -1,5 +1,11 @@
-index:
+noteCreate:
     path: /note
     methods: [ post ]
     controller: App\Controller\NoteCreatorController::handleRequest
 
+noteGet:
+    path: /note/{noteId}
+    methods: [ get ]
+    controller: App\Controller\SingleNoteGetterController::handleRequest
+    requirements:
+        noteId: '\d+'
