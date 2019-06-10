@@ -88,8 +88,8 @@ services:
 
 
     #Single Note Getter
-    App\Controller\SingleNoteGetterController:
+    App\Controller\NoteGetterController:
         public: true
         arguments:
-            - '@App\Domain\UseCase\NoteGetter'
+            - '@App\Domain\UseCase\NoteCreator'
             - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
