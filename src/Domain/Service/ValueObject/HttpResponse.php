@@ -29,4 +29,11 @@ class HttpResponse
     {
         return $this->content;
     }
+
+    public function equals(self $object): bool
+    {
+        return
+            $object->getStatusCode() === $this->getStatusCode() &&
+            $object->getContent()  === $this->getContent();
+    }
 }
