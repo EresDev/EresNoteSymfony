@@ -6,15 +6,12 @@ use App\Domain\Entity\Entity;
 use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\ValueObject\HttpResponse;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class StubFactories
 {
-    use MockGeneratorTrait;
-
     public static function getEntityFactory(Entity $entity): EntityFactory
     {
-        $entityFactory = self::getStubGenerator()
+        $entityFactory = MockGenerator::get()
             ->getMock(EntityFactory::class);
 
         $entityFactory
@@ -26,7 +23,7 @@ class StubFactories
 
     public static function getHttpResponseFactory(int $statusCode, $content): HttpResponseFactory
     {
-        $httpResponseFactory = self::getStubGenerator()
+        $httpResponseFactory = MockGenerator::get()
             ->getMock(HttpResponseFactory::class);
 
         $httpResponseFactory

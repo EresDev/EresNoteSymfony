@@ -11,3 +11,12 @@ The development approaches includes usage of design patterns, continuous integra
 Feel free to fork, try things out, and recommend your ideas.  
 
 
+## How to install
+- Clone the repository
+`git clone https://github.com/EresDev/hqCRUD.git `
+
+- Rename `.env.dist` to  `.env` and update the details inside the file.
+- Use composer to install
+`composer install `
+- To run all tests (Unit+Integration+Functional) run the following command
+`php bin/phpunit `

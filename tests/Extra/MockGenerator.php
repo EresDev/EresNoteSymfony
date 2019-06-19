@@ -4,9 +4,9 @@ namespace App\Tests\Extra;
 
 use PHPUnit\Framework\MockObject\Generator;
 
-trait MockGeneratorTrait
+class MockGenerator
 {
-    private static function getStubGenerator() : Generator
+    public static function get() : Generator
     {
         return new Generator();
     }

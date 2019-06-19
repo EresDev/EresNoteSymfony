@@ -7,11 +7,9 @@ use App\Domain\Service\ValueObject\HttpResponse;
 
 class StubServices
 {
-    use MockGeneratorTrait;
-
     public static function getResponder(HttpResponse $httpResponse): Responder
     {
-        $responder = self::getStubGenerator()
+        $responder = MockGenerator::get()
             ->getMock(Responder::class);
 
         $responder->method('prepare')
