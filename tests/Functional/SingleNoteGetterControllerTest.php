@@ -44,4 +44,20 @@ class SingleNoteGetterControllerTest extends FixtureWebTestCase
 
         $this->assertEquals($validNoteId, $contentObject->id);
     }
+
+
+    public function testHandleRequestWithInvalidNoteId()
+    {
+        $invalidNoteId = 0;
+
+        $this->client->request(
+            'get',
+            '/note/'.$invalidNoteId,
+            [],
+            [],
+            ['content-type' => 'application/json']
+        );
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+    }
 }

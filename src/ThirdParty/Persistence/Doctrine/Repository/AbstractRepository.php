@@ -23,7 +23,7 @@ abstract class AbstractRepository extends EntityRepository implements Repository
     
     abstract public function getEntityClass() : string;
 
-    public function getById($id) : Entity
+    public function getById($id) : ?Entity
     {
         return $this->entityManager->find($this->getEntityClass(), $id);
     }

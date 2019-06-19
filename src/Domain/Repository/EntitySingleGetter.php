@@ -6,5 +6,5 @@ use App\Domain\Entity\Entity;
 
 interface EntitySingleGetter
 {
-    public function getById($id) : Entity;
+    public function getById($id) : ?Entity;
 }
