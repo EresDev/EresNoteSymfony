@@ -15,7 +15,8 @@ Feel free to fork, try things out, and recommend your ideas.
 - Clone the repository
 `git clone https://github.com/EresDev/hqCRUD.git `
 
-- Rename `.env.dist` to  `.env` and update the details inside the file.
+- To override default environment variables based on your machine, create a new .env.local and env.test.local file and add variables in it to override. More info about this can be found here https://symfony.com/doc/4.2/configuration.html#configuring-environment-variables-in-development
+
 - Use composer to install
 `composer install `
 - To run all tests (Unit+Integration+Functional) run the following command
