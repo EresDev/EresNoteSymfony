@@ -24,8 +24,6 @@ class SingleNoteGetterControllerTest extends FixtureWebTestCase
 
     public function testHandleRequestWithValidNoteId()
     {
-        $this->markTestSkipped();
-
         $validNoteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'

@@ -7,6 +7,10 @@
                 <target>Hinweis wurde erfolgreich erstellt.</target>
             </trans-unit>
 
+            <trans-unit id="resource_not_found">
+                <source>getter.responder</source>
+                <target>Die angeforderte Ressource wurde nicht gefunden.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

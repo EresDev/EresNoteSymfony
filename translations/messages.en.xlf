@@ -7,7 +7,10 @@
                 <target>Note has been created successfully.</target>
             </trans-unit>
 
-
+            <trans-unit id="resource_not_found">
+                <source>getter.responder</source>
+                <target>Requested resource was not found.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

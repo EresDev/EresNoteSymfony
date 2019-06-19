@@ -38,4 +38,5 @@ class ValidEntities
 
         return $user;
     }
+
 }

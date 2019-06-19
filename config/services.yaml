@@ -64,7 +64,6 @@ services:
 
 
     #Create Note
-    #App\Domain\Service\Http\Request\PostParametersGetter: '@App\ThirdParty\Adapter\Symfony\Request'
     App\Domain\Repository\UserRepository: '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl'
 
     App\Controller\NoteCreatorController:
@@ -80,7 +79,7 @@ services:
             - '@App\Domain\Service\Responder\NoteCreatorResponder'
 
     App\Domain\Service\Responder\NoteCreatorResponder:
-        public: flase
+        public: false
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
@@ -90,5 +89,19 @@ services:
     App\Controller\NoteGetterController:
         public: true
         arguments:
-            - '@App\Domain\UseCase\NoteCreator'
+            - '@App\Domain\UseCase\NoteGetter'
             - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
+
+    App\Domain\UseCase\NoteGetter:
+        public: false
+        arguments:
+            - '@App\Domain\Service\Responder\NoteGetterResponder'
+            - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
+
+    App\Domain\Service\Responder\NoteGetterResponder:
+        public: false
+        arguments:
+            - '@App\ThirdParty\Adapter\Symfony\TranslatorAdapter'
+            - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+
+

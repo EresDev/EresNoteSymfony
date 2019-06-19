@@ -21,7 +21,7 @@ class StubFactories
         return $entityFactory;
     }
 
-    public static function getHttpResponseFactory(int $statusCode, $content): HttpResponseFactory
+    public static function getHttpResponseFactory(HttpResponse $httpResponse): HttpResponseFactory
     {
         $httpResponseFactory = MockGenerator::get()
             ->getMock(HttpResponseFactory::class);
@@ -29,7 +29,7 @@ class StubFactories
         $httpResponseFactory
             ->method('create')
             ->willReturn(
-                new HttpResponse($statusCode, $content)
+                $httpResponse
             );
 
         return $httpResponseFactory;
