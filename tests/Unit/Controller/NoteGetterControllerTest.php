@@ -3,32 +3,32 @@
 namespace App\Tests\Unit\Controller;
 
 use App\Controller\NoteGetterController;
-use App\Domain\Service\Http\Request\GetParameterGetter;
+use App\Domain\Service\ValueObject\HttpResponse;
+use App\Tests\Extra\StubServices;
+use App\Tests\Extra\ValidValues;
+use PHPUnit\Framework\TestCase;
 
-class NoteGetterControllerTest extends ControllerTestBase
+class NoteGetterControllerTest extends TestCase
 {
+    private const STATUS_CODE = 200;
+    private const CONTENT = 'Some content.';
+
     private const NOTE_ID = 1;
-    private const GET_PARAMETER_KEY = 'noteId';
 
     public function testHandleRequest(): void
     {
-        $getParameterGetter = $this->createMock(GetParameterGetter::class);
-        $getParameterGetter->expects($this->any())
-            ->method('get')
-            ->with(self::GET_PARAMETER_KEY)
-            ->willReturn(self::NOTE_ID);
+        $pathVariableGetter = StubServices::getPathVariableGetter(self::NOTE_ID);
 
-        $controller = new NoteGetterController(
-            $this->getUseCase(),
-            $getParameterGetter
+        $useCase = StubServices::getUseCase(
+            ValidValues::getHttpResponse(self::STATUS_CODE, self::CONTENT)
         );
+
+        $controller = new NoteGetterController($useCase, $pathVariableGetter);
 
         $response = $controller->handleRequest();
 
         $this->assertEquals(self::STATUS_CODE, $response->getStatusCode());
-        $this->assertEquals(self::CONTENT, $response->getCOntent());
-
+        $this->assertEquals(self::CONTENT, $response->getContent());
     }
-
 
 }

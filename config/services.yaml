@@ -76,3 +76,10 @@ services:
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\TranslatorAdapter'
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+
+    #Note Deleter
+    App\Controller\DeleteNoteController:
+        public: true
+        arguments:
+            - '@App\Domain\UseCase\NoteGetter'
+            - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'

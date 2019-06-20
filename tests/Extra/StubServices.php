@@ -4,12 +4,25 @@ namespace App\Tests\Extra;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Repository\EntitySingleGetter;
+use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
+use App\Domain\UseCase\UseCase;
 
 class StubServices
 {
+    public static function getUseCase(HttpResponse $httpResponse) : UseCase
+    {
+        $useCase = MockGenerator::get()
+            ->getMock(UseCase::class);
+
+        $useCase->method('execute')
+            ->willReturn($httpResponse);
+
+        return $useCase;
+    }
+
     public static function getResponder(HttpResponse $httpResponse): Responder
     {
         $responder = MockGenerator::get()
@@ -19,6 +32,17 @@ class StubServices
             ->willReturn($httpResponse);
 
         return $responder;
+    }
+
+    public static function getTranslator(string $textToReturn) : Translator
+    {
+        $translator = MockGenerator::get()
+            ->getMock(Translator::class);
+
+        $translator->method('translate')
+            ->willReturn($textToReturn);
+
+        return $translator;
     }
 
     public static function getEntitySingleGetter(Entity $entity) : EntitySingleGetter
@@ -32,14 +56,14 @@ class StubServices
         return $entitySingleGetter;
     }
 
-    public static function getTranslator(string $textToReturn) : Translator
+    public static function getPathVariableGetter(string $valueToReturn): PathVariableGetter
     {
-        $translator = MockGenerator::get()
-            ->getMock(Translator::class);
+        $pathVariableGetter = MockGenerator::get()
+            ->getMock(PathVariableGetter::class);
 
-        $translator->method('translate')
-            ->willReturn($textToReturn);
+        $pathVariableGetter->method('get')
+            ->willReturn($valueToReturn);
 
-        return $translator;
+        return $pathVariableGetter;
     }
 }

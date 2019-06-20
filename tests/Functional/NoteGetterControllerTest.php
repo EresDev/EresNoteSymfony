@@ -6,13 +6,8 @@ use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Extra\FixtureWebTestCase;
 use Symfony\Component\BrowserKit\Client;
 
-class SingleNoteGetterControllerTest extends FixtureWebTestCase
+class NoteGetterControllerTest extends FixtureWebTestCase
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
     protected function setUp()
     {
         parent::setUp();

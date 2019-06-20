@@ -59,4 +59,17 @@ abstract class AbstractRepository extends EntityRepository implements Repository
         $this->entityManager->flush();
     }
 
+    public function delete(int $entityId) : bool
+    {
+        $entity = $this->getById($entityId);
+
+        if($entity != null){
+            $this->entityManager->remove($entity);
+            $this->entityManager->flush();
+
+            return true;
+        }
+
+        return false;
+    }
 }

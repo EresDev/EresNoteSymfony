@@ -4,20 +4,26 @@ namespace App\Tests\Unit\Controller;
 
 use App\Controller\NoteCreatorController;
 use App\Domain\Service\Http\Request\PostParametersGetter;
+use App\Domain\Service\ValueObject\HttpResponse;
+use App\Tests\Extra\StubServices;
+use PHPUnit\Framework\TestCase;
 
-class NoteCreatorControllerTest extends ControllerTestBase
+class NoteCreatorControllerTest extends TestCase
 {
+    private const STATUS_CODE = 200;
+    private const CONTENT = 'Some content.';
+
     public function testHandleRequest(): void
     {
         $postParametersGetter = $this->createMock(PostParametersGetter::class);
-        $postParametersGetter->expects($this->any())
-            ->method('getAll')
+        $postParametersGetter->method('getAll')
             ->willReturn(['post_data_key', 'post_data_value']);
 
-        $controller = new NoteCreatorController(
-            $this->getUseCase(),
-            $postParametersGetter
+        $useCase = StubServices::getUseCase(
+            new HttpResponse(self::STATUS_CODE, self::CONTENT)
         );
+
+        $controller = new NoteCreatorController($useCase, $postParametersGetter);
 
         $response = $controller->handleRequest();
 

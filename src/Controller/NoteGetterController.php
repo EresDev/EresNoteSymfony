@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Domain\Service\Http\Request\GetParameterGetter;
+use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\UseCase;
 
@@ -14,19 +14,19 @@ class NoteGetterController extends Controller
     private $useCase;
 
     /**
-     * @var GetParameterGetter
+     * @var PathVariableGetter
      */
-    private $getParameterGetter;
+    private $pathVariableGetter;
 
-    public function __construct(UseCase $useCase, GetParameterGetter $getParameterGetter)
+    public function __construct(UseCase $useCase, PathVariableGetter $pathVariableGetter)
     {
         $this->useCase = $useCase;
-        $this->getParameterGetter = $getParameterGetter;
+        $this->pathVariableGetter = $pathVariableGetter;
     }
 
     protected function getResponse(): HttpResponse
     {
-        $noteId = $this->getParameterGetter->get('noteId');
+        $noteId = $this->pathVariableGetter->get('noteId');
 
         return $this->useCase->execute($noteId);
     }

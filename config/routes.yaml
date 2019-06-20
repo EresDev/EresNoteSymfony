@@ -9,3 +9,11 @@ noteGet:
     controller: App\Controller\NoteGetterController::handleRequest
     requirements:
         noteId: '\d+'
+
+noteDelete:
+    path: /note/{noteId}
+    methods: [ delete ]
+    controller: App\Controller\NoteDeleterController::handleRequest
+    requirements:
+        noteId: '\d+'
+
