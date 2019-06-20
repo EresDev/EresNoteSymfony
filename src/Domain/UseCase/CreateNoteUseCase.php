@@ -2,6 +2,6 @@
 
 namespace App\Domain\UseCase;
 
-class CreateNoteUseCase extends CreateUseCase
+class CreateNoteUseCase extends CreateEntityUseCase
 {
 }

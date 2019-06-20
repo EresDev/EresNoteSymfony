@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Service\Responder\CreatorResponder;
-use App\Domain\Service\Responder\NoteCreatorResponder;
+use App\Domain\Service\Responder\CreateEntityResponder;
+use App\Domain\Service\Responder\CreateNoteResponder;
 use App\Domain\Repository\EntitySaver;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
@@ -11,7 +11,7 @@ use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
-class NoteCreatorResponderBuilder extends TestCase
+class CreateNoteResponderBuilder extends TestCase
 {
     protected $validator;
     protected $httpResponseFactory;
@@ -22,7 +22,7 @@ class NoteCreatorResponderBuilder extends TestCase
         return new self();
     }
 
-    public function build() : CreatorResponder
+    public function build() : CreateEntityResponder
     {
         $this->withValidValidatorResponse();
 
@@ -79,9 +79,9 @@ class NoteCreatorResponderBuilder extends TestCase
             ->willReturn(new HttpResponse(422, 'An error message.'));
     }
 
-    public function getCreatorResponderInstance(): CreatorResponder
+    public function getCreatorResponderInstance(): CreateEntityResponder
     {
-        return new NoteCreatorResponder(
+        return new CreateNoteResponder(
             $this->validator,
             $this->httpResponseFactory,
             $this->entitySaver

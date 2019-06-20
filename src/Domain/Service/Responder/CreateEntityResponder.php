@@ -8,7 +8,7 @@ use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-abstract class CreatorResponder implements Responder
+abstract class CreateEntityResponder implements Responder
 {
     private $validator;
     private $httpResponseFactory;

@@ -6,15 +6,15 @@ use App\Domain\Entity\Note;
 use App\Domain\Service\ValueObject\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
-class NoteCreatorResponderTest extends TestCase
+class CreateNoteResponderTest extends TestCase
 {
     public function testPrepareForValidEntity(): void
     {
-        $creatorResponder = NoteCreatorResponderBuilder::getInstance()
+        $responder = CreateNoteResponderBuilder::getInstance()
             ->withValidValidatorResponse()
             ->build();
 
-        $response = $creatorResponder->prepare(
+        $response = $responder->prepare(
             $this->createMock(Note::class)
         );
 
@@ -25,11 +25,11 @@ class NoteCreatorResponderTest extends TestCase
 
     public function testPrepareForInvalidEntity(): void
     {
-        $creatorResponder = NoteCreatorResponderBuilder::getInstance()
+        $responder = CreateNoteResponderBuilder::getInstance()
             ->withInvalidValidatorResponse()
             ->build();
 
-        $response = $creatorResponder->prepare(
+        $response = $responder->prepare(
             $this->createMock(Note::class)
         );
 
