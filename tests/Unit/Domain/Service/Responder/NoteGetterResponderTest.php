@@ -2,9 +2,6 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Service\Responder\NoteGetterResponder;
-use App\Tests\Extra\StubFactories;
-use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;

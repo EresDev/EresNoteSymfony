@@ -6,8 +6,6 @@ use App\Domain\Service\Responder\NoteGetterResponder;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Tests\Extra\StubFactories;
 use App\Tests\Extra\StubServices;
-use App\Tests\Extra\ValidEntities;
-use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
 class NoteGetterResponderBuilder extends TestCase
