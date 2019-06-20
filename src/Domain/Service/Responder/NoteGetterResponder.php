@@ -20,7 +20,7 @@ class NoteGetterResponder implements Responder
         $this->httpResponseFactory = $httpResponseFactory;
     }
 
-    public function prepare(?Entity $entity): HttpResponse
+    public function prepare($entity): HttpResponse
     {
         if ($entity != null) {
             return $this->getResponse(200, $entity);

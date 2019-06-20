@@ -10,19 +10,8 @@ use App\Domain\Service\ValueObject\HttpResponse;
 
 abstract class CreatorResponder implements Responder
 {
-    /**
-     * @var Validator
-     */
     private $validator;
-
-    /**
-     * @var HttpResponseFactory
-     */
     private $httpResponseFactory;
-
-    /**
-     * @var EntitySaver
-     */
     private $entitySaver;
 
     public function __construct(
@@ -35,7 +24,7 @@ abstract class CreatorResponder implements Responder
         $this->entitySaver = $entitySaver;
     }
 
-    public function prepare(Entity $entity) : HttpResponse
+    public function prepare($entity) : HttpResponse
     {
         $validatorResponse = $this->validator->validate($entity);
 

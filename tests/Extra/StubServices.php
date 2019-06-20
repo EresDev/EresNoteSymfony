@@ -3,6 +3,7 @@
 namespace App\Tests\Extra;
 
 use App\Domain\Entity\Entity;
+use App\Domain\Repository\EntityDeleter;
 use App\Domain\Repository\EntitySingleGetter;
 use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\Responder\Responder;
@@ -56,6 +57,17 @@ class StubServices
         return $entitySingleGetter;
     }
 
+    public static function getEntityDeleter(bool $valueToReturn) : EntityDeleter
+    {
+        $entityDeleter = MockGenerator::get()
+            ->getMock(EntityDeleter::class);
+
+        $entityDeleter->method('delete')
+            ->willReturn($valueToReturn);
+
+        return $entityDeleter;
+    }
+
     public static function getPathVariableGetter(string $valueToReturn): PathVariableGetter
     {
         $pathVariableGetter = MockGenerator::get()
@@ -66,4 +78,6 @@ class StubServices
 
         return $pathVariableGetter;
     }
+
+
 }
