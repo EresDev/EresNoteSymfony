@@ -14,13 +14,11 @@ class NoteGetterResponderTest extends TestCase
     public function testPrepareForValidNote() : void
     {
         $note = ValidEntities::getNote();
-
         $responseForValidNote = ValidValues::getHttpResponse(200, $note);
-        $httpResponseFactory = StubFactories::getHttpResponseFactory($responseForValidNote);
 
-        $translator = StubServices::getTranslator('Content after translation.');
-
-        $noteGetterResponder = new NoteGetterResponder($translator, $httpResponseFactory);
+        $noteGetterResponder = NoteGetterResponderBuilder::getInstance()
+            ->withHttpResponse($responseForValidNote)
+            ->build();
 
         $response = $noteGetterResponder->prepare($note);
 
@@ -29,17 +27,14 @@ class NoteGetterResponderTest extends TestCase
 
     public function testPrepareForNullInPlaceOfNote() : void
     {
-
         $responseForNull = ValidValues::getHttpResponse(
             404,
             'Resource not found.'
         );
 
-        $httpResponseFactory = StubFactories::getHttpResponseFactory($responseForNull);
-
-        $translator = StubServices::getTranslator('Resource not found.');
-
-        $noteGetterResponder = new NoteGetterResponder($translator, $httpResponseFactory);
+        $noteGetterResponder = NoteGetterResponderBuilder::getInstance()
+            ->withHttpResponse($responseForNull)
+            ->build();
 
         $response = $noteGetterResponder->prepare(null);
 

@@ -19,7 +19,7 @@ class NoteCreatorResponderBuilder extends TestCase
 
     public static function getInstance(): self
     {
-        return new static();
+        return new self();
     }
 
     public function build() : CreatorResponder
