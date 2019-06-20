@@ -6,7 +6,7 @@ use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\UseCase;
 
-class NoteGetterController extends Controller
+class GetNoteController extends Controller
 {
     /**
      * @var UseCase

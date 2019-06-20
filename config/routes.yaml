@@ -6,7 +6,7 @@ noteCreate:
 noteGet:
     path: /note/{noteId}
     methods: [ get ]
-    controller: App\Controller\NoteGetterController::handleRequest
+    controller: App\Controller\GetNoteController::handleRequest
     requirements:
         noteId: '\d+'
 

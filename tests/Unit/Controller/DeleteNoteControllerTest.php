@@ -2,6 +2,6 @@
 
 namespace App\Tests\Unit\Controller;
 
-class DeleteNoteControllerTest extends NoteGetterControllerTest
+class DeleteNoteControllerTest extends GetNoteControllerTest
 {
 }

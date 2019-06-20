@@ -59,7 +59,7 @@ services:
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
 
     #Single Note Getter
-    App\Controller\NoteGetterController:
+    App\Controller\GetNoteController:
         public: true
         arguments:
             - '@App\Domain\UseCase\NoteGetter'

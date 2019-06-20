@@ -3,18 +3,14 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\NoteFixture;
-use App\Tests\Extra\FixtureWebTestCase;
-use Symfony\Component\BrowserKit\Client;
 
-class NoteGetterControllerTest extends FixtureWebTestCase
+class GetNoteControllerTest extends FunctionalTestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
         $this->loadFixture(NoteFixture::class);
-
-        $this->client = static::createClient();
     }
 
     public function testHandleRequestWithValidNoteId()

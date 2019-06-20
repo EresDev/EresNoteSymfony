@@ -2,13 +2,12 @@
 
 namespace App\Tests\Unit\Controller;
 
-use App\Controller\NoteGetterController;
-use App\Domain\Service\ValueObject\HttpResponse;
+use App\Controller\GetNoteController;
 use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
-class NoteGetterControllerTest extends TestCase
+class GetNoteControllerTest extends TestCase
 {
     private const STATUS_CODE = 200;
     private const CONTENT = 'Some content.';
@@ -23,7 +22,7 @@ class NoteGetterControllerTest extends TestCase
             ValidValues::getHttpResponse(self::STATUS_CODE, self::CONTENT)
         );
 
-        $controller = new NoteGetterController($useCase, $pathVariableGetter);
+        $controller = new GetNoteController($useCase, $pathVariableGetter);
 
         $response = $controller->handleRequest();
 
