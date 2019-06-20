@@ -2,14 +2,13 @@
 
 namespace App\Tests\Unit\Domain\UseCase;
 
-use App\Domain\UseCase\NoteGetter;
+use App\Domain\UseCase\GetNoteUseCase;
 use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
-class NoteGetterTest extends TestCase
+class GetNoteUseCaseTest extends TestCase
 {
     private const NOTE_ID = 1; 
     
@@ -22,8 +21,8 @@ class NoteGetterTest extends TestCase
 
         $entitySingleGetter = StubServices::getEntitySingleGetter($note);
 
-        $noteGetter = new NoteGetter($responder, $entitySingleGetter);
-        $response = $noteGetter->execute(self::NOTE_ID);
+        $getNoteUseCase = new GetNoteUseCase($responder, $entitySingleGetter);
+        $response = $getNoteUseCase->execute(self::NOTE_ID);
 
         $this->assertTrue($response->equals($responseForEntityFound));
     }

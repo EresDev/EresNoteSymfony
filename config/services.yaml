@@ -62,10 +62,10 @@ services:
     App\Controller\GetNoteController:
         public: true
         arguments:
-            - '@App\Domain\UseCase\NoteGetter'
+            - '@App\Domain\UseCase\GetNoteUseCase'
             - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
 
-    App\Domain\UseCase\NoteGetter:
+    App\Domain\UseCase\GetNoteUseCase:
         public: false
         arguments:
             - '@App\Domain\Service\Responder\NoteGetterResponder'
