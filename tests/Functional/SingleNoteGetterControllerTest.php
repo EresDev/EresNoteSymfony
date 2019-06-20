@@ -57,6 +57,7 @@ class SingleNoteGetterControllerTest extends FixtureWebTestCase
             [],
             ['content-type' => 'application/json']
         );
+        $resposne = $this->client->getResponse();
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }

@@ -28,7 +28,7 @@ class NoteGetterResponder implements Responder
 
         return $this->getResponse(
             404,
-            $this->translator->translate('resource_not_found')
+            $this->translator->translate('not.found.resource.getter.responder')
         );
     }
 

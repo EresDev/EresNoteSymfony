@@ -8,7 +8,7 @@
             </trans-unit>
 
             <trans-unit id="resource_not_found">
-                <source>getter.responder</source>
+                <source>not.found.resource.getter.responder</source>
                 <target>Requested resource was not found.</target>
             </trans-unit>
         </body>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\ThirdParty\Adapter\Symfony;
 
 use App\Domain\Service\Translator;

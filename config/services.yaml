@@ -76,5 +76,3 @@ services:
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\TranslatorAdapter'
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
-
-

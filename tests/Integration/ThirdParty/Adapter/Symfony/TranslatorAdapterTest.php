@@ -4,17 +4,35 @@ namespace App\Tests\Integration\ThirdParty\Adapter\Symfony;
 
 use App\Tests\Extra\FixtureWebTestCase;
 use App\ThirdParty\Adapter\Symfony\TranslatorAdapter;
+use Symfony\Component\Translation\Loader\XliffFileLoader;
+use Symfony\Component\Translation\Translator;
 
 class TranslatorAdapterTest extends FixtureWebTestCase
 {
+    /**
+     * @var Translator
+     */
     private $translator;
 
     protected function setUp()
     {
         parent::setUp();
-        $this->translator = parent::getService(
-            'Symfony\Contracts\Translation\TranslatorInterface'
+        $this->translator = new Translator('en');
+
+        $this->translator->addLoader('xlf', new XliffFileLoader());
+
+        $this->translator->addResource(
+            'xlf',
+            self::$container->getParameter('kernel.project_dir').'/tests/Extra/translations/messages.en.xlf',
+            'en'
         );
+
+        $this->translator->addResource(
+            'xlf',
+            self::$container->getParameter('kernel.project_dir').'/tests/Extra/translations/messages.de.xlf',
+            'de_DE'
+        );
+
     }
 
     public function testTranslateForDefaultLocaleEnglish()
