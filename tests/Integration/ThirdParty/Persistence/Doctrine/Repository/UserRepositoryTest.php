@@ -26,12 +26,12 @@ class UserRepositoryTest extends FixtureWebTestCase
 
     public function testGetById() : void
     {
-        $entityId = $this->getFixtureId(
+        $userId = $this->getFixtureId(
             UserFixture::class,
             UserFixture::class.'_0'
         );
 
-        $entity = $this->repository->getById($entityId);
+        $entity = $this->repository->getById($userId);
 
         $this->assertNotNull($entity);
     }
@@ -52,5 +52,24 @@ class UserRepositoryTest extends FixtureWebTestCase
     {
         $notes = $this->repository->getBy(['deleted' => false]);
         $this->assertCount(5, $notes);
+    }
+
+    public function testDeleteForExistingUser() : void
+    {
+        $userId = $this->getFixtureId(
+            UserFixture::class,
+            UserFixture::class.'_0'
+        );
+
+        $isDeleted = $this->repository->delete($userId);
+        $this->assertTrue($isDeleted);
+    }
+
+    public function testDeleteForInvalidUser() : void
+    {
+        $userId = 111;
+
+        $isDeleted = $this->repository->delete($userId);
+        $this->assertFalse($isDeleted);
     }
 }

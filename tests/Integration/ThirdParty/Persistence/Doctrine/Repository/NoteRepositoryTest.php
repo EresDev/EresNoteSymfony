@@ -23,13 +23,13 @@ class NoteRepositoryTest extends FixtureWebTestCase
 
     public function testGetById() : void
     {
-        $entityId = $this->getFixtureId(
+        $noteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class . '_0'
 
         );
 
-        $entity = $this->repository->getById($entityId);
+        $entity = $this->repository->getById($noteId);
 
         $this->assertNotNull($entity);
     }
@@ -50,5 +50,25 @@ class NoteRepositoryTest extends FixtureWebTestCase
     {
         $note = $this->repository->getBy(['content' => 'Some test content 0']);
         $this->assertCount(1, $note);
+    }
+
+    public function testDeleteForExistingNote() : void
+    {
+        $noteId = $this->getFixtureId(
+            NoteFixture::class,
+            NoteFixture::class . '_0'
+
+        );
+
+        $isDeleted = $this->repository->delete($noteId);
+        $this->assertTrue($isDeleted);
+    }
+
+    public function testDeleteForInvalidNote() : void
+    {
+        $noteId = 111;
+
+        $isDeleted = $this->repository->delete($noteId);
+        $this->assertFalse($isDeleted);
     }
 }
