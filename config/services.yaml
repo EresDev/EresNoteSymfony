@@ -66,10 +66,10 @@ services:
     App\Domain\UseCase\GetNoteUseCase:
         public: false
         arguments:
-            - '@App\Domain\Service\Responder\NoteGetterResponder'
+            - '@App\Domain\Service\Responder\GetNoteResponder'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
 
-    App\Domain\Service\Responder\NoteGetterResponder:
+    App\Domain\Service\Responder\GetNoteResponder:
         public: false
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\TranslatorAdapter'

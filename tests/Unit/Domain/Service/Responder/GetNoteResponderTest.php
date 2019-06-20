@@ -6,18 +6,18 @@ use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
-class NoteGetterResponderTest extends TestCase
+class GetNoteResponderTest extends TestCase
 {
     public function testPrepareForValidNote() : void
     {
         $note = ValidEntities::getNote();
         $responseForValidNote = ValidValues::getHttpResponse(200, $note);
 
-        $noteGetterResponder = NoteGetterResponderBuilder::getInstance()
+        $responder = GetNoteResponderBuilder::getInstance()
             ->withHttpResponse($responseForValidNote)
             ->build();
 
-        $response = $noteGetterResponder->prepare($note);
+        $response = $responder->prepare($note);
 
         $this->assertTrue($responseForValidNote->equals($response));
     }
@@ -29,11 +29,11 @@ class NoteGetterResponderTest extends TestCase
             'Resource not found.'
         );
 
-        $noteGetterResponder = NoteGetterResponderBuilder::getInstance()
+        $responder = GetNoteResponderBuilder::getInstance()
             ->withHttpResponse($responseForNull)
             ->build();
 
-        $response = $noteGetterResponder->prepare(null);
+        $response = $responder->prepare(null);
 
         $this->assertTrue($responseForNull->equals($response));
     }

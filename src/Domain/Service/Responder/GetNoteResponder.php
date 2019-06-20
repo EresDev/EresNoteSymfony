@@ -6,7 +6,7 @@ use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-class NoteGetterResponder implements Responder
+class GetNoteResponder implements Responder
 {
     private $translator;
     private $httpResponseFactory;

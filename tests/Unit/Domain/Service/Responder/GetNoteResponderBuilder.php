@@ -2,13 +2,13 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Service\Responder\NoteGetterResponder;
+use App\Domain\Service\Responder\GetNoteResponder;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Tests\Extra\StubFactories;
 use App\Tests\Extra\StubServices;
 use PHPUnit\Framework\TestCase;
 
-class NoteGetterResponderBuilder extends TestCase
+class GetNoteResponderBuilder extends TestCase
 {
     private $translator;
     private $httpResponseFactory;
@@ -18,7 +18,7 @@ class NoteGetterResponderBuilder extends TestCase
         return new static();
     }
 
-    public function build() : NoteGetterResponder
+    public function build() : GetNoteResponder
     {
         if ($this->httpResponseFactory == null) {
             throw new \UnexpectedValueException(
@@ -26,7 +26,7 @@ class NoteGetterResponderBuilder extends TestCase
             );
         }
 
-        return new NoteGetterResponder(
+        return new GetNoteResponder(
             $this->translator,
             $this->httpResponseFactory
         );
