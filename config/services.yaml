@@ -42,10 +42,10 @@ services:
     App\Controller\CreateNoteController:
         public: true
         arguments:
-            - '@App\Domain\UseCase\NoteCreator'
+            - '@App\Domain\UseCase\CreateNoteUseCase'
             - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
 
-    App\Domain\UseCase\NoteCreator:
+    App\Domain\UseCase\CreateNoteUseCase:
         public: false
         arguments:
             - '@App\Domain\Service\Factory\NoteFactory'
