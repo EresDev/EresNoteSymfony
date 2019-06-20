@@ -1,7 +1,7 @@
 noteCreate:
     path: /note
     methods: [ post ]
-    controller: App\Controller\NoteCreatorController::handleRequest
+    controller: App\Controller\CreateNoteController::handleRequest
 
 noteGet:
     path: /note/{noteId}

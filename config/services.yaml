@@ -39,7 +39,7 @@ services:
         public: true
 
     #Create Note
-    App\Controller\NoteCreatorController:
+    App\Controller\CreateNoteController:
         public: true
         arguments:
             - '@App\Domain\UseCase\NoteCreator'

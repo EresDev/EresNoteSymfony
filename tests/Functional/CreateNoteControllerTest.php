@@ -5,7 +5,7 @@ namespace App\Tests\Functional;
 use App\Tests\Extra\DataFixture\UserFixture;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class NoteCreatorControllerTest extends FunctionalTestCase
+class CreateNoteControllerTest extends FunctionalTestCase
 {
     private $validNoteData = [
         "title" => "A sample title",

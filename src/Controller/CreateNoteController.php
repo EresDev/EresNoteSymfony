@@ -6,15 +6,9 @@ use App\Domain\Service\Http\Request\PostParametersGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\UseCase;
 
-class NoteCreatorController extends Controller
+class CreateNoteController extends Controller
 {
-    /**
-     * @var \App\Domain\UseCase\UseCase
-     */
     private $useCase;
-    /**
-     * @var PostParametersGetter
-     */
     private $postParametersGetter;
 
     public function __construct(
