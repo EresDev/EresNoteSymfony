@@ -15,10 +15,8 @@ class DeleteNoteControllerTest extends FunctionalTestCase
         $this->client = static::createClient();
     }
 
-    public function testHandleRequest() : void
+    public function testHandleRequestWithExistingNote() : void
     {
-        $this->markTestSkipped();
-
         $noteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
@@ -32,11 +30,21 @@ class DeleteNoteControllerTest extends FunctionalTestCase
             ['content-type' => 'application/json']
         );
 
-        $noteIdAfterDelete = $this->getFixtureId(
-            NoteFixture::class,
-            NoteFixture::class.'_0'
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testHandleRequestWithInvalidNote() : void
+    {
+        $noteId = 111;
+
+        $this->client->request(
+            'delete',
+            '/note/'.$noteId,
+            [],
+            [],
+            ['content-type' => 'application/json']
         );
 
-        $this->assertNull($noteIdAfterDelete);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }

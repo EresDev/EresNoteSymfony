@@ -2,7 +2,6 @@
 
 namespace App\Domain\Service\Responder;
 
-use App\Domain\Entity\Entity;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;

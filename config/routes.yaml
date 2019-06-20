@@ -13,7 +13,7 @@ noteGet:
 noteDelete:
     path: /note/{noteId}
     methods: [ delete ]
-    controller: App\Controller\NoteDeleterController::handleRequest
+    controller: App\Controller\DeleteNoteController::handleRequest
     requirements:
         noteId: '\d+'
 

@@ -87,5 +87,10 @@ services:
     App\Domain\UseCase\DeleteNoteUseCase:
         public: false
         arguments:
-            - '@App\Domain\Service\Responder\NoteGetterResponder'
+            - '@App\Domain\Service\Responder\DeleteNoteResponder'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
+
+    App\Domain\Service\Responder\DeleteNoteResponder:
+        public: false
+        arguments:
+            - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
