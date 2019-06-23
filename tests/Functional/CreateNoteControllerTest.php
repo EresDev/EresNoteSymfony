@@ -7,11 +7,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class CreateNoteControllerTest extends FunctionalTestCase
 {
-    private $validNoteData = [
-        "title" => "A sample title",
-        "content" => "Some test content",
-        "user" => null //to be loaded via fixture in setUp
-    ];
+    private $validNoteData;
 
     protected function setUp()
     {
@@ -19,10 +15,15 @@ class CreateNoteControllerTest extends FunctionalTestCase
 
         $this->loadFixture(UserFixture::class);
 
-        $this->validNoteData['user'] = $this->getFixtureId(
+        $userIdForFixtures = $this->getFixtureId(
             UserFixture::class,
             UserFixture::class.'_0'
         );
+        $this->validNoteData = [
+            "title" => "A sample title",
+            "content" => "Some test content",
+            "user" => $userIdForFixtures
+        ];
     }
 
     public function testHandleRequestWithValidData() : void
