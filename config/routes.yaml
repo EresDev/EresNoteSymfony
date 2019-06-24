@@ -10,6 +10,11 @@ noteGet:
     requirements:
         noteId: '\d+'
 
+noteUpdate:
+    path: /note
+    methods: [ put ]
+    controller: App\Controller\UpdateNoteController::handleRequest
+
 noteDelete:
     path: /note/{noteId}
     methods: [ delete ]

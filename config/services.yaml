@@ -46,8 +46,8 @@ services:
     App\Domain\UseCase\CreateNoteUseCase:
         public: false
         arguments:
-            - '@App\Domain\Service\Factory\NoteFactory'
             - '@App\Domain\Service\Responder\CreateNoteResponder'
+            - '@App\Domain\Service\Factory\NoteFactory'
 
     App\Domain\Service\Responder\CreateNoteResponder:
         public: false
@@ -74,6 +74,26 @@ services:
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\TranslatorAdapter'
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+
+    #Note Update
+    App\Controller\UpdateNoteController:
+        public: true
+        arguments:
+            - '@App\Domain\UseCase\UpdateNoteUseCase'
+            - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
+
+    App\Domain\UseCase\UpdateNoteUseCase:
+        public: false
+        arguments:
+            - '@App\Domain\Service\Responder\CreateNoteResponder'
+            - '@App\Domain\Service\Factory\NoteFactory'
+
+    App\Domain\Service\Responder\UpdateNoteResponder:
+        public: false
+        arguments:
+            - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
+            - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+            - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
 
     #Note Deleter
     App\Controller\DeleteNoteController:

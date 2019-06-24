@@ -2,31 +2,31 @@
 
 namespace App\Tests\Unit\Controller;
 
-use App\Controller\CreateNoteController;
-use App\Domain\Service\Http\Request\PostParametersGetter;
+use App\Controller\UpdateNoteController;
+use App\Domain\Service\Http\Request\PutParametersGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Tests\Extra\StubServices;
 use PHPUnit\Framework\TestCase;
 
-class CreateNoteControllerTest extends TestCase
+class UpdateNoteControllerTest extends TestCase
 {
     private const STATUS_CODE = 200;
     private const CONTENT = 'Some content.';
 
-    public function testHandleRequest(): void
+    public function testHandleRequest() : void
     {
-        $postParametersGetter = $this->createMock(
-            PostParametersGetter::class
+        $putParametersGetter = $this->createMock(
+            PutParametersGetter::class
         );
-        
-        $postParametersGetter->method('getAll')
-            ->willReturn(['post_data_key' => 'post_data_value']);
+
+        $putParametersGetter->method('getAll')
+            ->willReturn(['put_data_key' => 'put_data_value']);
 
         $useCase = StubServices::getUseCase(
             new HttpResponse(self::STATUS_CODE, self::CONTENT)
         );
 
-        $controller = new CreateNoteController($useCase, $postParametersGetter);
+        $controller = new UpdateNoteController($useCase, $putParametersGetter);
 
         $response = $controller->handleRequest();
 

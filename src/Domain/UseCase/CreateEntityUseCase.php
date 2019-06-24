@@ -8,22 +8,21 @@ use App\Domain\Service\ValueObject\HttpResponse;
 
 abstract class CreateEntityUseCase implements UseCase
 {
-    private $entityFactory;
-    private $responder;
+    protected $entityFactory;
+    protected $responder;
 
     public function __construct(
-        EntityFactory $entityFactory,
-        Responder $responder
+        Responder $responder,
+        EntityFactory $entityFactory
     ){
-        $this->entityFactory = $entityFactory;
         $this->responder = $responder;
+        $this->entityFactory = $entityFactory;
     }
 
     public function execute($requestParameters) : HttpResponse
     {
         $entity = $this->entityFactory->createFromParameters($requestParameters);
-        $response = $this->responder->prepare($entity);
 
-        return $response;
+        return $this->responder->prepare($entity);
     }
 }

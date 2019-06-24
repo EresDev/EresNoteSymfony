@@ -13,8 +13,10 @@ class Note extends Entity
         string $title,
         string $content,
         \DateTime $creationDatetime,
-        User $user
+        User $user,
+        int $id = null
     ){
+        $this->setId($id);
         $this->setTitle($title);
         $this->setContent($content);
         $this->setCreationDatetime($creationDatetime);

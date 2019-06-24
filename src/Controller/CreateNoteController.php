@@ -21,6 +21,7 @@ class CreateNoteController extends Controller
 
     protected function getResponse(): HttpResponse
     {
+        // TODO: use current user, remove userId sent via POST
         $parameters = $this->postParametersGetter->getAll();
         $response = $this->useCase->execute($parameters);
 

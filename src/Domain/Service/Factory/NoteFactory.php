@@ -13,6 +13,7 @@ final class NoteFactory implements EntityFactory
 
     public function __construct(UserRepository $userRepository)
     {
+        // TODO: end dependence on Repository, Use current user
         $this->userRepository = $userRepository;
     }
 
@@ -28,8 +29,12 @@ final class NoteFactory implements EntityFactory
         return $note;
     }
 
-    private function getUser(int $userId) : User
+    private function getUser($user) : User
     {
-        return $this->userRepository->getById($userId);
+        if (is_object($user)) {
+            return $user;
+        }
+
+        return $this->userRepository->getById($user);
     }
 }
