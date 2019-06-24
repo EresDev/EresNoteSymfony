@@ -20,9 +20,9 @@ class CreateNoteControllerTest extends FunctionalTestCase
             UserFixture::class.'_0'
         );
         $this->validNoteData = [
-            "title" => "A sample title",
-            "content" => "Some test content",
-            "user" => $userIdForFixtures
+            'title' => 'A sample title',
+            'content' => 'Some test content',
+            'user' => $userIdForFixtures
         ];
     }
 
