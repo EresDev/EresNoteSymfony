@@ -7,6 +7,9 @@ use App\Tests\Extra\DataFixture\NoteFixture;
 
 class UpdateNoteControllerTest extends FunctionalTestCase
 {
+    // TODO: add tests for validation errors
+    // TODO: add assertions for content
+
     private $existingNoteData;
 
     protected function setUp()

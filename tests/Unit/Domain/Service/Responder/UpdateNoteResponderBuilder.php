@@ -2,9 +2,7 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Service\Responder\CreateEntityResponder;
-use App\Domain\Service\Responder\CreateNoteResponder;
-use App\Domain\Repository\EntitySaver;
+use App\Domain\Repository\EntityUpdater;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Responder\UpdateNoteResponder;
 use App\Domain\Service\Validator;
@@ -16,7 +14,7 @@ class UpdateNoteResponderBuilder extends TestCase
 {
     protected $validator;
     protected $httpResponseFactory;
-    protected $entitySaver;
+    protected $entityUpdater;
 
     public static function getInstance(): self
     {
@@ -38,8 +36,8 @@ class UpdateNoteResponderBuilder extends TestCase
             HttpResponseFactory::class
         );
 
-        $this->entitySaver = $this->createMock(
-            EntitySaver::class
+        $this->entityUpdater = $this->createMock(
+            EntityUpdater::class
         );
     }
 
@@ -85,7 +83,7 @@ class UpdateNoteResponderBuilder extends TestCase
         return new UpdateNoteResponder(
             $this->validator,
             $this->httpResponseFactory,
-            $this->entitySaver
+            $this->entityUpdater
         );
     }
 }

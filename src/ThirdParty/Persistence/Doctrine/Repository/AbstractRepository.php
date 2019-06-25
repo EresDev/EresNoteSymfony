@@ -72,4 +72,10 @@ abstract class AbstractRepository extends EntityRepository implements Repository
 
         return false;
     }
+
+    public function update(Entity $entity): void
+    {
+        $this->entityManager->merge($entity);
+        $this->entityManager->flush();
+    }
 }

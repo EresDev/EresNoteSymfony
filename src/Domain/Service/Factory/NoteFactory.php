@@ -23,7 +23,8 @@ final class NoteFactory implements EntityFactory
             $parameters['title'] ?? '',
             $parameters['content'] ?? '',
             new \DateTime(),
-            $this->getUser($parameters['user'])
+            $this->getUser($parameters['user']),
+            $parameters['id'] ?? null
         );
 
         return $note;

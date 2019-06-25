@@ -85,7 +85,7 @@ services:
     App\Domain\UseCase\UpdateNoteUseCase:
         public: false
         arguments:
-            - '@App\Domain\Service\Responder\CreateNoteResponder'
+            - '@App\Domain\Service\Responder\UpdateNoteResponder'
             - '@App\Domain\Service\Factory\NoteFactory'
 
     App\Domain\Service\Responder\UpdateNoteResponder:

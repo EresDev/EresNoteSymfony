@@ -10,8 +10,8 @@ use App\Domain\Service\ValueObject\HttpResponse;
 
 abstract class CreateEntityResponder implements Responder
 {
-    private $validator;
-    private $httpResponseFactory;
+    protected $validator;
+    protected $httpResponseFactory;
     private $entitySaver;
 
     public function __construct(
@@ -29,7 +29,7 @@ abstract class CreateEntityResponder implements Responder
         $validatorResponse = $this->validator->validate($entity);
 
         if ($validatorResponse->isValid()) {
-            $this->entitySaver->save($entity);
+            $this->save($entity);
 
             return $this->getSuccessResponse($entity);
         }
@@ -47,5 +47,10 @@ abstract class CreateEntityResponder implements Responder
     {
         $response = $this->httpResponseFactory->create(422, $errors);
         return $response;
+    }
+
+    protected function save(Entity $entity): void
+    {
+        $this->entitySaver->save($entity);
     }
 }
