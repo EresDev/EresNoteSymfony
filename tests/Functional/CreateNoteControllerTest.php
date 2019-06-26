@@ -3,10 +3,10 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\UserFixture;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class CreateNoteControllerTest extends FunctionalTestCase
 {
+    // TODO: userId should not be sent in request, update it and update assertions
     private $validNoteData;
 
     protected function setUp()
@@ -35,10 +35,6 @@ class CreateNoteControllerTest extends FunctionalTestCase
         $response = $this->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
-
-        /**
-         * @var $headers ResponseHeaderBag
-         */
 
         $contentJson = $response->getContent();
         $contentObject = json_decode($contentJson);

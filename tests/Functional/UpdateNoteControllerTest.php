@@ -44,6 +44,17 @@ class UpdateNoteControllerTest extends FunctionalTestCase
         $response = $this->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
+
+        $contentJson = $response->getContent();
+        $contentObject = json_decode($contentJson);
+
+        $this->assertEquals($this->existingNoteData['title'], $contentObject->title);
+        $this->assertEquals($this->existingNoteData['content'], $contentObject->content);
+        $this->assertEquals(
+            $this->existingNoteData['user']->getId(),
+            $contentObject->user->id
+        );
+
     }
 
     private function sendRequest($parameters) : void
