@@ -23,8 +23,7 @@ class CreateNoteController extends Controller
     {
         // TODO: use current user, remove userId sent via POST
         $parameters = $this->postParametersGetter->getAll();
-        $response = $this->useCase->execute($parameters);
 
-        return $response;
+        return $this->useCase->execute($parameters);;
     }
 }
