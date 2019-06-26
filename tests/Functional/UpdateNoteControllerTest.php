@@ -67,4 +67,19 @@ class UpdateNoteControllerTest extends FunctionalTestCase
             []
         );
     }
+
+    public function testHandleRequestWithEmptyTitle() : void
+    {
+        $noteData = $this->validNoteData;
+        $noteData['title'] = '';
+
+        $this->sendRequest($noteData);
+
+        $response = $this->getResponse();
+        $this->assertEquals(422, $response->getStatusCode());
+
+        $contentJson = $response->getContent();
+        $contentMultiArray = json_decode($contentJson, true);
+        $this->assertArrayHasKey('title', $contentMultiArray[0]);
+    }
 }
