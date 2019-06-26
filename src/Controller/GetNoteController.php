@@ -8,14 +8,7 @@ use App\Domain\UseCase\UseCase;
 
 class GetNoteController extends Controller
 {
-    /**
-     * @var UseCase
-     */
     private $useCase;
-
-    /**
-     * @var PathVariableGetter
-     */
     private $pathVariableGetter;
 
     public function __construct(UseCase $useCase, PathVariableGetter $pathVariableGetter)
