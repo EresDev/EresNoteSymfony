@@ -8,20 +8,17 @@ use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-abstract class CreateEntityResponder implements Responder
+abstract class UpsertEntityResponder implements Responder
 {
-    protected $validator;
-    protected $httpResponseFactory;
-    private $entitySaver;
+    private $validator;
+    private $httpResponseFactory;
 
     public function __construct(
         Validator $validator,
-        HttpResponseFactory $httpResponseFactory,
-        EntitySaver $entitySaver
+        HttpResponseFactory $httpResponseFactory
     ){
         $this->validator = $validator;
         $this->httpResponseFactory = $httpResponseFactory;
-        $this->entitySaver = $entitySaver;
     }
 
     public function prepare($entity) : HttpResponse
@@ -38,10 +35,7 @@ abstract class CreateEntityResponder implements Responder
     }
 
 
-    protected function save(Entity $entity): void
-    {
-        $this->entitySaver->save($entity);
-    }
+    abstract protected function save(Entity $entity): void ;
 
     protected function getSuccessResponse(Entity $entity): HttpResponse
     {

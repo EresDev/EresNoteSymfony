@@ -7,7 +7,7 @@ use App\Domain\Repository\EntityUpdater;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 
-class UpdateNoteResponder extends CreateNoteResponder
+class UpdateNoteResponder extends UpsertEntityResponder
 {
     private $entityUpdater;
 
@@ -16,8 +16,8 @@ class UpdateNoteResponder extends CreateNoteResponder
         HttpResponseFactory $httpResponseFactory,
         EntityUpdater $entityUpdater
     ){
-        $this->validator = $validator;
-        $this->httpResponseFactory = $httpResponseFactory;
+        parent::__construct($validator, $httpResponseFactory);
+
         $this->entityUpdater = $entityUpdater;
     }
 

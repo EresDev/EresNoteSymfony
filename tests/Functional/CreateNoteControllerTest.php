@@ -4,6 +4,8 @@ namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Extra\Utility;
+use App\Domain\Service\Factory\HttpResponseFactory;
+use App\Domain\Service\Validator;
 
 class CreateNoteControllerTest extends FunctionalTestCase
 {
