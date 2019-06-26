@@ -4,12 +4,10 @@ namespace App\Tests\Functional;
 
 use App\Domain\Entity\Note;
 use App\Tests\Extra\DataFixture\NoteFixture;
+use App\Tests\Extra\Utility;
 
 class UpdateNoteControllerTest extends FunctionalTestCase
 {
-    // TODO: add tests for validation errors
-    // TODO: add assertions for content
-
     private $existingNoteData;
 
     protected function setUp()
@@ -70,16 +68,31 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithEmptyTitle() : void
     {
-        $noteData = $this->validNoteData;
-        $noteData['title'] = '';
+        $this->existingNoteData['title'] = '';
 
-        $this->sendRequest($noteData);
+        $this->sendRequest($this->existingNoteData);
 
         $response = $this->getResponse();
         $this->assertEquals(422, $response->getStatusCode());
 
         $contentJson = $response->getContent();
-        $contentMultiArray = json_decode($contentJson, true);
-        $this->assertArrayHasKey('title', $contentMultiArray[0]);
+        $contentMultiArrayWithErrors = json_decode($contentJson, true);
+
+        $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
+    }
+
+    public function testHandleRequestWithTooBigTitle() : void
+    {
+        $this->existingNoteData['title'] = Utility::generateRandomString(51);
+
+        $this->sendRequest($this->existingNoteData);
+
+        $response = $this->getResponse();
+        $this->assertEquals(422, $response->getStatusCode());
+
+        $contentJson = $response->getContent();
+        $contentMultiArrayWithErrors = json_decode($contentJson, true);
+
+        $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
 }

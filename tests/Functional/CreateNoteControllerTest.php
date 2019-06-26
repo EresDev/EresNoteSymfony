@@ -9,7 +9,7 @@ class CreateNoteControllerTest extends FunctionalTestCase
 {
     // TODO: userId should not be sent in request, use security and
     // update it and update assertions
-    
+
     private $validNoteData;
 
     protected function setUp()
@@ -66,8 +66,9 @@ class CreateNoteControllerTest extends FunctionalTestCase
         $this->assertEquals(422, $response->getStatusCode());
 
         $contentJson = $response->getContent();
-        $contentMultiArray = json_decode($contentJson, true);
-        $this->assertArrayHasKey('title', $contentMultiArray[0]);
+        $contentMultiArrayWithErrors = json_decode($contentJson, true);
+
+        $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
 
     public function testHandleRequestWithTooBigTitle() : void
@@ -80,8 +81,8 @@ class CreateNoteControllerTest extends FunctionalTestCase
         $this->assertEquals(422, $response->getStatusCode());
 
         $contentJson = $response->getContent();
-        $contentMultiArray = json_decode($contentJson, true);
+        $contentMultiArrayWithErrors = json_decode($contentJson, true);
 
-        $this->assertArrayHasKey('title', $contentMultiArray[0]);
+        $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
 }
