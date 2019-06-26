@@ -21,6 +21,7 @@ class DeleteNoteUseCase implements UseCase
     {
         // TODO: delete note only if the user owns the note
         $existedAndDeleted = $this->entityDeleter->delete($noteId);
+
         return $this->responder->prepare($existedAndDeleted);
     }
 }
