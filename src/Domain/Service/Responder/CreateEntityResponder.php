@@ -37,6 +37,12 @@ abstract class CreateEntityResponder implements Responder
         return $this->getFailureResponse($validatorResponse->getErrors());
     }
 
+
+    protected function save(Entity $entity): void
+    {
+        $this->entitySaver->save($entity);
+    }
+
     protected function getSuccessResponse(Entity $entity): HttpResponse
     {
         $response = $this->httpResponseFactory->create(200, $entity);
@@ -47,10 +53,5 @@ abstract class CreateEntityResponder implements Responder
     {
         $response = $this->httpResponseFactory->create(422, $errors);
         return $response;
-    }
-
-    protected function save(Entity $entity): void
-    {
-        $this->entitySaver->save($entity);
     }
 }
