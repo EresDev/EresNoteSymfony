@@ -22,11 +22,11 @@ class CreateNoteControllerTest extends TestCase
         $postParametersGetter->method('getAll')
             ->willReturn(['post_data_key' => 'post_data_value']);
 
-        $useCase = StubServices::getUseCase(
+        $createUseCase = StubServices::getCreateUseCase(
             new HttpResponse(self::STATUS_CODE, self::CONTENT)
         );
 
-        $controller = new CreateNoteController($useCase, $postParametersGetter);
+        $controller = new CreateNoteController($createUseCase, $postParametersGetter);
 
         $response = $controller->handleRequest();
 

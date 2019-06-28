@@ -9,6 +9,7 @@ use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
+use App\Domain\UseCase\CreateUseCase;
 use App\Domain\UseCase\UseCase;
 
 class StubServices
@@ -17,6 +18,17 @@ class StubServices
     {
         $useCase = MockGenerator::get()
             ->getMock(UseCase::class);
+
+        $useCase->method('execute')
+            ->willReturn($httpResponse);
+
+        return $useCase;
+    }
+
+    public static function getCreateUseCase(HttpResponse $httpResponse) : CreateUseCase
+    {
+        $useCase = MockGenerator::get()
+            ->getMock(CreateUseCase::class);
 
         $useCase->method('execute')
             ->willReturn($httpResponse);
