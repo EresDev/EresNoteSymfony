@@ -4,7 +4,7 @@ namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\NoteFixture;
 
-class GetNoteControllerTest extends FunctionalTestCase
+class RetrieveNoteControllerTest extends FunctionalTestCase
 {
     protected function setUp()
     {

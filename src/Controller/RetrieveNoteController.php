@@ -6,7 +6,7 @@ use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\RetrieveUseCase;
 
-class GetNoteController extends Controller
+class RetrieveNoteController extends Controller
 {
     private $retrieveUseCase;
     private $pathVariableGetter;

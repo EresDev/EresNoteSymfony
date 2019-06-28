@@ -56,14 +56,14 @@ services:
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
 
-    #Single Note Getter
-    App\Controller\GetNoteController:
+    #Single Note Retrieve
+    App\Controller\RetrieveNoteController:
         public: true
         arguments:
-            - '@App\Domain\UseCase\GetNoteUseCase'
+            - '@App\Domain\UseCase\RetrieveNoteUseCase'
             - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
 
-    App\Domain\UseCase\GetNoteUseCase:
+    App\Domain\UseCase\RetrieveNoteUseCase:
         public: false
         arguments:
             - '@App\Domain\Service\Responder\GetNoteResponder'

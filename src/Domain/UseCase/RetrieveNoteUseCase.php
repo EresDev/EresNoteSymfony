@@ -6,7 +6,7 @@ use App\Domain\Repository\EntitySingleGetter;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-class GetNoteUseCase implements RetrieveUseCase
+class RetrieveNoteUseCase implements RetrieveUseCase
 {
     private $responder;
     private $entitySingleGetter;

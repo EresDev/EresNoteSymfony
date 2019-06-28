@@ -2,6 +2,6 @@
 
 namespace App\Controller;
 
-class DeleteNoteController extends GetNoteController
+class DeleteNoteController extends RetrieveNoteController
 {
 }

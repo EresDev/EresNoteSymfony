@@ -15,17 +15,6 @@ use App\Domain\UseCase\UseCase;
 
 class StubServices
 {
-    public static function getUseCase(HttpResponse $httpResponse) : UseCase
-    {
-        $useCase = MockGenerator::get()
-            ->getMock(UseCase::class);
-
-        $useCase->method('execute')
-            ->willReturn($httpResponse);
-
-        return $useCase;
-    }
-
     public static function getCreateUseCase(HttpResponse $httpResponse) : CreateUseCase
     {
         $createUseCase = MockGenerator::get()
