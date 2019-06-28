@@ -4,16 +4,18 @@ namespace App\Controller;
 
 use App\Domain\Service\Http\Request\PutParametersGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
-use App\Domain\UseCase\UseCase;
+use App\Domain\UseCase\CreateUseCase;
 
 class UpdateNoteController extends Controller
 {
-    private $useCase;
+    private $createUseCase;
     private $putParametersGetter;
 
-    public function __construct(UseCase $useCase, PutParametersGetter $putParametersGetter)
-    {
-        $this->useCase = $useCase;
+    public function __construct(
+        CreateUseCase $createUseCase,
+        PutParametersGetter $putParametersGetter
+    ) {
+        $this->createUseCase = $createUseCase;
         $this->putParametersGetter = $putParametersGetter;
     }
 
@@ -21,6 +23,6 @@ class UpdateNoteController extends Controller
     {
         $noteUpdatedData = $this->putParametersGetter->getAll();
 
-        return $this->useCase->execute($noteUpdatedData);
+        return $this->createUseCase->execute($noteUpdatedData);
     }
 }

@@ -22,7 +22,7 @@ class UpdateNoteControllerTest extends TestCase
         $putParametersGetter->method('getAll')
             ->willReturn(['put_data_key' => 'put_data_value']);
 
-        $useCase = StubServices::getUseCase(
+        $useCase = StubServices::getCreateUseCase(
             new HttpResponse(self::STATUS_CODE, self::CONTENT)
         );
 

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Domain\Service\Http\Request\PostParametersGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\CreateUseCase;
-use App\Domain\UseCase\UseCase;
 
 class CreateNoteController extends Controller
 {
