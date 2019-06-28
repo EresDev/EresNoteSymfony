@@ -5,7 +5,7 @@ namespace App\Domain\Service\Responder;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-class DeleteNoteResponder implements Responder
+class DeleteNoteResponder implements DeleteResponder
 {
     private $httpResponseFactory;
 
@@ -14,7 +14,7 @@ class DeleteNoteResponder implements Responder
         $this->httpResponseFactory = $httpResponseFactory;
     }
 
-    public function prepare($entityExistedAndDeleted): HttpResponse
+    public function prepare(): HttpResponse
     {
         return $this->httpResponseFactory->create(
             200,

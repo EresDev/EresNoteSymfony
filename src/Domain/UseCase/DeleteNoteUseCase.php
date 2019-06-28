@@ -3,25 +3,27 @@
 namespace App\Domain\UseCase;
 
 use App\Domain\Repository\EntityDeleter;
-use App\Domain\Service\Responder\Responder;
+use App\Domain\Service\Responder\DeleteResponder;
 use App\Domain\Service\ValueObject\HttpResponse;
 
 class DeleteNoteUseCase implements RetrieveUseCase
 {
-    private $responder;
+    private $deleteResponder;
     private $entityDeleter;
 
-    public function __construct(Responder $responder, EntityDeleter $entityDeleter)
-    {
-        $this->responder = $responder;
+    public function __construct(
+        DeleteResponder $deleteResponder,
+        EntityDeleter $entityDeleter
+    ) {
+        $this->deleteResponder = $deleteResponder;
         $this->entityDeleter = $entityDeleter;
     }
 
     public function execute($noteId): HttpResponse
     {
         // TODO: delete note only if the user owns the note
-        $existedAndDeleted = $this->entityDeleter->delete($noteId);
+        $this->entityDeleter->delete($noteId);
 
-        return $this->responder->prepare($existedAndDeleted);
+        return $this->deleteResponder->prepare();
     }
 }

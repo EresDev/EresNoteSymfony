@@ -20,7 +20,7 @@ abstract class CreateEntityResponderTemplate implements Responder
         $this->httpResponseFactory = $httpResponseFactory;
     }
 
-    public function prepare($entity) : HttpResponse
+    public function prepare(?Entity $entity) : HttpResponse
     {
         $validatorResponse = $this->validator->validate($entity);
 

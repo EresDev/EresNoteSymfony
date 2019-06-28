@@ -20,11 +20,11 @@ class DeleteNoteUseCaseTest extends TestCase
             self::HTTP_STATUS_CODE,
             self::CONTENT
         );
-        $responder = StubServices::getResponder($httpResponse);
+        $deleteResponder = StubServices::getDeleteResponder($httpResponse);
 
         $entityDeleter = StubServices::getEntityDeleter(true);
 
-        $useCase = new DeleteNoteUseCase($responder, $entityDeleter);
+        $useCase = new DeleteNoteUseCase($deleteResponder, $entityDeleter);
         $response = $useCase->execute(self::NOTE_ID);
 
         $this->assertTrue($httpResponse->equals($response));

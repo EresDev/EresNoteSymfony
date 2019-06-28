@@ -21,8 +21,8 @@ class DeleteNoteResponderTest extends TestCase
 
         $httpResponseFactory = StubFactories::getHttpResponseFactory($httpResponse);
 
-        $responder = new DeleteNoteResponder($httpResponseFactory);
-        $response = $responder->prepare(true);
+        $deleteResponder = new DeleteNoteResponder($httpResponseFactory);
+        $response = $deleteResponder->prepare(true);
 
         $this->assertTrue($httpResponse->equals($response));
     }

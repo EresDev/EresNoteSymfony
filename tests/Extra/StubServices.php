@@ -6,6 +6,7 @@ use App\Domain\Entity\Entity;
 use App\Domain\Repository\EntityDeleter;
 use App\Domain\Repository\EntitySingleGetter;
 use App\Domain\Service\Http\Request\PathVariableGetter;
+use App\Domain\Service\Responder\DeleteResponder;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
@@ -46,6 +47,17 @@ class StubServices
             ->willReturn($httpResponse);
 
         return $responder;
+    }
+
+    public static function getDeleteResponder(HttpResponse $httpResponse): DeleteResponder
+    {
+        $deleteResponder = MockGenerator::get()
+            ->getMock(DeleteResponder::class);
+
+        $deleteResponder->method('prepare')
+            ->willReturn($httpResponse);
+
+        return $deleteResponder;
     }
 
     public static function getTranslator(string $textToReturn) : Translator

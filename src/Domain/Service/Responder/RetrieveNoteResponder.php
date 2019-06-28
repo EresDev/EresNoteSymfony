@@ -2,6 +2,7 @@
 
 namespace App\Domain\Service\Responder;
 
+use App\Domain\Entity\Entity;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
@@ -19,7 +20,7 @@ class RetrieveNoteResponder implements Responder
         $this->httpResponseFactory = $httpResponseFactory;
     }
 
-    public function prepare($entity): HttpResponse
+    public function prepare(?Entity $entity): HttpResponse
     {
         if ($entity != null) {
             return $this->getResponse(200, $entity);
