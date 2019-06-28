@@ -19,7 +19,7 @@ class DeleteNoteUseCase implements RetrieveUseCase
         $this->entityDeleter = $entityDeleter;
     }
 
-    public function execute($noteId): HttpResponse
+    public function execute(int $noteId): HttpResponse
     {
         // TODO: delete note only if the user owns the note
         $note = $this->entityDeleter->delete($noteId);

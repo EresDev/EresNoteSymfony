@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Entity\Note;
 use App\Domain\Service\ValueObject\HttpResponse;
+use App\Tests\Extra\ValidEntities;
 use PHPUnit\Framework\TestCase;
 
 class CreateNoteResponderTest extends TestCase
@@ -15,7 +16,7 @@ class CreateNoteResponderTest extends TestCase
             ->build();
 
         $response = $responder->prepare(
-            $this->createMock(Note::class)
+            ValidEntities::getNote()
         );
 
         $this->assertInstanceOf(HttpResponse::class, $response);

@@ -22,14 +22,15 @@ class RetrieveNoteResponder implements Responder
 
     public function prepare(?Entity $entity): HttpResponse
     {
-        if ($entity != null) {
-            return $this->getResponse(200, $entity);
+        if (is_null($entity)) {
+            return $this->getResponse(
+                404,
+                $this->translator->translate('not.found.resource.getter.responder')
+            );
         }
 
-        return $this->getResponse(
-            404,
-            $this->translator->translate('not.found.resource.getter.responder')
-        );
+        return $this->getResponse(200, $entity);
+
     }
 
     protected function getResponse(int $statusCode, $data): HttpResponse

@@ -7,5 +7,5 @@ use App\Domain\Service\ValueObject\HttpResponse;
 
 interface Responder
 {
-    public function prepare(?Entity $entity) : HttpResponse;
+    public function prepare(Entity $entity) : HttpResponse;
 }
