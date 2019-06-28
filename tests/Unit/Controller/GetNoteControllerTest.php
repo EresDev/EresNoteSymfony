@@ -18,11 +18,11 @@ class GetNoteControllerTest extends TestCase
     {
         $pathVariableGetter = StubServices::getPathVariableGetter(self::NOTE_ID);
 
-        $useCase = StubServices::getUseCase(
+        $retrieveUseCase = StubServices::getRetrieveUseCase(
             ValidValues::getHttpResponse(self::STATUS_CODE, self::CONTENT)
         );
 
-        $controller = new GetNoteController($useCase, $pathVariableGetter);
+        $controller = new GetNoteController($retrieveUseCase, $pathVariableGetter);
 
         $response = $controller->handleRequest();
 

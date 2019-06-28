@@ -4,16 +4,18 @@ namespace App\Controller;
 
 use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\ValueObject\HttpResponse;
-use App\Domain\UseCase\UseCase;
+use App\Domain\UseCase\RetrieveUseCase;
 
 class GetNoteController extends Controller
 {
-    private $useCase;
+    private $retrieveUseCase;
     private $pathVariableGetter;
 
-    public function __construct(UseCase $useCase, PathVariableGetter $pathVariableGetter)
-    {
-        $this->useCase = $useCase;
+    public function __construct(
+        RetrieveUseCase $retrieveUseCase,
+        PathVariableGetter $pathVariableGetter
+    ) {
+        $this->retrieveUseCase = $retrieveUseCase;
         $this->pathVariableGetter = $pathVariableGetter;
     }
 
@@ -21,6 +23,6 @@ class GetNoteController extends Controller
     {
         $noteId = $this->pathVariableGetter->get('noteId');
 
-        return $this->useCase->execute($noteId);
+        return $this->retrieveUseCase->execute($noteId);
     }
 }

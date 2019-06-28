@@ -6,7 +6,7 @@ use App\Domain\Repository\EntitySingleGetter;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-class GetNoteUseCase implements UseCase
+class GetNoteUseCase implements RetrieveUseCase
 {
     private $responder;
     private $entitySingleGetter;
@@ -19,7 +19,7 @@ class GetNoteUseCase implements UseCase
         $this->entitySingleGetter = $entitySingleGetter;
     }
 
-    public function execute($entityId) : HttpResponse
+    public function execute(int $entityId) : HttpResponse
     {
         $entity = $this->entitySingleGetter->getById($entityId);
 

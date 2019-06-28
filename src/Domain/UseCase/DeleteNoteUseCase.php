@@ -6,7 +6,7 @@ use App\Domain\Repository\EntityDeleter;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-class DeleteNoteUseCase implements UseCase
+class DeleteNoteUseCase implements RetrieveUseCase
 {
     private $responder;
     private $entityDeleter;

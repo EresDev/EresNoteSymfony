@@ -10,6 +10,7 @@ use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\CreateUseCase;
+use App\Domain\UseCase\RetrieveUseCase;
 use App\Domain\UseCase\UseCase;
 
 class StubServices
@@ -27,13 +28,24 @@ class StubServices
 
     public static function getCreateUseCase(HttpResponse $httpResponse) : CreateUseCase
     {
-        $useCase = MockGenerator::get()
+        $createUseCase = MockGenerator::get()
             ->getMock(CreateUseCase::class);
 
-        $useCase->method('execute')
+        $createUseCase->method('execute')
             ->willReturn($httpResponse);
 
-        return $useCase;
+        return $createUseCase;
+    }
+
+    public static function getRetrieveUseCase(HttpResponse $httpResponse) : RetrieveUseCase
+    {
+        $retrieveUseCase = MockGenerator::get()
+            ->getMock(RetrieveUseCase::class);
+
+        $retrieveUseCase->method('execute')
+            ->willReturn($httpResponse);
+
+        return $retrieveUseCase;
     }
 
     public static function getResponder(HttpResponse $httpResponse): Responder
