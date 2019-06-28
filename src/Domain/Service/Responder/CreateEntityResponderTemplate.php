@@ -3,12 +3,11 @@
 namespace App\Domain\Service\Responder;
 
 use App\Domain\Entity\Entity;
-use App\Domain\Repository\EntitySaver;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 use App\Domain\Service\ValueObject\HttpResponse;
 
-abstract class UpsertEntityResponder implements Responder
+abstract class CreateEntityResponderTemplate implements Responder
 {
     private $validator;
     private $httpResponseFactory;

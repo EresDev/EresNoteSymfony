@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Service\Responder\UpsertEntityResponder;
+use App\Domain\Service\Responder\CreateEntityResponderTemplate;
 use App\Domain\Service\Responder\CreateNoteResponder;
 use App\Domain\Repository\EntitySaver;
 use App\Domain\Service\Factory\HttpResponseFactory;
@@ -22,7 +22,7 @@ class CreateNoteResponderBuilder extends TestCase
         return new self();
     }
 
-    public function build() : UpsertEntityResponder
+    public function build() : CreateEntityResponderTemplate
     {
         $this->withValidValidatorResponse();
 
@@ -79,7 +79,7 @@ class CreateNoteResponderBuilder extends TestCase
             ->willReturn(new HttpResponse(422, 'An error message.'));
     }
 
-    public function getCreatorResponderInstance(): UpsertEntityResponder
+    public function getCreatorResponderInstance(): CreateEntityResponderTemplate
     {
         return new CreateNoteResponder(
             $this->validator,

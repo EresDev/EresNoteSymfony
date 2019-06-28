@@ -7,7 +7,7 @@ use App\Domain\Repository\EntityUpdater;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 
-class UpdateNoteResponder extends UpsertEntityResponder
+class UpdateNoteResponder extends CreateEntityResponderTemplate
 {
     private $entityUpdater;
 

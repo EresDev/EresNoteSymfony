@@ -7,7 +7,7 @@ use App\Domain\Repository\EntitySaver;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 
-class CreateNoteResponder extends UpsertEntityResponder
+class CreateNoteResponder extends CreateEntityResponderTemplate
 {
     private $entitySaver;
 
