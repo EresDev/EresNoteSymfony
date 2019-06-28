@@ -6,14 +6,14 @@ use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
-class GetNoteResponderTest extends TestCase
+class RetrieveNoteResponderTest extends TestCase
 {
     public function testPrepareForValidNote() : void
     {
         $note = ValidEntities::getNote();
         $responseForValidNote = ValidValues::getHttpResponse(200, $note);
 
-        $responder = GetNoteResponderBuilder::getInstance()
+        $responder = RetrieveNoteResponderBuilder::getInstance()
             ->withHttpResponse($responseForValidNote)
             ->build();
 
@@ -29,7 +29,7 @@ class GetNoteResponderTest extends TestCase
             'Resource not found.'
         );
 
-        $responder = GetNoteResponderBuilder::getInstance()
+        $responder = RetrieveNoteResponderBuilder::getInstance()
             ->withHttpResponse($responseForNull)
             ->build();
 
