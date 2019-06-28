@@ -2,6 +2,7 @@
 
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
+use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepository;
 use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Extra\FixtureWebTestCase;
@@ -61,15 +62,15 @@ class UserRepositoryTest extends FixtureWebTestCase
             UserFixture::class.'_0'
         );
 
-        $isDeleted = $this->repository->delete($userId);
-        $this->assertTrue($isDeleted);
+        $user = $this->repository->delete($userId);
+        $this->assertInstanceOf(User::class, $user);
     }
 
     public function testDeleteForInvalidUser() : void
     {
         $userId = 111;
 
-        $isDeleted = $this->repository->delete($userId);
-        $this->assertFalse($isDeleted);
+        $user = $this->repository->delete($userId);
+        $this->assertNull($user);
     }
 }

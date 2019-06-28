@@ -45,6 +45,6 @@ class DeleteNoteControllerTest extends FunctionalTestCase
             ['content-type' => 'application/json']
         );
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 }

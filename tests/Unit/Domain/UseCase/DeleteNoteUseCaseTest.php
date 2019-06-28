@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\UseCase;
 
 use App\Domain\UseCase\DeleteNoteUseCase;
 use App\Tests\Extra\StubServices;
+use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
@@ -20,11 +21,13 @@ class DeleteNoteUseCaseTest extends TestCase
             self::HTTP_STATUS_CODE,
             self::CONTENT
         );
-        $deleteResponder = StubServices::getDeleteResponder($httpResponse);
+        $responder = StubServices::getResponder($httpResponse);
 
-        $entityDeleter = StubServices::getEntityDeleter(true);
+        $entityDeleter = StubServices::getEntityDeleter(
+            ValidEntities::getNote()
+        );
 
-        $useCase = new DeleteNoteUseCase($deleteResponder, $entityDeleter);
+        $useCase = new DeleteNoteUseCase($responder, $entityDeleter);
         $response = $useCase->execute(self::NOTE_ID);
 
         $this->assertTrue($httpResponse->equals($response));

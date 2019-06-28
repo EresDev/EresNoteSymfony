@@ -2,6 +2,7 @@
 
 namespace App\Tests\Integration\ThirdParty\Persistence\Doctrine\Repository;
 
+use App\Domain\Entity\Note;
 use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Extra\FixtureWebTestCase;
 use App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl;
@@ -60,15 +61,15 @@ class NoteRepositoryTest extends FixtureWebTestCase
 
         );
 
-        $isDeleted = $this->repository->delete($noteId);
-        $this->assertTrue($isDeleted);
+        $note = $this->repository->delete($noteId);
+        $this->assertInstanceOf(Note::class, $note);
     }
 
     public function testDeleteForInvalidNote() : void
     {
         $noteId = 111;
 
-        $isDeleted = $this->repository->delete($noteId);
-        $this->assertFalse($isDeleted);
+        $note = $this->repository->delete($noteId);
+        $this->assertNull($note);
     }
 }

@@ -49,17 +49,6 @@ class StubServices
         return $responder;
     }
 
-    public static function getDeleteResponder(HttpResponse $httpResponse): DeleteResponder
-    {
-        $deleteResponder = MockGenerator::get()
-            ->getMock(DeleteResponder::class);
-
-        $deleteResponder->method('prepare')
-            ->willReturn($httpResponse);
-
-        return $deleteResponder;
-    }
-
     public static function getTranslator(string $textToReturn) : Translator
     {
         $translator = MockGenerator::get()
@@ -82,13 +71,13 @@ class StubServices
         return $entitySingleGetter;
     }
 
-    public static function getEntityDeleter(bool $valueToReturn) : EntityDeleter
+    public static function getEntityDeleter(?Entity $entityToReturn) : EntityDeleter
     {
         $entityDeleter = MockGenerator::get()
             ->getMock(EntityDeleter::class);
 
         $entityDeleter->method('delete')
-            ->willReturn($valueToReturn);
+            ->willReturn($entityToReturn);
 
         return $entityDeleter;
     }
@@ -103,6 +92,4 @@ class StubServices
 
         return $pathVariableGetter;
     }
-
-
 }
