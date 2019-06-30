@@ -2,7 +2,24 @@ App\Domain\Entity\Note:
   properties:
     title:
       - NotBlank:
-          message: 'invalid.title.notblank'
+          message: 'note.invalid.title.notBlank'
       - Length:
           max: 50
-          maxMessage: 'invalid.title.maxlength'
+          maxMessage: 'note.invalid.title.maxLength'
+
+App\Domain\Entity\User:
+  properties:
+    email:
+      - Email:
+          message: 'user.invalid.email'
+      - Length:
+          max: 72
+          maxMessage: 'user.invalid.email.maxlength'
+    password:
+      - NotBlank:
+          message: 'user.invalid.password.notBlank'
+      - Length:
+          min: 6
+          minMessage: 'user.invalid.password.minLength'
+          max: 4096
+          maxMessage: 'user.invalid.password.maxLength'

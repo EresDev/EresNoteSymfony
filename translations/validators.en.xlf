@@ -3,12 +3,33 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="note_title_blank_error">
-                <source>invalid.title.notblank</source>
+                <source>note.invalid.title.notBlank</source>
                 <target>The title must not be blank.</target>
             </trans-unit>
             <trans-unit id="note_title_length_above_max_limit_error">
-                <source>invalid.title.maxlength</source>
-                <target>The title must not be more than %limit% characters.</target>
+                <source>note.invalid.title.maxLength</source>
+                <target>The title must not be more than {{ limit }} characters.</target>
+            </trans-unit>
+
+            <trans-unit id="user_invalid_email">
+                <source>user.invalid.email</source>
+                <target>Email is not valid.</target>
+            </trans-unit>
+            <trans-unit id="user_invalid_email_maxLength">
+                <source>user.invalid.email.maxlength</source>
+                <target>Email can't be more than {{ limit }} characters long.</target>
+            </trans-unit>
+            <trans-unit id="user_invalid_password_notBlank">
+                <source>user.invalid.password.notBlank</source>
+                <target>Password can't be blank.</target>
+            </trans-unit>
+            <trans-unit id="user_invalid_password_minLength">
+                <source>user.invalid.password.minLength</source>
+                <target>Password can't be less than {{ limit }} characters.</target>
+            </trans-unit>
+            <trans-unit id="user_invalid_password_maxLength">
+                <source>user.invalid.password.maxLength</source>
+                <target>Password can't be more than {{ limit }} characters.</target>
             </trans-unit>
         </body>
     </file>
