@@ -22,3 +22,7 @@ noteDelete:
     requirements:
         noteId: '\d+'
 
+userCreate:
+    path: /user
+    methods: [ post ]
+    controller: App\Controller\CreateUserController::handleRequest

@@ -46,4 +46,9 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
         return $this->client->getResponse();
     }
 
+    protected function toObject(string $json) : object
+    {
+        return json_decode($json);
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Domain\Entity\Entity;
 use App\Domain\Repository\EntityDeleter;
 use App\Domain\Repository\EntitySingleGetter;
 use App\Domain\Service\Http\Request\PathVariableGetter;
+use App\Domain\Service\Http\Request\PostParametersProvider;
 use App\Domain\Service\Responder\DeleteResponder;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Translator;
@@ -80,6 +81,18 @@ class StubServices
             ->willReturn($entityToReturn);
 
         return $entityDeleter;
+    }
+
+    public static function getPostParametersProvider(
+        array $toReturn
+    ) : PostParametersProvider {
+        $postParametersProvider = MockGenerator::get()
+            ->getMock(PostParametersProvider::class);
+
+        $postParametersProvider->method('getAll')
+            ->willReturn($toReturn);
+
+        return $postParametersProvider;
     }
 
     public static function getPathVariableGetter(string $valueToReturn): PathVariableGetter

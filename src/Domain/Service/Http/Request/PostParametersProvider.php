@@ -2,7 +2,7 @@
 
 namespace App\Domain\Service\Http\Request;
 
-interface PostParametersGetter
+interface PostParametersProvider
 {
     public function getAll() : array;
 }

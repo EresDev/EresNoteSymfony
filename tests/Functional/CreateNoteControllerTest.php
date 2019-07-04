@@ -39,8 +39,9 @@ class CreateNoteControllerTest extends FunctionalTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $contentJson = $response->getContent();
-        $contentObject = json_decode($contentJson);
+        $contentObject = $this->toObject(
+            $response->getContent()
+        );
 
         $this->assertEquals($this->validNoteData['title'], $contentObject->title);
         $this->assertEquals($this->validNoteData['content'], $contentObject->content);
@@ -54,7 +55,7 @@ class CreateNoteControllerTest extends FunctionalTestCase
             '/note',
             $parameters,
             [],
-            []//['content-type' => $this->contentType]
+            []
         );
     }
 

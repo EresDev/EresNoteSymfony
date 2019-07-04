@@ -3,12 +3,12 @@
 namespace App\ThirdParty\Adapter\Symfony;
 
 use App\Domain\Service\Http\Request\PathVariableGetter;
-use App\Domain\Service\Http\Request\PostParametersGetter;
+use App\Domain\Service\Http\Request\PostParametersProvider;
 use App\Domain\Service\Http\Request\PutParametersGetter;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class RequestAdapter implements PostParametersGetter,
+class RequestAdapter implements PostParametersProvider,
     PathVariableGetter,
     PutParametersGetter
 {

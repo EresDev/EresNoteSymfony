@@ -112,3 +112,24 @@ services:
         public: false
         arguments:
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+
+
+    #Create User
+    App\Controller\CreateUserController:
+        public: true
+        arguments:
+            - '@App\Domain\UseCase\CreateNoteUseCase'
+            - '@App\ThirdParty\Adapter\Symfony\RequestAdapter'
+
+#    App\Domain\UseCase\CreateNoteUseCase:
+#        public: false
+#        arguments:
+#            - '@App\Domain\Service\Responder\CreateNoteResponder'
+#            - '@App\Domain\Service\Factory\NoteFactory'
+#
+#    App\Domain\Service\Responder\CreateNoteResponder:
+#        public: false
+#        arguments:
+#            - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
+#            - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+#            - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
