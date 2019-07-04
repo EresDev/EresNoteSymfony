@@ -2,14 +2,14 @@
 
 namespace App\Tests\Unit\Domain\UseCase;
 
-use App\Domain\UseCase\CreateNoteUseCase;
+use App\Domain\UseCase\CreateUserUseCase;
 use App\Tests\Extra\StubFactories;
 use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
-class CreateNoteUseCaseTest extends TestCase
+class CreateUserUseCaseTest extends TestCase
 {
     private $dummyRequestParameters = [];
 
@@ -21,10 +21,11 @@ class CreateNoteUseCaseTest extends TestCase
         $httpResponse = ValidValues::getHttpResponse();
         $responder = StubServices::getResponder($httpResponse);
 
-        $useCase = new CreateNoteUseCase($responder, $entityFactory);
+        $useCase = new CreateUserUseCase($responder, $entityFactory);
         $response = $useCase->execute($this->dummyRequestParameters);
 
         $this->assertTrue($httpResponse->equals($response));
     }
 
 }
+

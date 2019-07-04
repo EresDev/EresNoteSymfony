@@ -19,7 +19,7 @@ final class NoteFactory implements EntityFactory
 
     public function createFromParameters(array $parameters) : Entity
     {
-        $note = new Note(
+        $entity = new Note(
             $parameters['title'] ?? '',
             $parameters['content'] ?? '',
             new \DateTime(),
@@ -27,7 +27,7 @@ final class NoteFactory implements EntityFactory
             $parameters['id'] ?? null
         );
 
-        return $note;
+        return $entity;
     }
 
     private function getUser($user) : User

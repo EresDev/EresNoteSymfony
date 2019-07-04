@@ -19,7 +19,7 @@ abstract class CreateEntityUseCase implements CreateUseCase
         $this->entityFactory = $entityFactory;
     }
 
-    public function execute($requestParameters) : HttpResponse
+    public function execute(array $requestParameters) : HttpResponse
     {
         $entity = $this->entityFactory->createFromParameters($requestParameters);
 
