@@ -11,9 +11,10 @@ App\Domain\Entity\User:
   fields:
     email:
       type: string
+      unique: true
       length: 72
       nullable: false
-      unique: true
+
     password:
       type: binary
       nullable: false
