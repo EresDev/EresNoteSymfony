@@ -51,4 +51,9 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
         return json_decode($json);
     }
 
+    protected function toArrayAssoc(string $json) : array
+    {
+        return json_decode($json, true);
+    }
+
 }

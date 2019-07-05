@@ -68,8 +68,7 @@ class CreateNoteControllerTest extends FunctionalTestCase
         $response = $this->getResponse();
         $this->assertEquals(422, $response->getStatusCode());
 
-        $contentJson = $response->getContent();
-        $contentMultiArrayWithErrors = json_decode($contentJson, true);
+        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
 
         $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
@@ -83,8 +82,7 @@ class CreateNoteControllerTest extends FunctionalTestCase
         $response = $this->getResponse();
         $this->assertEquals(422, $response->getStatusCode());
 
-        $contentJson = $response->getContent();
-        $contentMultiArrayWithErrors = json_decode($contentJson, true);
+        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
 
         $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }

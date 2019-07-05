@@ -13,6 +13,7 @@ App\Domain\Entity\User:
       type: string
       length: 72
       nullable: false
+      unique: true
     password:
       type: binary
       nullable: false
@@ -30,3 +31,4 @@ App\Domain\Entity\User:
       type: datetime
       column: memberSince
       nullable: false
+

@@ -11,6 +11,10 @@
                 <target>The title must not be more than {{ limit }} characters.</target>
             </trans-unit>
 
+            <trans-unit id="user_invalid_email_empty">
+                <source>user.invalid.email.notBlank</source>
+                <target>Email can't be empty.</target>
+            </trans-unit>
             <trans-unit id="user_invalid_email">
                 <source>user.invalid.email</source>
                 <target>Email is not valid.</target>

@@ -2,6 +2,8 @@
 
 namespace App\Tests\Functional;
 
+use App\Tests\Extra\Utility;
+
 class CreateUserControllerTest extends FunctionalTestCase
 {
     private $validUserData;
@@ -18,18 +20,14 @@ class CreateUserControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithValidData() : void
     {
-        $this->markTestSkipped();
-        $this->sendRequest($this->validNoteData);
-
+        $this->sendRequest($this->validUserData);
         $response = $this->getResponse();
-
         $this->assertEquals(200, $response->getStatusCode());
 
         $contentObject = $this->toObject(
             $response->getContent()
         );
-
-        $this->assertEquals($this->validNoteData['email'], $contentObject->email);
+        $this->assertEquals($this->validUserData['email'], $contentObject->email);
     }
 
     private function sendRequest(array $parameters) : void
@@ -42,4 +40,63 @@ class CreateUserControllerTest extends FunctionalTestCase
             []
         );
     }
+
+    public function testHandleRequestWithBlankEmail() : void
+    {
+        $this->validUserData['email'] = '';
+        $this->assertInvalidEmail();
+    }
+
+    private function assertInvalidEmail() : void
+    {
+        $this->sendRequest($this->validUserData);
+        $response = $this->getResponse();
+        $this->assertEquals(422, $response->getStatusCode());
+
+        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
+        $this->assertArrayHasKey('email', $contentMultiArrayWithErrors[0]);
+    }
+
+    public function testHandleRequestWithInvalidEmail() : void
+    {
+        $this->validUserData['email'] = 'anInvalidEmail';
+        $this->assertInvalidEmail();
+    }
+
+    public function testHandleRequestWithAboveMaxLengthEmail() : void
+    {
+        $this->validUserData['email'] = Utility::generateRandomString(65).
+            '@eresdev.com';
+        $this->assertInvalidEmail();
+    }
+
+    public function testHandleRequestWithBlankPassword() : void
+    {
+        $this->validUserData['password'] = '';
+        $this->assertInvalidPassword();
+    }
+
+    private function assertInvalidPassword() : void
+    {
+        $this->sendRequest($this->validUserData);
+        $response = $this->getResponse();
+        $this->assertEquals(422, $response->getStatusCode());
+
+        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
+        $this->assertArrayHasKey('password', $contentMultiArrayWithErrors[0]);
+    }
+
+    public function testHandleRequestWithLessThanMinLengthPassword() : void
+    {
+        $this->validUserData['password'] = '5Char';
+        $this->assertInvalidPassword();
+    }
+
+    public function testHandleRequestWithMoreThanMaxLengthPassword() : void
+    {
+        $this->validUserData['password'] = Utility::generateRandomString(4097);
+        $this->assertInvalidPassword();
+    }
+
+
 }

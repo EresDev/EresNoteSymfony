@@ -10,6 +10,8 @@ App\Domain\Entity\Note:
 App\Domain\Entity\User:
   properties:
     email:
+      - NotBlank:
+          message: 'user.invalid.email.notBlank'
       - Email:
           message: 'user.invalid.email'
       - Length:
