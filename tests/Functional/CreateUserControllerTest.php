@@ -12,8 +12,7 @@ class CreateUserControllerTest extends FunctionalTestCase
 
         $this->validUserData = [
             'email' => 'test_user@eresdev.com',
-            'password' => 'someTestPassword1@2',
-            'confirmEmail' => 'test_user@eresdev.com'
+            'password' => 'someTestPassword1@2'
         ];
     }
 
