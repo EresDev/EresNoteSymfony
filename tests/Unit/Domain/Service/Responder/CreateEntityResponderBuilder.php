@@ -3,7 +3,6 @@
 namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Service\Responder\CreateEntityResponderTemplate;
-use App\Domain\Service\Responder\CreateNoteResponder;
 use App\Domain\Repository\EntitySaver;
 use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
@@ -11,7 +10,7 @@ use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
-class CreateNoteResponderBuilder extends TestCase
+class CreateEntityResponderBuilder extends TestCase
 {
     protected $validator;
     protected $httpResponseFactory;
@@ -22,14 +21,14 @@ class CreateNoteResponderBuilder extends TestCase
         return new self();
     }
 
-    public function build() : CreateEntityResponderTemplate
+    public function build(string $responderClassName) : CreateEntityResponderTemplate
     {
         $this->withValidValidatorResponse();
 
-        return $this->getCreatorResponderInstance();
+        return $this->getCreatorResponderInstance($responderClassName);
     }
 
-    public function __construct()
+    private function __construct()
     {
         $this->validator = $this->createMock(Validator::class);
 
@@ -79,9 +78,11 @@ class CreateNoteResponderBuilder extends TestCase
             ->willReturn(new HttpResponse(422, 'An error message.'));
     }
 
-    public function getCreatorResponderInstance(): CreateEntityResponderTemplate
-    {
-        return new CreateNoteResponder(
+    public function getCreatorResponderInstance(
+        string $responderClassName
+    ): CreateEntityResponderTemplate {
+
+        return new $responderClassName(
             $this->validator,
             $this->httpResponseFactory,
             $this->entitySaver

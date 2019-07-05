@@ -2,22 +2,22 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
-use App\Domain\Entity\Note;
-use App\Domain\Service\Responder\CreateNoteResponder;
+use App\Domain\Entity\User;
+use App\Domain\Service\Responder\CreateUserResponder;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Tests\Extra\ValidEntities;
 use PHPUnit\Framework\TestCase;
 
-class CreateNoteResponderTest extends TestCase
+class CreateUserResponderTest extends TestCase
 {
     public function testPrepareForValidEntity(): void
     {
         $responder = CreateEntityResponderBuilder::getInstance()
             ->withValidValidatorResponse()
-            ->build(CreateNoteResponder::class);
+            ->build(CreateUserResponder::class);
 
         $response = $responder->prepare(
-            ValidEntities::getNote()
+            ValidEntities::getUser()
         );
 
         $this->assertInstanceOf(HttpResponse::class, $response);
@@ -29,10 +29,10 @@ class CreateNoteResponderTest extends TestCase
     {
         $responder = CreateEntityResponderBuilder::getInstance()
             ->withInvalidValidatorResponse()
-            ->build(CreateNoteResponder::class);
+            ->build(CreateUserResponder::class);
 
         $response = $responder->prepare(
-            $this->createMock(Note::class)
+            $this->createMock(User::class)
         );
 
         $this->assertEquals(422, $response->getStatusCode());

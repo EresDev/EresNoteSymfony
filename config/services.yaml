@@ -124,12 +124,12 @@ services:
     App\Domain\UseCase\CreateUserUseCase:
         public: false
         arguments:
-            - '@App\Domain\Service\Responder\CreateNoteResponder'
+            - '@App\Domain\Service\Responder\CreateUserResponder'
             - '@App\Domain\Service\Factory\UserFactory'
-#
-#    App\Domain\Service\Responder\CreateNoteResponder:
-#        public: false
-#        arguments:
-#            - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
-#            - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
-#            - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
+
+    App\Domain\Service\Responder\CreateUserResponder:
+        public: false
+        arguments:
+            - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
+            - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+            - '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl'
