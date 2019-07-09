@@ -16,6 +16,7 @@ abstract class FixtureWebTestCase extends WebTestCase
     protected function setUp()
     {
         self::bootKernel();
+        $this->fixtureLoader = $this->getService(FixtureLoader::class);
     }
 
     protected function getService(string $serviceId) : object
@@ -25,7 +26,6 @@ abstract class FixtureWebTestCase extends WebTestCase
 
     protected function loadFixture(string $className) : void
     {
-        $this->fixtureLoader = $this->getService(FixtureLoader::class);
         $this->fixtureLoader->loadFixture($className);
     }
 
@@ -54,5 +54,10 @@ abstract class FixtureWebTestCase extends WebTestCase
     protected function getEntityManager(): EntityManagerInterface
     {
         return $this->getService('doctrine')->getManager();
+    }
+
+    protected function cleanDatabase() : void
+    {
+        $this->fixtureLoader->cleanDatabase();
     }
 }

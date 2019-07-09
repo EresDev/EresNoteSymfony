@@ -32,4 +32,3 @@ App\Domain\Entity\User:
       type: datetime
       column: memberSince
       nullable: false
-

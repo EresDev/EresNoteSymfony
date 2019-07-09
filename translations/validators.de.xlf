@@ -11,6 +11,10 @@
                 <target>Der Titel darf nicht länger als {{ limit }} Zeichen sein.</target>
             </trans-unit>
 
+            <trans-unit id="user_email_already_exists">
+                <source>user.email.already.exists</source>
+                <target>Die angegebene E-Mail ist bereits registriert.</target>
+            </trans-unit>
             <trans-unit id="user_invalid_email_empty">
                 <source>user.invalid.email.notBlank</source>
                 <target>E-mail darf nicht leer sein.</target>

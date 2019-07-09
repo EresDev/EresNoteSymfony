@@ -48,7 +48,7 @@ class FixtureLoader
         return $purger;
     }
 
-    private function cleanDatabase() : void
+    public function cleanDatabase() : void
     {
         $connection = $this->entityManager->getConnection();
 

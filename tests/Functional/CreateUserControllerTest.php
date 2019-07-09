@@ -14,6 +14,8 @@ class CreateUserControllerTest extends FunctionalTestCase
     {
         parent::setUp();
 
+        $this->cleanDatabase();
+
         $this->validUserData = [
             'email' => 'test_user@eresdev.com',
             'password' => 'someTestPassword1@2'
@@ -100,5 +102,14 @@ class CreateUserControllerTest extends FunctionalTestCase
         $this->assertInvalidPassword();
     }
 
+    public function testHandleRequestWithSameEmailAgain() : void
+    {
+        $this->sendRequest($this->validUserData);
+        $this->sendRequest($this->validUserData);
+        $response = $this->getResponse();
+        $this->assertEquals(422, $response->getStatusCode());
 
+        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
+        $this->assertArrayHasKey('email', $contentMultiArrayWithErrors[0]);
+    }
 }
