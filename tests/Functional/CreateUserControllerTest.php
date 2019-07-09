@@ -6,8 +6,6 @@ use App\Tests\Extra\Utility;
 
 class CreateUserControllerTest extends FunctionalTestCase
 {
-    // TODO: UNIQUE email test to add
-
     private $validUserData;
 
     protected function setUp()
