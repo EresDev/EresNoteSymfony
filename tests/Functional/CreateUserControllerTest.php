@@ -59,6 +59,17 @@ class CreateUserControllerTest extends FunctionalTestCase
         $this->assertArrayHasKey('email', $contentMultiArrayWithErrors[0]);
     }
 
+    public function testHandleRequestWithSameEmailAgain() : void
+    {
+        $this->sendRequest($this->validUserData);
+        $this->sendRequest($this->validUserData);
+        $response = $this->getResponse();
+        $this->assertEquals(422, $response->getStatusCode());
+
+        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
+        $this->assertArrayHasKey('email', $contentMultiArrayWithErrors[0]);
+    }
+
     public function testHandleRequestWithInvalidEmail() : void
     {
         $this->validUserData['email'] = 'anInvalidEmail';
@@ -98,16 +109,5 @@ class CreateUserControllerTest extends FunctionalTestCase
     {
         $this->validUserData['password'] = Utility::generateRandomString(4097);
         $this->assertInvalidPassword();
-    }
-
-    public function testHandleRequestWithSameEmailAgain() : void
-    {
-        $this->sendRequest($this->validUserData);
-        $this->sendRequest($this->validUserData);
-        $response = $this->getResponse();
-        $this->assertEquals(422, $response->getStatusCode());
-
-        $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
-        $this->assertArrayHasKey('email', $contentMultiArrayWithErrors[0]);
     }
 }
