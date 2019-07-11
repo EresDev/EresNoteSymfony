@@ -36,16 +36,6 @@ services:
         autowire: true
         public: true
 
-    App\Tests\Extra\DataFixture\AuthUserFixture:
-        autowire: true
-        public: true
-    App\Tests\Extra\DataFixture\UserFixture:
-        autowire: true
-        public: true
-    App\Tests\Extra\DataFixture\NoteFixture:
-        autowire: true
-        public: true
-
 
     #Create Note
     App\Controller\CreateNoteController:
