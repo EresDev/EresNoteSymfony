@@ -2,9 +2,7 @@
 
 namespace App\Domain\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-
-class User extends Entity implements UserInterface
+class User extends Entity
 {
     private $email;
     private $password;
@@ -74,24 +72,5 @@ class User extends Entity implements UserInterface
     public function setMemberSince($memberSince): void
     {
         $this->memberSince = $memberSince;
-    }
-
-    public function getUsername() : string
-    {
-        return $this->getEmail();
-    }
-
-    public function getRoles() : array
-    {
-        return ['ROLE_USER'];
-    }
-
-    public function getSalt() : ?string
-    {
-        return '';
-    }
-
-    public function eraseCredentials() : void
-    {
     }
 }
