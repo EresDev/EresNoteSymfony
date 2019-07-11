@@ -14,9 +14,9 @@ App\Domain\Entity\User:
       unique: true
       length: 72
       nullable: false
-
     password:
-      type: binary
+      type: string
+      length: 60
       nullable: false
     deleted:
       type: boolean

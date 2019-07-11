@@ -4,12 +4,20 @@ namespace App\Domain\Service\Factory;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Entity\User;
+use App\Domain\Service\PasswordEncoder;
 
 class UserFactory implements EntityFactory
 {
+    private $passwordEncoder;
+
+    public function __construct(PasswordEncoder $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function createFromParameters(array $parameters) : Entity
     {
-        $entity = new User(
+        $user = new User(
             $parameters['email'] ?? '',
             $parameters['password'] ?? '',
             true,
@@ -17,6 +25,8 @@ class UserFactory implements EntityFactory
             new \DateTime()
         );
 
-        return $entity;
+        $user = $this->passwordEncoder->encode($user, $parameters['password']);
+
+        return $user;
     }
 }

@@ -2,23 +2,27 @@
 
 namespace App\Domain\Entity;
 
-class User extends Entity
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class User extends Entity implements UserInterface
 {
     private $email;
     private $password;
+    private $plainPassword;
     private $activated;
     private $deleted;
     private $memberSince;
 
     public function __construct(
         string $email,
-        string $password,
+        string $plainPassword,
         bool $activated,
         bool $deleted,
         \DateTime $memberSince
     ){
         $this->setEmail($email);
-        $this->setPassword($password);
+        $this->setPlainPassword($plainPassword);
+        $this->setPassword($plainPassword);
         $this->setActivated($activated);
         $this->setDeleted($deleted);
         $this->setMemberSince($memberSince);
@@ -34,18 +38,24 @@ class User extends Entity
         $this->email = $email;
     }
 
-    public function getPassword()
+    public function getPassword() : ?string
     {
-        //TODO, UNTIL PASSWORD ENCODER IS NOT ADDED
-        // ALLOWS TESTS TO PASS BECAUSE OF RESOURCE VALUE
-        //return $this->password;
-        return "Coming soon";
+        return $this->password;
     }
-
 
     public function setPassword($password): void
     {
         $this->password = $password;
+    }
+
+    public function getPlainPassword() : ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     public function getActivated() : bool
@@ -76,5 +86,24 @@ class User extends Entity
     public function setMemberSince($memberSince): void
     {
         $this->memberSince = $memberSince;
+    }
+
+    public function getUsername() : string
+    {
+        return $this->getEmail();
+    }
+
+    public function getRoles() : array
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getSalt() : ?string
+    {
+        return '';
+    }
+
+    public function eraseCredentials() : void
+    {
     }
 }

@@ -21,7 +21,7 @@ App\Domain\Entity\User:
       - Length:
           max: 72
           maxMessage: 'user.invalid.email.maxlength'
-    password:
+    plainPassword:
       - NotBlank:
           message: 'user.invalid.password.notBlank'
       - Length:

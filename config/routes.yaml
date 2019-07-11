@@ -26,3 +26,6 @@ userCreate:
     path: /user
     methods: [ post ]
     controller: App\Controller\CreateUserController::handleRequest
+
+api_login_check:
+    path: /login_check

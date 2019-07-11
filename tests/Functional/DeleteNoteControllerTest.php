@@ -11,8 +11,6 @@ class DeleteNoteControllerTest extends FunctionalTestCase
         parent::setUp();
 
         $this->loadFixture(NoteFixture::class);
-
-        $this->client = static::createClient();
     }
 
     public function testHandleRequestWithExistingNote() : void
