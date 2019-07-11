@@ -143,4 +143,10 @@ services:
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\ValidatorAdapter'
             - '@App\Domain\Service\Factory\HttpResponseFactoryImpl'
+            - '@App\Domain\Service\CreateUserSuccessHookImpl'
+
+    App\Domain\Service\CreateUserSuccessHookImpl:
+        public: false
+        arguments:
+            - '@App\ThirdParty\Adapter\Symfony\PasswordEncoderAdapter'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl'

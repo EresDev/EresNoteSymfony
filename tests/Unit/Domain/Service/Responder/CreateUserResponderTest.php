@@ -3,7 +3,6 @@
 namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Entity\User;
-use App\Domain\Service\Responder\CreateUserResponder;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Tests\Extra\ValidEntities;
 use PHPUnit\Framework\TestCase;
@@ -12,9 +11,9 @@ class CreateUserResponderTest extends TestCase
 {
     public function testPrepareForValidEntity(): void
     {
-        $responder = CreateEntityResponderBuilder::getInstance()
+        $responder = CreateUserResponderBuilder::getInstance()
             ->withValidValidatorResponse()
-            ->build(CreateUserResponder::class);
+            ->build();
 
         $response = $responder->prepare(
             ValidEntities::getUser()
@@ -27,9 +26,9 @@ class CreateUserResponderTest extends TestCase
 
     public function testPrepareForInvalidEntity(): void
     {
-        $responder = CreateEntityResponderBuilder::getInstance()
+        $responder = CreateUserResponderBuilder::getInstance()
             ->withInvalidValidatorResponse()
-            ->build(CreateUserResponder::class);
+            ->build();
 
         $response = $responder->prepare(
             $this->createMock(User::class)

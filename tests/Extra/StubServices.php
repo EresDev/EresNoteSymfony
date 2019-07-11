@@ -3,10 +3,13 @@
 namespace App\Tests\Extra;
 
 use App\Domain\Entity\Entity;
+use App\Domain\Entity\User;
 use App\Domain\Repository\EntityDeleter;
 use App\Domain\Repository\EntitySingleGetter;
+use App\Domain\Service\CreateUserSuccessHook;
 use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\Http\Request\PostParametersProvider;
+use App\Domain\Service\PasswordEncoder;
 use App\Domain\Service\Responder\DeleteResponder;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Translator;
@@ -17,6 +20,21 @@ use App\Domain\UseCase\UseCase;
 
 class StubServices
 {
+    public static function getPasswordEncoder(
+        User $returnValue,
+        string $encodedPassword
+    ): PasswordEncoder {
+        $passwordEncoder = MockGenerator::get()
+            ->getMock(PasswordEncoder::class);
+
+        $returnValue->setPassword($encodedPassword);
+
+        $passwordEncoder->method('encode')
+            ->willReturn($returnValue);
+
+        return $passwordEncoder;
+    }
+
     public static function getCreateUseCase(HttpResponse $httpResponse) : CreateUseCase
     {
         $createUseCase = MockGenerator::get()
