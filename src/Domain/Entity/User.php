@@ -8,21 +8,19 @@ class User extends Entity implements UserInterface
 {
     private $email;
     private $password;
-    private $plainPassword;
     private $activated;
     private $deleted;
     private $memberSince;
 
     public function __construct(
         string $email,
-        string $plainPassword,
+        string $password,
         bool $activated,
         bool $deleted,
         \DateTime $memberSince
     ){
         $this->setEmail($email);
-        $this->setPlainPassword($plainPassword);
-        $this->setPassword($plainPassword);
+        $this->setPassword($password);
         $this->setActivated($activated);
         $this->setDeleted($deleted);
         $this->setMemberSince($memberSince);
@@ -46,16 +44,6 @@ class User extends Entity implements UserInterface
     public function setPassword($password): void
     {
         $this->password = $password;
-    }
-
-    public function getPlainPassword() : ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword($plainPassword): void
-    {
-        $this->plainPassword = $plainPassword;
     }
 
     public function getActivated() : bool

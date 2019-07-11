@@ -6,7 +6,6 @@ use App\Tests\Extra\Utility;
 
 class CreateUserControllerTest extends FunctionalTestCase
 {
-    // TODO: change key plainPassword to password
     private $validUserData;
 
     protected function setUp()
@@ -97,7 +96,7 @@ class CreateUserControllerTest extends FunctionalTestCase
         $this->assertEquals(422, $response->getStatusCode());
 
         $contentMultiArrayWithErrors = $this->toArrayAssoc($response->getContent());
-        $this->assertArrayHasKey('plainPassword', $contentMultiArrayWithErrors[0]);
+        $this->assertArrayHasKey('password', $contentMultiArrayWithErrors[0]);
     }
 
     public function testHandleRequestWithLessThanMinLengthPassword() : void
@@ -108,8 +107,7 @@ class CreateUserControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithMoreThanMaxLengthPassword() : void
     {
-        $this->markTestSkipped();
-        $this->validUserData['plainPassword'] = Utility::generateRandomString(4097);
+        $this->validUserData['password'] = Utility::generateRandomString(4097);
         $this->assertInvalidPassword();
     }
 }
