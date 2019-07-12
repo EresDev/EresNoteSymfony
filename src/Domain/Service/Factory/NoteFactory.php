@@ -4,17 +4,15 @@ namespace App\Domain\Service\Factory;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Entity\Note;
-use App\Domain\Entity\User;
-use App\Domain\Repository\UserRepository;
+use App\Domain\Service\Security\Security;
 
 final class NoteFactory implements EntityFactory
 {
-    private $userRepository;
+    private $security;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(Security $security)
     {
-        // TODO: end dependence on Repository, Use current user
-        $this->userRepository = $userRepository;
+        $this->security = $security;
     }
 
     public function createFromParameters(array $parameters) : Entity
@@ -23,19 +21,10 @@ final class NoteFactory implements EntityFactory
             $parameters['title'] ?? '',
             $parameters['content'] ?? '',
             new \DateTime(),
-            $this->getUser($parameters['user']),
+            $this->security->getUser(),
             $parameters['id'] ?? null
         );
 
         return $entity;
-    }
-
-    private function getUser($user) : User
-    {
-        if (is_object($user)) {
-            return $user;
-        }
-
-        return $this->userRepository->getById($user);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Tests\Functional\ControllerLess;
 use App\Tests\Extra\DataFixture\AuthUserFixture;
 use App\Tests\Functional\FunctionalTestCase;
 
-class LexikJwtToken extends FunctionalTestCase
+class LexikJwtTokenTest extends FunctionalTestCase
 {
     protected function setUp()
     {

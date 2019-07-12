@@ -37,6 +37,10 @@ services:
         autowire: true
         public: true
 
+    functional_test.security.helper:
+        alias: security.helper
+        public: true
+
     #ADAPTERS
     App\ThirdParty\Adapter\Symfony\PasswordEncoderAdapter:
         public: true
@@ -61,6 +65,11 @@ services:
         arguments:
             - '@App\Domain\Service\Responder\CreateNoteResponder'
             - '@App\Domain\Service\Factory\NoteFactory'
+
+    App\Domain\Service\Factory\NoteFactory:
+        public: false
+        arguments:
+            - '@App\ThirdParty\Adapter\Symfony\SecurityAdapter'
 
     App\Domain\Service\Responder\CreateNoteResponder:
         public: false

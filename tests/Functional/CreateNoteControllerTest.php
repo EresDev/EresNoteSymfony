@@ -4,31 +4,21 @@ namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Extra\Utility;
-use App\Domain\Service\Factory\HttpResponseFactory;
-use App\Domain\Service\Validator;
 
 class CreateNoteControllerTest extends FunctionalTestCase
 {
-    // TODO: userId should not be sent in request, use security and
-    // update it and update assertions
-
     private $validNoteData;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->loadFixture(UserFixture::class);
-
-        $userIdForFixtures = $this->getFixtureId(
-            UserFixture::class,
-            UserFixture::class.'_0'
-        );
         $this->validNoteData = [
             'title' => 'A sample title',
-            'content' => 'Some test content',
-            'user' => $userIdForFixtures
+            'content' => 'Some test content'
         ];
+
+        $this->createAuthenticatedClient();
     }
 
     public function testHandleRequestWithValidData() : void
@@ -45,7 +35,7 @@ class CreateNoteControllerTest extends FunctionalTestCase
 
         $this->assertEquals($this->validNoteData['title'], $contentObject->title);
         $this->assertEquals($this->validNoteData['content'], $contentObject->content);
-        $this->assertEquals($this->validNoteData['user'], $contentObject->user->id);
+        $this->assertEquals($this->getAuthUserId(), $contentObject->user->id);
     }
 
     private function sendRequest($parameters) : void

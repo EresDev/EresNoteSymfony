@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Tests\Extra\DataFixture\AuthUserFixture;
 use App\Tests\Extra\FixtureWebTestCase;
 use Symfony\Component\BrowserKit\Client;
 
@@ -11,12 +12,39 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
      * @var Client
      */
     protected $client;
+    private $authUserId;
 
     protected function setUp()
     {
         parent::setUp();
 
         $this->client = static::createClient();
+    }
+
+    protected function createAuthenticatedClient(
+        $email = AuthUserFixture::EMAIL,
+        $password = AuthUserFixture::PASSWORD
+    ) : void {
+
+        $this->loadFixture(AuthUserFixture::class);
+        $this->authUserId = $this->getFixtureId(AuthUserFixture::class);
+
+        $this->client->request(
+            'post',
+            '/login_check',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode([
+                'email' => $email,
+                'password' => $password,
+            ])
+        );
+
+        $data = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->client = static::createClient();
+        $this->client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
     }
 
     protected function request(
@@ -56,4 +84,8 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
         return json_decode($json, true);
     }
 
+    protected function getAuthUserId() : int
+    {
+        return $this->authUserId;
+    }
 }

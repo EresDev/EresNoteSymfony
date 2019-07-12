@@ -1,9 +1,9 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        App\ThirdParty\Security\Symfony\AuthUser:
-            algorithm: bcrypt
-            cost: '%password.encoder.cost%'
+#        App\ThirdParty\Security\Symfony\AuthUser:
+#            algorithm: bcrypt
+#            cost: '%password.encoder.cost%'
         App\Domain\Entity\User:
             algorithm: bcrypt
             cost: '%password.encoder.cost%'
@@ -11,10 +11,10 @@ security:
         # ...
 #        jwt:
 #            lexik_jwt:
-#                class: App\ThirdParty\Security\AuthUser
+#                class: App\ThirdParty\Security\Symfony\AuthUser
         entity_provider:
             entity:
-                class: App\ThirdParty\Security\Symfony\AuthUser
+                class: App\Domain\Entity\User
                 property: email
     firewalls:
         dev:
@@ -33,7 +33,7 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
         api:
-            pattern:   ^/api
+            pattern:   ^/note
             stateless: true
             guard:
                 authenticators:
@@ -43,4 +43,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: ROLE_USER }
+        - { path: ^/note,       roles: ROLE_USER }
