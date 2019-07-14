@@ -35,24 +35,6 @@ abstract class AbstractRepository extends EntityRepository implements Repository
             ->findAll();
     }
 
-//    public function getBy(
-//        $conditions = [],
-//        $order = [],
-//        $limit = null,
-//        $offset = null
-//    ) : array {
-//        $repository = $this->entityManager->getRepository(
-//            $this->getEntityClass()
-//        );
-//        $results = $repository->findBy(
-//            $conditions,
-//            $order,
-//            $limit,
-//            $offset
-//        );
-//        return $results;
-//    }
-
     public function save(Entity $entity) : void
     {
         $this->entityManager->persist($entity);
