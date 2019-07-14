@@ -2,7 +2,7 @@
 
 namespace App\Tests\Integration\ThirdParty\Adapter\Symfony;
 
-use App\Domain\Exception\UserNotLoggedInException;
+use App\Domain\Exception\UserNotAuthenticatedException;
 use App\Tests\Extra\ValidEntities;
 use App\ThirdParty\Adapter\Symfony\SecurityAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -31,7 +31,7 @@ class SecurityAdapterTest extends WebTestCase
 
     public function testGetUserWhenThereIsNoUserLoggedIn() : void
     {
-        $this->expectException(UserNotLoggedInException::class);
+        $this->expectException(UserNotAuthenticatedException::class);
 
         $symfonySecurity = self::$container->get('functional_test.security.helper');
         $security = new SecurityAdapter($symfonySecurity);

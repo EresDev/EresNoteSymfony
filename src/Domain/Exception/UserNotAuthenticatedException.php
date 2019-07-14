@@ -4,7 +4,7 @@ namespace App\Domain\Exception;
 
 use Throwable;
 
-class UserNotLoggedInException extends \Exception
+class UserNotAuthenticatedException extends \Exception
 {
     public function __construct(
         string $message = "",

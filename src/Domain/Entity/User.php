@@ -76,6 +76,16 @@ class User extends Entity implements UserInterface
         $this->memberSince = $memberSince;
     }
 
+    public function equals(self $user): bool
+    {
+        return
+            $this->getId() === $user->getId() &&
+            $this->getEmail() === $user->getEmail() &&
+            $this->getActivated() === $user->getActivated() &&
+            $this->getDeleted() === $user->getDeleted() &&
+            $this->getMemberSince() === $user->getMemberSince();
+    }
+
     public function getUsername() : string
     {
         return $this->getEmail();
