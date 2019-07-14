@@ -47,6 +47,12 @@ services:
         arguments:
             - '@Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder'
 
+    App\ThirdParty\Adapter\Symfony\SecurityAdapter:
+        public: true
+        arguments:
+            - '@Symfony\Component\Security\Core\Security'
+            - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
+
     Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder:
         public: true
         arguments:
@@ -128,6 +134,7 @@ services:
         public: false
         arguments:
             - '@App\Domain\Service\Responder\DeleteNoteResponder'
+            - '@App\ThirdParty\Adapter\Symfony\SecurityAdapter'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
 
     App\Domain\Service\Responder\DeleteNoteResponder:
@@ -161,3 +168,10 @@ services:
         arguments:
             - '@App\ThirdParty\Adapter\Symfony\PasswordEncoderAdapter'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\UserRepositoryImpl'
+
+
+    #Events
+    kernel.listener.exception:
+        class: App\ThirdParty\Event\Listener\Symfony\ExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

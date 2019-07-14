@@ -63,5 +63,4 @@ class Note extends Entity
     {
         $this->user = $user;
     }
-
 }

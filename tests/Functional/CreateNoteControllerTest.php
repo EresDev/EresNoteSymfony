@@ -2,7 +2,6 @@
 
 namespace App\Tests\Functional;
 
-use App\Tests\Extra\DataFixture\UserFixture;
 use App\Tests\Extra\Utility;
 
 class CreateNoteControllerTest extends FunctionalTestCase

@@ -27,14 +27,14 @@ class NoteFixture extends Fixture implements DependentFixtureInterface
                 "Some title $i",
                 "Some test content $i",
                 new \DateTime(),
-                $this->getReference(UserFixture::class.'_0')
+                $this->getReference(AuthUserFixture::class)
             );
         }
     }
     public function getDependencies()
     {
         return array(
-            UserFixture::class
+            AuthUserFixture::class
         );
     }
 
