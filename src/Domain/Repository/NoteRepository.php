@@ -2,6 +2,6 @@
 
 namespace App\Domain\Repository;
 
-interface NoteRepository extends Repository, EntityOwned
+interface NoteRepository extends Repository, EntityOwnerProvider
 {
 }

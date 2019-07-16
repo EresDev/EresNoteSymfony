@@ -3,23 +3,17 @@
 namespace App\ThirdParty\Adapter\Symfony;
 
 use App\Domain\Entity\User;
-use App\Domain\Exception\EntityDoesNotExistException;
-use App\Domain\Exception\UserIsNotTheOwnerException;
 use App\Domain\Exception\UserNotAuthenticatedException;
-use App\Domain\Repository\EntityOwned;
-use App\Domain\Service\Security\Ownership;
 use App\Domain\Service\Security\Security;
 use Symfony\Component\Security\Core\Security as SymfonySecurity;
 
-class SecurityAdapter implements Security, Ownership
+class SecurityAdapter implements Security
 {
     private $security;
-    private $entityOwned;
 
-    public function __construct(SymfonySecurity $security, EntityOwned $entityOwned)
+    public function __construct(SymfonySecurity $security)
     {
         $this->security = $security;
-        $this->entityOwned = $entityOwned;
     }
 
     public function getUser(): User
@@ -28,6 +22,7 @@ class SecurityAdapter implements Security, Ownership
 
         if ($user == null) {
             throw new UserNotAuthenticatedException(
+                401,
                 'User is not authenticated to perform the action.'
             );
         }
@@ -35,22 +30,8 @@ class SecurityAdapter implements Security, Ownership
         return $user;
     }
 
-    public function check(int $entityId) : void
+    public function isCurrentUser(User $user): bool
     {
-        $user = $this->entityOwned->getOwner($entityId);
-
-        if ($user == null) {
-            throw new EntityDoesNotExistException(
-                404,
-                'Given entity does not exist to perform the action.'
-            );
-        }
-
-        if (!$this->getUser()->equals($user)) {
-            throw new UserIsNotTheOwnerException(
-                401,
-                'User does not own the entity to perform the action.'
-            );
-        }
+        return $this->getUser()->equals($user);
     }
 }

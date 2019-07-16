@@ -5,13 +5,14 @@ namespace App\Tests\Extra;
 use App\Domain\Entity\Entity;
 use App\Domain\Entity\User;
 use App\Domain\Repository\EntityDeleter;
+use App\Domain\Repository\EntityOwnerProvider;
 use App\Domain\Repository\EntitySingleGetter;
-use App\Domain\Service\CreateUserSuccessHook;
 use App\Domain\Service\Http\Request\PathVariableGetter;
 use App\Domain\Service\Http\Request\PostParametersProvider;
 use App\Domain\Service\PasswordEncoder;
 use App\Domain\Service\Responder\DeleteResponder;
 use App\Domain\Service\Responder\Responder;
+use App\Domain\Service\Security\Security;
 use App\Domain\Service\Translator;
 use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\UseCase\CreateUseCase;
@@ -79,6 +80,17 @@ class StubServices
         return $translator;
     }
 
+    public static function getSecurity(string $method, $valueToReturn) : Security
+    {
+        $security = MockGenerator::get()
+            ->getMock(Security::class);
+
+        $security->method($method)
+            ->willReturn($valueToReturn);
+
+        return $security;
+    }
+
     public static function getEntitySingleGetter(Entity $entity) : EntitySingleGetter
     {
         $entitySingleGetter = MockGenerator::get()
@@ -99,6 +111,17 @@ class StubServices
             ->willReturn($entityToReturn);
 
         return $entityDeleter;
+    }
+
+    public static function getEntityOwnerProvider(?User $userToReturn) : EntityOwnerProvider
+    {
+        $entityOwnerProvider = MockGenerator::get()
+            ->getMock(EntityOwnerProvider::class);
+
+        $entityOwnerProvider->method('getOwner')
+            ->willReturn($userToReturn);
+
+        return $entityOwnerProvider;
     }
 
     public static function getPostParametersProvider(

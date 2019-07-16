@@ -27,7 +27,7 @@ class ValidEntities
     {
         $user = new User(
             'test@eresdev.com',
-            'someRandomPassword@!2',
+            'someRandomPassword@!1',
             true,
             false,
             new \DateTime()
@@ -35,6 +35,22 @@ class ValidEntities
         );
 
         $user->setId(1);
+
+        return $user;
+    }
+
+    public static function getAnotherUser() : User
+    {
+        $user = new User(
+            'test2@eresdev.com',
+            'someRandomPassword@!2',
+            true,
+            false,
+            new \DateTime()
+
+        );
+
+        $user->setId(2);
 
         return $user;
     }

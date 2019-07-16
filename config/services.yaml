@@ -134,7 +134,7 @@ services:
         public: false
         arguments:
             - '@App\Domain\Service\Responder\DeleteNoteResponder'
-            - '@App\ThirdParty\Adapter\Symfony\SecurityAdapter'
+            - '@App\Domain\Service\Security\OwnershipImpl'
             - '@App\ThirdParty\Persistence\Doctrine\Repository\NoteRepositoryImpl'
 
     App\Domain\Service\Responder\DeleteNoteResponder:

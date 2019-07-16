@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Entity\User;
 
-interface EntityOwned
+interface EntityOwnerProvider
 {
     public function getOwner(int $entityId) : ?User;
 }

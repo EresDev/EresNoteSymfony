@@ -5,7 +5,6 @@ namespace App\ThirdParty\Event\Listener\Symfony;
 use App\Domain\Exception\HttpException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ExceptionListener
 {
