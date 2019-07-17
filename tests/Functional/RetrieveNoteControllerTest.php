@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Tests\Extra\DataFixture\AnotherAuthUserFixture;
 use App\Tests\Extra\DataFixture\NoteFixture;
 
 class RetrieveNoteControllerTest extends FunctionalTestCase
@@ -15,40 +16,59 @@ class RetrieveNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithValidNoteId()
     {
+        $this->createAuthenticatedClient();
+
         $validNoteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
         );
 
-        $this->client->request(
-            'get',
-            '/note/'.$validNoteId,
-            [],
-            [],
-            ['content-type' => 'application/json']
-        );
+        $this->sendRequest($validNoteId);
 
-        $response = $this->client->getResponse();
-
-        $contentJson = $response->getContent();
-        $contentObject = json_decode($contentJson);
+        $contentJson = $this->getResponse()->getContent();
+        $contentObject = $this->toObject($contentJson);
 
         $this->assertEquals($validNoteId, $contentObject->id);
+    }
+
+    private function sendRequest(int $noteId) : void
+    {
+        $this->client->request(
+            'get',
+            '/note/'.$noteId,
+            [],
+            [],
+            []
+        );
     }
 
 
     public function testHandleRequestWithInvalidNoteId()
     {
+        $this->createAuthenticatedClient();
+
         $invalidNoteId = 0;
 
-        $this->client->request(
-            'get',
-            '/note/'.$invalidNoteId,
-            [],
-            [],
-            ['content-type' => 'application/json']
+        $this->sendRequest($invalidNoteId);
+
+        $this->assertEquals(404, $this->getResponse()->getStatusCode());
+    }
+
+    public function testHandleRequestWithDifferentAuthUserThatIsNotTheOwner()
+    {
+        $this->createAuthenticatedClient(
+            AnotherAuthUserFixture::EMAIL,
+            AnotherAuthUserFixture::PASSWORD,
+            AnotherAuthUserFixture::class
         );
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $validNoteId = $this->getFixtureId(
+            NoteFixture::class,
+            NoteFixture::class.'_0'
+        );
+
+        $this->sendRequest($validNoteId);
+
+        $this->assertEquals(401, $this->getResponse()->getStatusCode());
     }
 }

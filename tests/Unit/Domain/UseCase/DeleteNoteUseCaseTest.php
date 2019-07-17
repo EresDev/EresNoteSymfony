@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Domain\UseCase;
 
+use App\Domain\Service\Security\Ownership;
 use App\Domain\UseCase\DeleteNoteUseCase;
 use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
@@ -23,11 +24,18 @@ class DeleteNoteUseCaseTest extends TestCase
         );
         $responder = StubServices::getResponder($httpResponse);
 
+        $ownership = $this->createMock(Ownership::class);
+
         $entityDeleter = StubServices::getEntityDeleter(
             ValidEntities::getNote()
         );
 
-        $useCase = new DeleteNoteUseCase($responder, $entityDeleter);
+        $useCase = new DeleteNoteUseCase(
+            $responder,
+            $ownership,
+            $entityDeleter
+        );
+
         $response = $useCase->execute(self::NOTE_ID);
 
         $this->assertTrue($httpResponse->equals($response));

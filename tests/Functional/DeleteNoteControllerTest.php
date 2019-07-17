@@ -22,29 +22,28 @@ class DeleteNoteControllerTest extends FunctionalTestCase
             NoteFixture::class.'_0'
         );
 
+        $this->sendRequest($noteId);
+
+        $this->assertEquals(200, $this->getResponse()->getStatusCode());
+    }
+
+    private function sendRequest(int $noteId) : void
+    {
         $this->client->request(
             'delete',
             '/note/'.$noteId,
             [],
             [],
-            ['content-type' => 'application/json']
+            []
         );
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function testHandleRequestWithInvalidNote() : void
     {
         $noteId = 111;
 
-        $this->client->request(
-            'delete',
-            '/note/'.$noteId,
-            [],
-            [],
-            ['content-type' => 'application/json']
-        );
+        $this->sendRequest($noteId);
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(404, $this->getResponse()->getStatusCode());
     }
 }

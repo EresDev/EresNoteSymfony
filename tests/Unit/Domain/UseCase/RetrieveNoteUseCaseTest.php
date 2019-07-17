@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Domain\UseCase;
 
+use App\Domain\Service\Security\Ownership;
 use App\Domain\UseCase\RetrieveNoteUseCase;
 use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
@@ -19,9 +20,15 @@ class RetrieveNoteUseCaseTest extends TestCase
         $responseForEntityFound = ValidValues::getHttpResponse(200, $note);
         $responder = StubServices::getResponder($responseForEntityFound);
 
+        $ownership = $this->createMock(Ownership::class);
+
         $entitySingleGetter = StubServices::getEntitySingleGetter($note);
 
-        $retrieveNoteUseCase = new RetrieveNoteUseCase($responder, $entitySingleGetter);
+        $retrieveNoteUseCase = new RetrieveNoteUseCase(
+            $responder,
+            $ownership,
+            $entitySingleGetter
+        );
         $response = $retrieveNoteUseCase->execute(self::NOTE_ID);
 
         $this->assertTrue($response->equals($responseForEntityFound));

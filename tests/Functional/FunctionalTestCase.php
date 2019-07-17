@@ -22,12 +22,13 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
     }
 
     protected function createAuthenticatedClient(
-        $email = AuthUserFixture::EMAIL,
-        $password = AuthUserFixture::PASSWORD
+        string $email = AuthUserFixture::EMAIL,
+        string $password = AuthUserFixture::PASSWORD,
+        string $fixtureClass = AuthUserFixture::class
     ) : void {
 
-        $this->loadFixture(AuthUserFixture::class);
-        $this->authUserId = $this->getFixtureId(AuthUserFixture::class);
+        $this->loadFixture($fixtureClass);
+        $this->authUserId = $this->getFixtureId($fixtureClass);
 
         $this->client->request(
             'post',
