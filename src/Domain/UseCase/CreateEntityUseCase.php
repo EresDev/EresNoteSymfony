@@ -8,8 +8,8 @@ use App\Domain\Service\ValueObject\HttpResponse;
 
 abstract class CreateEntityUseCase implements CreateUseCase
 {
-    protected $entityFactory;
     protected $responder;
+    protected $entityFactory;
 
     public function __construct(
         Responder $responder,

@@ -30,9 +30,10 @@ class FixtureLoader
 
     public function loadFixture(string $className) : void
     {
+        $this->loader = new Loader();
         $this->loader->addFixture(new $className());
         $executor = new ORMExecutor($this->entityManager, new ORMPurger());
-        $executor->execute($this->loader->getFixtures());
+        $executor->execute($this->loader->getFixtures(), true);
     }
 
     public function getFixture(string $className) : Fixture

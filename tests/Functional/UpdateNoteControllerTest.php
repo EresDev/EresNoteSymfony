@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Domain\Entity\Note;
+use App\Tests\Extra\DataFixture\AnotherAuthUserFixture;
 use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Extra\Utility;
 
@@ -13,6 +14,7 @@ class UpdateNoteControllerTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
+        $this->cleanDatabase();
 
         $this->loadFixture(NoteFixture::class);
 
@@ -33,8 +35,11 @@ class UpdateNoteControllerTest extends FunctionalTestCase
         ];
     }
 
+
     public function testHandleRequestUpdateTitle(): void
     {
+        $this->createAuthenticatedClientForExistingUser();
+
         $this->existingNoteData['title'] = 'An updated title.';
 
         $this->sendRequest($this->existingNoteData);
@@ -68,6 +73,8 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithEmptyTitle() : void
     {
+        $this->createAuthenticatedClientForExistingUser();
+
         $this->existingNoteData['title'] = '';
 
         $this->sendRequest($this->existingNoteData);
@@ -83,6 +90,8 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithTooBigTitle() : void
     {
+        $this->createAuthenticatedClientForExistingUser();
+
         $this->existingNoteData['title'] = Utility::generateRandomString(51);
 
         $this->sendRequest($this->existingNoteData);
@@ -95,4 +104,20 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
         $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
+
+    public function testHandleRequestToUpdateTitleWithDifferentAuthUserThatIsNotTheOwner()
+    {
+        $this->createAuthenticatedClientForNewUser(
+            AnotherAuthUserFixture::EMAIL,
+            AnotherAuthUserFixture::PASSWORD,
+            AnotherAuthUserFixture::class
+        );
+
+        $this->existingNoteData['title'] = 'An updated title.';
+
+        $this->sendRequest($this->existingNoteData);
+
+        $this->assertEquals(401, $this->getResponse()->getStatusCode());
+    }
+
 }

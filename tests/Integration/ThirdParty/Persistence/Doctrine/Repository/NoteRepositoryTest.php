@@ -41,18 +41,6 @@ class NoteRepositoryTest extends FixtureWebTestCase
         $this->assertCount(5, $allNotes);
     }
 
-    public function testGetByTitle(): void
-    {
-        $note = $this->repository->getBy(['title' => 'Some title 0']);
-        $this->assertCount(1, $note);
-    }
-
-    public function testGetByContent(): void
-    {
-        $note = $this->repository->getBy(['content' => 'Some test content 0']);
-        $this->assertCount(1, $note);
-    }
-
     public function testDeleteForExistingNote() : void
     {
         $noteId = $this->getFixtureId(

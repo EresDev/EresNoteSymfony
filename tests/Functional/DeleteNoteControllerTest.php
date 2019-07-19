@@ -16,12 +16,12 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithExistingNote() : void
     {
-        $this->createAuthenticatedClient();
-
         $noteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
         );
+
+        $this->createAuthenticatedClientForExistingUser();
 
         $this->sendRequest($noteId);
 
@@ -41,7 +41,7 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithInvalidNote() : void
     {
-        $this->createAuthenticatedClient();
+        $this->createAuthenticatedClientForExistingUser();
 
         $noteId = 111;
 
@@ -52,15 +52,15 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithDifferentAuthUserThatIsNotTheOwner()
     {
-        $this->createAuthenticatedClient(
-            AnotherAuthUserFixture::EMAIL,
-            AnotherAuthUserFixture::PASSWORD,
-            AnotherAuthUserFixture::class
-        );
-
         $validNoteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
+        );
+
+        $this->createAuthenticatedClientForNewUser(
+            AnotherAuthUserFixture::EMAIL,
+            AnotherAuthUserFixture::PASSWORD,
+            AnotherAuthUserFixture::class
         );
 
         $this->sendRequest($validNoteId);

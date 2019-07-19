@@ -116,6 +116,7 @@ services:
         arguments:
             - '@App\Domain\Service\Responder\UpdateNoteResponder'
             - '@App\Domain\Service\Factory\NoteFactory'
+            - '@App\Domain\Service\Security\OwnershipImpl'
 
     App\Domain\Service\Responder\UpdateNoteResponder:
         public: false

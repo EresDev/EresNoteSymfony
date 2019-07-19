@@ -17,7 +17,7 @@ class CreateNoteControllerTest extends FunctionalTestCase
             'content' => 'Some test content'
         ];
 
-        $this->createAuthenticatedClient();
+        $this->createAuthenticatedClientForNewUser();
     }
 
     public function testHandleRequestWithValidData() : void

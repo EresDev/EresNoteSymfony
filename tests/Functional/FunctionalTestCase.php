@@ -21,13 +21,12 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
         $this->client = static::createClient();
     }
 
-    protected function createAuthenticatedClient(
+    protected function createAuthenticatedClientForExistingUser(
         string $email = AuthUserFixture::EMAIL,
         string $password = AuthUserFixture::PASSWORD,
         string $fixtureClass = AuthUserFixture::class
     ) : void {
 
-        $this->loadFixture($fixtureClass);
         $this->authUserId = $this->getFixtureId($fixtureClass);
 
         $this->client->request(
@@ -46,6 +45,16 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
 
         $this->client = static::createClient();
         $this->client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
+    }
+
+    public function createAuthenticatedClientForNewUser(
+        string $email = AuthUserFixture::EMAIL,
+        string $password = AuthUserFixture::PASSWORD,
+        string $fixtureClass = AuthUserFixture::class
+    ) : void
+    {
+        $this->loadFixture($fixtureClass);
+        $this->createAuthenticatedClientForExistingUser($email, $password, $fixtureClass);
     }
 
     protected function request(

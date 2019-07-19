@@ -16,12 +16,12 @@ class RetrieveNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithValidNoteId()
     {
-        $this->createAuthenticatedClient();
-
         $validNoteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
         );
+
+        $this->createAuthenticatedClientForExistingUser();
 
         $this->sendRequest($validNoteId);
 
@@ -45,7 +45,7 @@ class RetrieveNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithInvalidNoteId()
     {
-        $this->createAuthenticatedClient();
+        $this->createAuthenticatedClientForExistingUser();
 
         $invalidNoteId = 0;
 
@@ -56,16 +56,17 @@ class RetrieveNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithDifferentAuthUserThatIsNotTheOwner()
     {
-        $this->createAuthenticatedClient(
+        $validNoteId = $this->getFixtureId(
+            NoteFixture::class,
+            NoteFixture::class.'_0'
+        );
+
+        $this->createAuthenticatedClientForNewUser(
             AnotherAuthUserFixture::EMAIL,
             AnotherAuthUserFixture::PASSWORD,
             AnotherAuthUserFixture::class
         );
 
-        $validNoteId = $this->getFixtureId(
-            NoteFixture::class,
-            NoteFixture::class.'_0'
-        );
 
         $this->sendRequest($validNoteId);
 

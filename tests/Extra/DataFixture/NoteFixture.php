@@ -21,12 +21,13 @@ class NoteFixture extends Fixture implements DependentFixtureInterface
 
     public function getNotes()
     {
+        $user = $this->getReference(AuthUserFixture::class);
         for ($i = 0; $i < 5; $i++) {
             yield new Note(
                 "Some title $i",
                 "Some test content $i",
                 new \DateTime(),
-                $this->getReference(AuthUserFixture::class)
+                $user
             );
         }
     }
@@ -36,5 +37,4 @@ class NoteFixture extends Fixture implements DependentFixtureInterface
             AuthUserFixture::class
         );
     }
-
 }

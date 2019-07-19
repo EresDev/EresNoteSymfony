@@ -43,18 +43,6 @@ class UserRepositoryTest extends FixtureWebTestCase
         $this->assertCount(5, $allNotes);
     }
 
-    public function testGetByEmail(): void
-    {
-        $user = $this->repository->getBy(['email' => 'test_0@eresdev.com']);
-        $this->assertCount(1, $user);
-    }
-
-    public function testGetByDeleted(): void
-    {
-        $notes = $this->repository->getBy(['deleted' => false]);
-        $this->assertCount(5, $notes);
-    }
-
     public function testDeleteForExistingUser() : void
     {
         $userId = $this->getFixtureId(
