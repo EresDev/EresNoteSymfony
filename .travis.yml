@@ -8,7 +8,7 @@ cache:
 env:
 - SYMFONY_VERSION="4.2.*" DB=mysql
 script:
-- php bin/phpunit
+- php bin/phpunit Tests/Functional/ControllerLess/LexikJwtTokenTest
 services:
 - mysql
 install:
