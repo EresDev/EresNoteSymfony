@@ -24,7 +24,7 @@ class LexikJwtTokenTest extends FunctionalTestCase
         $this->sendRequest($validUser);
 
         $response = $this->getResponse();
-
+        echo $response->getContent();
         $this->assertEquals(200, $response->getStatusCode());
 
         $contentArray = $this->toArrayAssoc(
