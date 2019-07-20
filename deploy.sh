@@ -25,6 +25,11 @@ cd "$DIRECTORY/tmp/"
 APP_ENV=prod
 composer install --no-dev
 
+#generate JWT keys
+mkdir -p config/jwt
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -pass pass:eresnoteApp1
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout -passin pass:eresnoteApp1
+
 #Swap the temporary directory with app directory
 if ! [ -d "$DIRECTORY/app" ]; then
   mkdir "$DIRECTORY/app"
