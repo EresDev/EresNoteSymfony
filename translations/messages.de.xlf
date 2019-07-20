@@ -21,6 +21,24 @@
                 <source>fail.delete.note.notFound.responder</source>
                 <target>Hinweis wurde nicht gefunden, Löschen fehlgeschlagen.</target>
             </trans-unit>
+
+
+            <trans-unit id="exception.text.entity.does.not.exist">
+                <source>exception.text.entity.does.not.exist</source>
+                <target>Die Entität, auf die Sie zugreifen möchten, ist nicht vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="exception.text.user.is.not.the.owner.of.resource">
+                <source>exception.text.user.is.not.the.owner.of.resource</source>
+                <target>Sie dürfen nicht auf diese Ressource zugreifen.</target>
+            </trans-unit>
+            <trans-unit id="exception.text.user.is.not.logged.in">
+                <source>exception.text.user.is.not.logged.in</source>
+                <target>Sie müssen angemeldet sein, um diese Aktion auszuführen.</target>
+            </trans-unit>
+            <trans-unit id="exception.text.unable.to.process.your.request.due.to.invalid.submission">
+                <source>exception.text.unable.to.process.your.request.due.to.invalid.submission</source>
+                <target>Wir konnten Ihre Anfrage aufgrund einer ungültigen Datenübermittlung nicht bearbeiten.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

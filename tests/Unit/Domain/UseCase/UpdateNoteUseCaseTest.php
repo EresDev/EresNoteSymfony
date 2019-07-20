@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Domain\UseCase;
 
+use App\Domain\Exception\ParameterMissingException;
 use App\Domain\Service\Security\Ownership;
 use App\Domain\UseCase\UpdateNoteUseCase;
 use App\Tests\Extra\StubFactories;
@@ -28,5 +29,21 @@ class UpdateNoteUseCaseTest extends TestCase
         $response = $createNoteUseCase->execute($this->dummyRequestParameters);
 
         $this->assertTrue($httpResponse->equals($response));
+    }
+
+    public function testExecuteWhenThereIsNotIdInRequestParameters()
+    {
+        $this->expectException(ParameterMissingException::class);
+
+        $note = ValidEntities::getNote();
+        $entityFactory = StubFactories::getEntityFactory($note);
+
+        $httpResponse = ValidValues::getHttpResponse();
+        $responder = StubServices::getResponder($httpResponse);
+
+        $ownership = $this->createMock(Ownership::class);
+
+        $createNoteUseCase = new UpdateNoteUseCase($responder, $entityFactory, $ownership);
+        $response = $createNoteUseCase->execute([]);
     }
 }

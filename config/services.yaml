@@ -175,5 +175,7 @@ services:
     #Events
     kernel.listener.exception:
         class: App\ThirdParty\Event\Listener\Symfony\ExceptionListener
+        arguments:
+            - '@App\ThirdParty\Adapter\Symfony\TranslatorAdapter'
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

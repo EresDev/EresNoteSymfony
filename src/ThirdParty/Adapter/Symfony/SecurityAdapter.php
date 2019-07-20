@@ -21,10 +21,7 @@ class SecurityAdapter implements Security
         $user = $this->security->getUser();
 
         if ($user == null) {
-            throw new UserNotAuthenticatedException(
-                401,
-                'User is not authenticated to perform the action.'
-            );
+            throw UserNotAuthenticatedException::get();
         }
 
         return $user;

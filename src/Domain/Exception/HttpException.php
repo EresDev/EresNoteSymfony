@@ -4,7 +4,7 @@ namespace App\Domain\Exception;
 
 use Throwable;
 
-abstract class HttpException extends \Exception
+abstract class HttpException extends BaseException
 {
     protected $httpStatusCode;
 

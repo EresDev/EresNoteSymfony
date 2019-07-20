@@ -21,6 +21,25 @@
                 <source>fail.delete.note.notFound.responder</source>
                 <target>Note was not found, delete failed.</target>
             </trans-unit>
+
+
+
+            <trans-unit id="exception.text.entity.does.not.exist">
+                <source>exception.text.entity.does.not.exist</source>
+                <target>The entity you are trying to access does not exist.</target>
+            </trans-unit>
+            <trans-unit id="exception.text.user.is.not.the.owner.of.resource">
+                <source>exception.text.user.is.not.the.owner.of.resource</source>
+                <target>You are not allowed to access this resource.</target>
+            </trans-unit>
+            <trans-unit id="exception.text.user.is.not.logged.in">
+                <source>exception.text.user.is.not.logged.in</source>
+                <target>You must be logged in to perform this action.</target>
+            </trans-unit>
+            <trans-unit id="exception.text.unable.to.process.your.request.due.to.invalid.submission">
+                <source>exception.text.unable.to.process.your.request.due.to.invalid.submission</source>
+                <target>We were unable to process your request due to invalid data submission.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

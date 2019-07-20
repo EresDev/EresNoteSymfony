@@ -105,7 +105,7 @@ class UpdateNoteControllerTest extends FunctionalTestCase
         $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
 
-    public function testHandleRequestToUpdateTitleWithDifferentAuthUserThatIsNotTheOwner()
+    public function testHandleRequestToUpdateTitleWithDifferentAuthUserThatIsNotTheOwner() : void
     {
         $this->createAuthenticatedClientForNewUser(
             AnotherAuthUserFixture::EMAIL,
@@ -120,4 +120,18 @@ class UpdateNoteControllerTest extends FunctionalTestCase
         $this->assertEquals(401, $this->getResponse()->getStatusCode());
     }
 
+    public function testHandleRequestWhenIdIsMissingFromParameters() : void
+    {
+        $this->createAuthenticatedClientForExistingUser();
+
+        $this->existingNoteData['title'] = 'An updated title.';
+
+        array_shift($this->existingNoteData);
+
+        $this->sendRequest($this->existingNoteData);
+
+        $response = $this->getResponse();
+
+        $this->assertEquals(422, $response->getStatusCode());
+    }
 }

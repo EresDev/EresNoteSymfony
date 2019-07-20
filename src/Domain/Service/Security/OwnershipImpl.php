@@ -24,28 +24,17 @@ class OwnershipImpl implements Ownership
         $user = $this->entityOwnerProvider->getOwner($entityId);
 
         if ($user == null) {
-            throw new EntityDoesNotExistException(
-                404,
-                sprintf(
-                    'Owner of the given Entity ID does not exist in the database. ' .
-                    'Entity ID: %s. ' .
-                    'Entity repository class: %s. ',
-                    $entityId,
-                    get_class($this->entityOwnerProvider)
-                )
+            throw EntityDoesNotExistException::from(
+                $entityId,
+                get_class($this->entityOwnerProvider)
             );
         }
 
         if (!$this->security->isCurrentUser($user)) {
-            throw new UserIsNotTheOwnerException(
-                401,
-                sprintf(
-                    'Currently authenticated user is not the owner of the given Entity ID. ' .
-                    'Entity ID: %s. ' .
-                    'Entity repository class: %s. ',
-                    $entityId,
-                    get_class($this->entityOwnerProvider)
-                )
+            throw UserIsNotTheOwnerException::from(
+                $entityId,
+                $this->security->getUser()->getId(),
+                get_class($this->entityOwnerProvider)
             );
         }
     }

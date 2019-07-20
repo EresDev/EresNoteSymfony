@@ -2,6 +2,7 @@
 
 namespace App\Domain\UseCase;
 
+use App\Domain\Exception\ParameterMissingException;
 use App\Domain\Service\Factory\EntityFactory;
 use App\Domain\Service\Responder\Responder;
 use App\Domain\Service\Security\Ownership;
@@ -26,7 +27,7 @@ class UpdateNoteUseCase implements CreateUseCase
     public function execute(array $requestParameters) : HttpResponse
     {
         if (! array_key_exists('id', $requestParameters)) {
-            //throw InvalidRequest::fromParameters($requestParameters, 'id');
+            throw ParameterMissingException::from($requestParameters, 'id');
         }
 
         $this->ownership->check($requestParameters['id']);
