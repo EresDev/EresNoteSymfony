@@ -4,6 +4,7 @@ namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\AuthUserFixture;
 use App\Tests\Extra\DataFixture\AuthUserSecondFixture;
+use App\Tests\Extra\Exception\FixtureNotLoadedException;
 use App\Tests\Extra\FixtureWebTestCase;
 use Symfony\Component\BrowserKit\Client;
 
@@ -28,11 +29,18 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
         string $fixtureClass = AuthUserFixture::class
     ) : void {
 
-        $this->authUserId = $this->getFixtureId($fixtureClass);
-
-        if ($this->authUserId == null) {
-            throw new \Exception("Load $fixtureClass fixture " .
-                "before creating authentication client.");
+        try {
+            $this->authUserId = $this->getFixtureId($fixtureClass);
+        } catch (FixtureNotLoadedException $fixtureNotLoadedException) {
+            throw new FixtureNotLoadedException(
+                sprintf(
+                    'The fixture %s must be loaded before you can create ' .
+                    'an authenticated client.',
+                    $fixtureClass
+                ),
+                0,
+                $fixtureNotLoadedException
+            );
         }
 
         $this->client->request(

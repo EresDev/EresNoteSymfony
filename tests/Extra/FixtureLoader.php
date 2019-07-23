@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Tests\Extra\Exception\FixtureNotLoadedException;
 
 class FixtureLoader
 {
@@ -39,9 +40,14 @@ class FixtureLoader
     public function getFixture(string $className) : Fixture
     {
         if ($this->loader == null) {
-            throw new \Exception('You have not loaded any fixture yet.' .
-                ' Load fixture first.');
+            throw new FixtureNotLoadedException(
+                sprintf(
+                    'The fixture %s must be loaded before you can access it.',
+                    $className
+                )
+            );
         }
+
         return $this->loader->getFixture($className);
     }
 
