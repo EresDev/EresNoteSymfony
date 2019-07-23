@@ -29,10 +29,6 @@ services:
     # please note that last definitions always *replace* previous ones
 
     #TESTS
-    Doctrine\Common\DataFixtures\Loader:
-        autowire: true
-        public: true
-
     App\Tests\Extra\FixtureLoader:
         autowire: true
         public: true
