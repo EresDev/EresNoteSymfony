@@ -14,18 +14,25 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithExistingNote() : void
     {
-        $this->loadFixtures([NoteFixture::class]);
+        $this->singleUserSetUp();
 
-        $noteId = $this->getFixtureId(
+        $this->sendRequest($this->getExistingNoteId());
+
+        $this->assertEquals(200, $this->getResponse()->getStatusCode());
+    }
+
+    private function singleUserSetUp() : void
+    {
+        $this->loadFixtures([NoteFixture::class]);
+        $this->createAuthenticatedClient();
+    }
+
+    private function getExistingNoteId(): int
+    {
+        return $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
         );
-
-        $this->createAuthenticatedClient();
-
-        $this->sendRequest($noteId);
-
-        $this->assertEquals(200, $this->getResponse()->getStatusCode());
     }
 
     private function sendRequest(int $noteId) : void
@@ -41,11 +48,9 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithInvalidNote() : void
     {
-        $this->loadFixtures([NoteFixture::class]);
-        $this->createAuthenticatedClient();
+        $this->singleUserSetUp();
 
         $noteId = 111;
-
         $this->sendRequest($noteId);
 
         $this->assertEquals(404, $this->getResponse()->getStatusCode());
@@ -53,20 +58,18 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithDifferentAuthUserThatIsNotTheOwner()
     {
+        $this->doubleUserSetUp();
+        $this->sendRequest($this->getExistingNoteId());
+        $this->assertEquals(401, $this->getResponse()->getStatusCode());
+    }
+
+    private function doubleUserSetUp() : void
+    {
         $this->loadFixtures([NoteFixture::class, AuthUserSecondFixture::class]);
-
-        $validNoteId = $this->getFixtureId(
-            NoteFixture::class,
-            NoteFixture::class.'_0'
-        );
-
         $this->createAuthenticatedClientForSecondUser(
             AuthUserSecondFixture::EMAIL,
             AuthUserSecondFixture::PASSWORD,
             AuthUserSecondFixture::class
         );
-
-        $this->sendRequest($validNoteId);
-        $this->assertEquals(401, $this->getResponse()->getStatusCode());
     }
 }
