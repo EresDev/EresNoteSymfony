@@ -3,7 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Domain\Entity\Note;
-use App\Tests\Extra\DataFixture\AnotherAuthUserFixture;
+use App\Tests\Extra\DataFixture\AuthUserSecondFixture;
 use App\Tests\Extra\DataFixture\NoteFixture;
 use App\Tests\Extra\Utility;
 
@@ -14,31 +14,11 @@ class UpdateNoteControllerTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->cleanDatabase();
-
-        $this->loadFixture(NoteFixture::class);
-
-        /**
-         * @var $note Note
-         */
-        $note = $this->getFixture(
-            NoteFixture::class,
-            NoteFixture::class.'_0'
-        );
-
-        $this->existingNoteData = [
-            'id' => $note->getId(),
-            'title' => $note->getTitle(),
-            'content' => $note->getContent(),
-            'creationDatetime'=> $note->getCreationDatetime(),
-            'user' => $note->getUser()
-        ];
     }
-
 
     public function testHandleRequestUpdateTitle(): void
     {
-        $this->createAuthenticatedClientForExistingUser();
+        $this->singleUserSetUp();
 
         $this->existingNoteData['title'] = 'An updated title.';
 
@@ -60,6 +40,32 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
     }
 
+    private function singleUserSetUp() : void
+    {
+        $this->loadFixtures([NoteFixture::class]);
+        $this->prepareNoteData();
+        $this->createAuthenticatedClient();
+    }
+
+    private function prepareNoteData(): void
+    {
+        /**
+         * @var $note Note
+         */
+        $note = $this->getFixture(
+            NoteFixture::class,
+            NoteFixture::class.'_0'
+        );
+
+        $this->existingNoteData = [
+            'id' => $note->getId(),
+            'title' => $note->getTitle(),
+            'content' => $note->getContent(),
+            'creationDatetime'=> $note->getCreationDatetime(),
+            'user' => $note->getUser()
+        ];
+    }
+
     private function sendRequest($parameters) : void
     {
         $this->request(
@@ -73,7 +79,7 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithEmptyTitle() : void
     {
-        $this->createAuthenticatedClientForExistingUser();
+        $this->singleUserSetUp();
 
         $this->existingNoteData['title'] = '';
 
@@ -90,7 +96,7 @@ class UpdateNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithTooBigTitle() : void
     {
-        $this->createAuthenticatedClientForExistingUser();
+        $this->singleUserSetUp();
 
         $this->existingNoteData['title'] = Utility::generateRandomString(51);
 
@@ -105,24 +111,9 @@ class UpdateNoteControllerTest extends FunctionalTestCase
         $this->assertArrayHasKey('title', $contentMultiArrayWithErrors[0]);
     }
 
-    public function testHandleRequestToUpdateTitleWithDifferentAuthUserThatIsNotTheOwner() : void
-    {
-        $this->createAuthenticatedClientForNewUser(
-            AnotherAuthUserFixture::EMAIL,
-            AnotherAuthUserFixture::PASSWORD,
-            AnotherAuthUserFixture::class
-        );
-
-        $this->existingNoteData['title'] = 'An updated title.';
-
-        $this->sendRequest($this->existingNoteData);
-
-        $this->assertEquals(401, $this->getResponse()->getStatusCode());
-    }
-
     public function testHandleRequestWhenIdIsMissingFromParameters() : void
     {
-        $this->createAuthenticatedClientForExistingUser();
+        $this->singleUserSetUp();
 
         $this->existingNoteData['title'] = 'An updated title.';
 
@@ -133,5 +124,27 @@ class UpdateNoteControllerTest extends FunctionalTestCase
         $response = $this->getResponse();
 
         $this->assertEquals(422, $response->getStatusCode());
+    }
+
+    public function testHandleRequestToUpdateTitleWithDifferentAuthUserThatIsNotTheOwner() : void
+    {
+        $this->doubleUserSetUp();
+
+        $this->existingNoteData['title'] = 'An updated title.';
+
+        $this->sendRequest($this->existingNoteData);
+
+        $this->assertEquals(401, $this->getResponse()->getStatusCode());
+    }
+
+    private function doubleUserSetUp() : void
+    {
+        $this->loadFixtures([NoteFixture::class, AuthUserSecondFixture::class]);
+        $this->prepareNoteData();
+        $this->createAuthenticatedClientForSecondUser(
+            AuthUserSecondFixture::EMAIL,
+            AuthUserSecondFixture::PASSWORD,
+            AuthUserSecondFixture::class
+        );
     }
 }

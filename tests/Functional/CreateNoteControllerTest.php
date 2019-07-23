@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Tests\Extra\DataFixture\AuthUserFixture;
 use App\Tests\Extra\Utility;
 
 class CreateNoteControllerTest extends FunctionalTestCase
@@ -17,7 +18,8 @@ class CreateNoteControllerTest extends FunctionalTestCase
             'content' => 'Some test content'
         ];
 
-        $this->createAuthenticatedClientForNewUser();
+        $this->loadFixtures([AuthUserFixture::class]);
+        $this->createAuthenticatedClient();
     }
 
     public function testHandleRequestWithValidData() : void

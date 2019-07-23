@@ -11,7 +11,7 @@ class LexikJwtTokenTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->loadFixture(AuthUserFixture::class);
+        $this->loadFixtures([AuthUserFixture::class]);
     }
 
     public function testJwtTokenGenerationIsSuccess() : void

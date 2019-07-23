@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Extra\DataFixture\AuthUserFixture;
+use App\Tests\Extra\DataFixture\AuthUserSecondFixture;
 use App\Tests\Extra\FixtureWebTestCase;
 use Symfony\Component\BrowserKit\Client;
 
@@ -17,17 +18,22 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
     protected function setUp()
     {
         parent::setUp();
-
+        $this->cleanDatabase();
         $this->client = static::createClient();
     }
 
-    protected function createAuthenticatedClientForExistingUser(
+    protected function createAuthenticatedClient(
         string $email = AuthUserFixture::EMAIL,
         string $password = AuthUserFixture::PASSWORD,
         string $fixtureClass = AuthUserFixture::class
     ) : void {
 
         $this->authUserId = $this->getFixtureId($fixtureClass);
+
+        if ($this->authUserId == null) {
+            throw new \Exception("Load $fixtureClass fixture " .
+                "before creating authentication client.");
+        }
 
         $this->client->request(
             'post',
@@ -47,14 +53,13 @@ abstract class FunctionalTestCase extends FixtureWebTestCase
         $this->client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
     }
 
-    public function createAuthenticatedClientForNewUser(
-        string $email = AuthUserFixture::EMAIL,
-        string $password = AuthUserFixture::PASSWORD,
-        string $fixtureClass = AuthUserFixture::class
+    public function createAuthenticatedClientForSecondUser(
+        string $email = AuthUserSecondFixture::EMAIL,
+        string $password = AuthUserSecondFixture::PASSWORD,
+        string $fixtureClass = AuthUserSecondFixture::class
     ) : void
     {
-        $this->loadFixture($fixtureClass);
-        $this->createAuthenticatedClientForExistingUser($email, $password, $fixtureClass);
+        $this->createAuthenticatedClient($email, $password, $fixtureClass);
     }
 
     protected function request(

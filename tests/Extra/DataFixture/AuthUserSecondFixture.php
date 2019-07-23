@@ -6,9 +6,9 @@ use App\Domain\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class AnotherAuthUserFixture extends Fixture
+class AuthUserSecondFixture extends Fixture
 {
-    public const EMAIL = 'another_auth_user@eresdev.com';
+    public const EMAIL = 'auth_user_second@eresdev.com';
     public const PASSWORD = 'somePassword1145236';
     public const ENCODED_PASSWORD =
         '$2y$12$ePhjXGuHR47ALFba/8F8I.ve.IfYoxe8HiI7RbDKXZuN.x/UlAfn.'; //bcrypt, cost 12

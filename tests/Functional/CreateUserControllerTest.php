@@ -12,8 +12,6 @@ class CreateUserControllerTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->cleanDatabase();
-
         $this->validUserData = [
             'email' => 'test_user@eresdev.com',
             'password' => 'someTestPassword1@2'

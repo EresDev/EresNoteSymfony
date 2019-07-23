@@ -19,7 +19,7 @@ class NoteRepositoryTest extends FixtureWebTestCase
         parent::setUp();
 
         $this->repository = new NoteRepositoryImpl($this->getEntityManager());
-        $this->loadFixture(NoteFixture::class);
+        $this->loadFixtures([NoteFixture::class]);
     }
 
     public function testGetById() : void

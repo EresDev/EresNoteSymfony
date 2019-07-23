@@ -18,26 +18,30 @@ class FixtureLoader
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        Loader $loader,
         ManagerRegistry $registry
     ) {
         $this->entityManager = $entityManager;
-        $this->loader = $loader;
         $this->registry = $registry;
-
-        $this->cleanDatabase();
     }
 
-    public function loadFixture(string $className) : void
+    public function loadFixtures(array $classNames) : void
     {
         $this->loader = new Loader();
-        $this->loader->addFixture(new $className());
+
+        foreach ($classNames as $className) {
+            $this->loader->addFixture(new $className());
+        }
+
         $executor = new ORMExecutor($this->entityManager, new ORMPurger());
-        $executor->execute($this->loader->getFixtures(), true);
+        $executor->execute($this->loader->getFixtures());
     }
 
     public function getFixture(string $className) : Fixture
     {
+        if ($this->loader == null) {
+            throw new \Exception('You have not loaded any fixture yet.' .
+                ' Load fixture first.');
+        }
         return $this->loader->getFixture($className);
     }
 

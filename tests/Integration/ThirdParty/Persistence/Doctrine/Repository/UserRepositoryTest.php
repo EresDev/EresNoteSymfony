@@ -22,7 +22,7 @@ class UserRepositoryTest extends FixtureWebTestCase
             parent::getEntityManager()
         );
 
-        $this->loadFixture(UserFixture::class);
+        $this->loadFixtures([UserFixture::class]);
     }
 
     public function testGetById() : void

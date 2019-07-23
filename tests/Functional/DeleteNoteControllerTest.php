@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional;
 
-use App\Tests\Extra\DataFixture\AnotherAuthUserFixture;
+use App\Tests\Extra\DataFixture\AuthUserSecondFixture;
 use App\Tests\Extra\DataFixture\NoteFixture;
 
 class DeleteNoteControllerTest extends FunctionalTestCase
@@ -10,18 +10,18 @@ class DeleteNoteControllerTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
-
-        $this->loadFixture(NoteFixture::class);
     }
 
     public function testHandleRequestWithExistingNote() : void
     {
+        $this->loadFixtures([NoteFixture::class]);
+
         $noteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
         );
 
-        $this->createAuthenticatedClientForExistingUser();
+        $this->createAuthenticatedClient();
 
         $this->sendRequest($noteId);
 
@@ -41,7 +41,8 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithInvalidNote() : void
     {
-        $this->createAuthenticatedClientForExistingUser();
+        $this->loadFixtures([NoteFixture::class]);
+        $this->createAuthenticatedClient();
 
         $noteId = 111;
 
@@ -52,19 +53,20 @@ class DeleteNoteControllerTest extends FunctionalTestCase
 
     public function testHandleRequestWithDifferentAuthUserThatIsNotTheOwner()
     {
+        $this->loadFixtures([NoteFixture::class, AuthUserSecondFixture::class]);
+
         $validNoteId = $this->getFixtureId(
             NoteFixture::class,
             NoteFixture::class.'_0'
         );
 
-        $this->createAuthenticatedClientForNewUser(
-            AnotherAuthUserFixture::EMAIL,
-            AnotherAuthUserFixture::PASSWORD,
-            AnotherAuthUserFixture::class
+        $this->createAuthenticatedClientForSecondUser(
+            AuthUserSecondFixture::EMAIL,
+            AuthUserSecondFixture::PASSWORD,
+            AuthUserSecondFixture::class
         );
 
         $this->sendRequest($validNoteId);
-
         $this->assertEquals(401, $this->getResponse()->getStatusCode());
     }
 }

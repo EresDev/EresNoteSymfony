@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class AnotherNoteFixture extends NoteFixture
+class NoteSecondFixture extends NoteFixture
 {
     public function getNotes()
     {
@@ -16,14 +16,14 @@ class AnotherNoteFixture extends NoteFixture
                 "Some title $i",
                 "Some test content $i",
                 new \DateTime(),
-                $this->getReference(AnotherAuthUserFixture::class)
+                $this->getReference(AuthUserSecondFixture::class)
             );
         }
     }
     public function getDependencies()
     {
         return array(
-            AnotherAuthUserFixture::class
+            AuthUserSecondFixture::class
         );
     }
 

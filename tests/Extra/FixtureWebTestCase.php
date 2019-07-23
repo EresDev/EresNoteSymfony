@@ -2,7 +2,6 @@
 
 namespace App\Tests\Extra;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -24,9 +23,9 @@ abstract class FixtureWebTestCase extends WebTestCase
         return self::$container->get($serviceId);
     }
 
-    protected function loadFixture(string $className) : void
+    protected function loadFixtures(array $classNames) : void
     {
-        $this->fixtureLoader->loadFixture($className);
+        $this->fixtureLoader->loadFixtures($classNames);
     }
 
     protected function getFixtureId(
