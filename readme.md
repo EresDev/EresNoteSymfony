@@ -4,7 +4,7 @@
 
 This is a RESTful application CRUD based on Symfony 4. The goal of its development is to produce high quality reusable CRUD application. Once a CRUD will reach an acceptable state, a fork of this will be dedicated to note-taking web application. That is why, you will see note-taking application domain vocabulary in the code. 
 
-The internal quality of code is based on the idea of using Test-driven development with unit tests, integration tests and functional tests. This project is refactored continuously to test and implement new and awesome ideas. 
+The internal quality of code is based on the idea of using Test-driven development with unit tests, integration tests and functional tests. This project is refactored continuously to test and implement new and awesome ideas. This repository is based on London School of TDD (mockist). 
 
 The development approaches includes usage of design patterns, continuous integration and continuous deployment and SOLID design principles. 
 
