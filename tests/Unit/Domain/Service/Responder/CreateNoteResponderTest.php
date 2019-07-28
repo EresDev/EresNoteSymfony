@@ -16,13 +16,14 @@ class CreateNoteResponderTest extends TestCase
             ->withValidValidatorResponse()
             ->build(CreateNoteResponder::class);
 
-        $response = $responder->prepare(
-            ValidEntities::getNote()
-        );
+        $note = ValidEntities::getNote();
+        $response = $responder->prepare($note);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Test content.', $response->getContent());
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromObject(200, $note)
+            )
+        );
     }
 
     public function testPrepareForInvalidEntity(): void
@@ -31,11 +32,16 @@ class CreateNoteResponderTest extends TestCase
             ->withInvalidValidatorResponse()
             ->build(CreateNoteResponder::class);
 
-        $response = $responder->prepare(
-            $this->createMock(Note::class)
-        );
+        $note = $this->createMock(Note::class);
+        $response = $responder->prepare($note);
 
-        $this->assertEquals(422, $response->getStatusCode());
-        $this->assertEquals('An error message.', $response->getContent());
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromArray(
+                    422,
+                    CreateEntityResponderBuilder::VALIDATOR_ERRORS
+                )
+            )
+        );
     }
 }

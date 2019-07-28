@@ -4,7 +4,7 @@ namespace App\Domain\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class User extends Entity implements UserInterface
+class User extends Entity implements UserInterface, \JsonSerializable
 {
     private $email;
     private $password;
@@ -104,5 +104,15 @@ class User extends Entity implements UserInterface
     public function eraseCredentials() : void
     {
         $this->setPassword('');
+    }
+
+    public function jsonSerialize() : array
+    {
+        return [
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'activated' => $this->getActivated(),
+            'memberSince' => $this->getMemberSince()
+        ];
     }
 }

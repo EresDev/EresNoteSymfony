@@ -3,7 +3,9 @@
 namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Service\Responder\DeleteNoteResponder;
+use App\Domain\Service\ValueObject\HttpResponse;
 use App\Tests\Extra\StubFactories;
+use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
 use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
@@ -17,33 +19,31 @@ class DeleteNoteResponderTest extends TestCase
 
     public function testPrepareForExistingNote() : void
     {
-        $httpResponse = ValidValues::getHttpResponse(
-            self::HTTP_SUCCESS,
-            self::CONTENT
+        $translator = StubServices::getTranslator(self::CONTENT);
+        $note = ValidEntities::getNote();
+
+        $responder = new DeleteNoteResponder($translator);
+        $response = $responder->prepare($note);
+
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromString(self::HTTP_SUCCESS, self::CONTENT)
+            )
         );
-
-        $httpResponseFactory = StubFactories::getHttpResponseFactory($httpResponse);
-
-        $responder = new DeleteNoteResponder($httpResponseFactory);
-        $response = $responder->prepare(
-            ValidEntities::getNote()
-        );
-
-        $this->assertTrue($httpResponse->equals($response));
     }
 
     public function testPrepareForNonExistingNote() : void
     {
-        $httpResponse = ValidValues::getHttpResponse(
-            self::HTTP_FAILURE,
-            self::CONTENT
-        );
+        $translator = StubServices::getTranslator(self::CONTENT);
+        $note = ValidEntities::getNote();
 
-        $httpResponseFactory = StubFactories::getHttpResponseFactory($httpResponse);
-
-        $responder = new DeleteNoteResponder($httpResponseFactory);
+        $responder = new DeleteNoteResponder($translator);
         $response = $responder->prepare(null);
 
-        $this->assertTrue($httpResponse->equals($response));
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromString(self::HTTP_FAILURE, self::CONTENT)
+            )
+        );
     }
 }

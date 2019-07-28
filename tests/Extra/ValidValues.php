@@ -11,10 +11,12 @@ class ValidValues
         $content='Some sample content.'
     ) : HttpResponse{
 
-        if (!is_string($content)) {
-            $content = json_encode($content);
+        if (is_object($content)) {
+            return HttpResponse::fromObject($statusCode, $content);
+        }else if(is_array($content)){
+            return HttpResponse::fromObject($statusCode, $content);
         }
 
-        return new HttpResponse($statusCode, $content);
+        return HttpResponse::fromString($statusCode, $content);
     }
 }

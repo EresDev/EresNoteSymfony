@@ -3,18 +3,16 @@
 namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Service\CreateUserSuccessHook;
-use App\Domain\Service\Factory\HttpResponseFactory;
-use App\Domain\Service\Responder\CreateEntityResponderTemplate;
 use App\Domain\Service\Responder\CreateUserResponder;
 use App\Domain\Service\Validator;
-use App\Domain\Service\ValueObject\HttpResponse;
 use App\Domain\Service\ValueObject\ValidatorResponse;
 use PHPUnit\Framework\TestCase;
 
 class CreateUserResponderBuilder extends TestCase
 {
+    const VALIDATOR_ERRORS = ['An error message.'];
+
     protected $validator;
-    protected $httpResponseFactory;
     protected $successHook;
 
     public static function getInstance(): self
@@ -33,10 +31,6 @@ class CreateUserResponderBuilder extends TestCase
     {
         $this->validator = $this->createMock(Validator::class);
 
-        $this->httpResponseFactory = $this->createMock(
-            HttpResponseFactory::class
-        );
-
         $this->successHook = $this->createMock(
             CreateUserSuccessHook::class
         );
@@ -49,41 +43,23 @@ class CreateUserResponderBuilder extends TestCase
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
-        $this->withHttpResponseFactoryForValidResponse();
-
         return $this;
-    }
-
-    private function withHttpResponseFactoryForValidResponse(): void
-    {
-        $this->httpResponseFactory->method('create')
-            ->willReturn(new HttpResponse(200, 'Test content.'));
-
     }
 
     public function withInvalidValidatorResponse(): self
     {
-        $validatorResponse = new ValidatorResponse(false, ['An error message.']);
+        $validatorResponse = new ValidatorResponse(false, self::VALIDATOR_ERRORS);
 
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
-        $this->withHttpResponseFactoryForInvalidResponse();
-
         return $this;
     }
 
-    private function withHttpResponseFactoryForInvalidResponse(): void
+    public function getCreatorResponderInstance(): CreateUserResponder
     {
-        $this->httpResponseFactory->method('create')
-            ->willReturn(new HttpResponse(422, 'An error message.'));
-    }
-
-    public function getCreatorResponderInstance(): CreateUserResponder {
-
         return new CreateUserResponder(
             $this->validator,
-            $this->httpResponseFactory,
             $this->successHook
         );
     }

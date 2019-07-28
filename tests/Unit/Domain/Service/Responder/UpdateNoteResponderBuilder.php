@@ -13,8 +13,9 @@ use PHPUnit\Framework\TestCase;
 class UpdateNoteResponderBuilder extends TestCase
 {
     protected $validator;
-    protected $httpResponseFactory;
     protected $entityUpdater;
+
+    const VALIDATOR_ERRORS = ['foo' => 'bar'];
 
     public static function getInstance(): self
     {
@@ -32,10 +33,6 @@ class UpdateNoteResponderBuilder extends TestCase
     {
         $this->validator = $this->createMock(Validator::class);
 
-        $this->httpResponseFactory = $this->createMock(
-            HttpResponseFactory::class
-        );
-
         $this->entityUpdater = $this->createMock(
             EntityUpdater::class
         );
@@ -48,41 +45,23 @@ class UpdateNoteResponderBuilder extends TestCase
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
-        $this->withHttpResponseFactoryForValidResponse();
-
         return $this;
-    }
-
-    private function withHttpResponseFactoryForValidResponse(): void
-    {
-        $this->httpResponseFactory->method('create')
-            ->willReturn(new HttpResponse(200, 'Test content.'));
-
     }
 
     public function withInvalidValidatorResponse(): self
     {
-        $validatorResponse = new ValidatorResponse(false, ['An error message.']);
+        $validatorResponse = new ValidatorResponse(false, self::VALIDATOR_ERRORS);
 
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
-        $this->withHttpResponseFactoryForInvalidResponse();
-
         return $this;
-    }
-
-    private function withHttpResponseFactoryForInvalidResponse(): void
-    {
-        $this->httpResponseFactory->method('create')
-            ->willReturn(new HttpResponse(422, 'An error message.'));
     }
 
     public function getUpdateNoteResponderInstance(): UpdateNoteResponder
     {
         return new UpdateNoteResponder(
             $this->validator,
-            $this->httpResponseFactory,
             $this->entityUpdater
         );
     }

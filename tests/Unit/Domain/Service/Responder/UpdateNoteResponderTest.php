@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\Service\Responder;
 
 use App\Domain\Entity\Note;
 use App\Domain\Service\ValueObject\HttpResponse;
+use App\Tests\Extra\ValidEntities;
 use PHPUnit\Framework\TestCase;
 
 class UpdateNoteResponderTest extends TestCase
@@ -14,13 +15,14 @@ class UpdateNoteResponderTest extends TestCase
             ->withValidValidatorResponse()
             ->build();
 
-        $response = $responder->prepare(
-            $this->createMock(Note::class)
-        );
+        $note = ValidEntities::getNote();
+        $response = $responder->prepare($note);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Test content.', $response->getContent());
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromObject(200, $note)
+            )
+        );
     }
 
     public function testPrepareForInvalidEntity(): void
@@ -33,7 +35,13 @@ class UpdateNoteResponderTest extends TestCase
             $this->createMock(Note::class)
         );
 
-        $this->assertEquals(422, $response->getStatusCode());
-        $this->assertEquals('An error message.', $response->getContent());
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromArray(
+                    422,
+                    UpdateNoteResponderBuilder::VALIDATOR_ERRORS
+                )
+            )
+        );
     }
 }

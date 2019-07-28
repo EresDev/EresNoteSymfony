@@ -2,8 +2,10 @@
 
 namespace App\Tests\Unit\Domain\Service\Responder;
 
+use App\Domain\Service\Responder\RetrieveNoteResponder;
+use App\Domain\Service\ValueObject\HttpResponse;
+use App\Tests\Extra\StubServices;
 use App\Tests\Extra\ValidEntities;
-use App\Tests\Extra\ValidValues;
 use PHPUnit\Framework\TestCase;
 
 class RetrieveNoteResponderTest extends TestCase
@@ -11,30 +13,29 @@ class RetrieveNoteResponderTest extends TestCase
     public function testPrepareForValidNote() : void
     {
         $note = ValidEntities::getNote();
-        $responseForValidNote = ValidValues::getHttpResponse(200, $note);
+        $translator = StubServices::getTranslator('foo bar...');
 
-        $responder = RetrieveNoteResponderBuilder::getInstance()
-            ->withHttpResponse($responseForValidNote)
-            ->build();
-
+        $responder = new RetrieveNoteResponder($translator);
         $response = $responder->prepare($note);
 
-        $this->assertTrue($responseForValidNote->equals($response));
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromObject(200, $note)
+            )
+        );
     }
 
     public function testPrepareForNullInPlaceOfNote() : void
     {
-        $responseForNull = ValidValues::getHttpResponse(
-            404,
-            'Resource not found.'
-        );
+        $translator = StubServices::getTranslator('foo bar...');
 
-        $responder = RetrieveNoteResponderBuilder::getInstance()
-            ->withHttpResponse($responseForNull)
-            ->build();
-
+        $responder = new RetrieveNoteResponder($translator);
         $response = $responder->prepare(null);
 
-        $this->assertTrue($responseForNull->equals($response));
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromString(404, 'foo bar...')
+            )
+        );
     }
 }

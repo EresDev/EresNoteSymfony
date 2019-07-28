@@ -4,7 +4,6 @@ namespace App\Domain\Service\Responder;
 
 use App\Domain\Entity\Entity;
 use App\Domain\Repository\EntityUpdater;
-use App\Domain\Service\Factory\HttpResponseFactory;
 use App\Domain\Service\Validator;
 
 class UpdateNoteResponder extends CreateEntityResponderTemplate
@@ -13,10 +12,9 @@ class UpdateNoteResponder extends CreateEntityResponderTemplate
 
     public function __construct(
         Validator $validator,
-        HttpResponseFactory $httpResponseFactory,
         EntityUpdater $entityUpdater
     ){
-        parent::__construct($validator, $httpResponseFactory);
+        parent::__construct($validator);
 
         $this->entityUpdater = $entityUpdater;
     }

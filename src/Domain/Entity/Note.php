@@ -2,7 +2,7 @@
 
 namespace App\Domain\Entity;
 
-class Note extends Entity
+class Note extends Entity implements \JsonSerializable
 {
     private $title;
     private $content;
@@ -62,5 +62,16 @@ class Note extends Entity
     public function setUser(User $user): void
     {
         $this->user = $user;
+    }
+
+    public function jsonSerialize() : array
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'content' => $this->getContent(),
+            'creationDatetime' => $this->getCreationDatetime(),
+            'user' => $this->getUser()
+        ];
     }
 }

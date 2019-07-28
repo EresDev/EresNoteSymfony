@@ -12,8 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class CreateEntityResponderBuilder extends TestCase
 {
+    const VALIDATOR_ERRORS = ['An error message.'];
+
     protected $validator;
-    protected $httpResponseFactory;
     protected $entitySaver;
 
     public static function getInstance(): self
@@ -32,10 +33,6 @@ class CreateEntityResponderBuilder extends TestCase
     {
         $this->validator = $this->createMock(Validator::class);
 
-        $this->httpResponseFactory = $this->createMock(
-            HttpResponseFactory::class
-        );
-
         $this->entitySaver = $this->createMock(
             EntitySaver::class
         );
@@ -48,34 +45,17 @@ class CreateEntityResponderBuilder extends TestCase
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
-        $this->withHttpResponseFactoryForValidResponse();
-
         return $this;
-    }
-
-    private function withHttpResponseFactoryForValidResponse(): void
-    {
-        $this->httpResponseFactory->method('create')
-            ->willReturn(new HttpResponse(200, 'Test content.'));
-
     }
 
     public function withInvalidValidatorResponse(): self
     {
-        $validatorResponse = new ValidatorResponse(false, ['An error message.']);
+        $validatorResponse = new ValidatorResponse(false, self::VALIDATOR_ERRORS);
 
         $this->validator->method('validate')
             ->willReturn($validatorResponse);
 
-        $this->withHttpResponseFactoryForInvalidResponse();
-
         return $this;
-    }
-
-    private function withHttpResponseFactoryForInvalidResponse(): void
-    {
-        $this->httpResponseFactory->method('create')
-            ->willReturn(new HttpResponse(422, 'An error message.'));
     }
 
     public function getCreatorResponderInstance(
@@ -84,7 +64,6 @@ class CreateEntityResponderBuilder extends TestCase
 
         return new $responderClassName(
             $this->validator,
-            $this->httpResponseFactory,
             $this->entitySaver
         );
     }

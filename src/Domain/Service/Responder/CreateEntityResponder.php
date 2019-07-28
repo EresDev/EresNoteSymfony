@@ -13,10 +13,9 @@ abstract class CreateEntityResponder extends CreateEntityResponderTemplate
 
     public function __construct(
         Validator $validator,
-        HttpResponseFactory $httpResponseFactory,
         EntitySaver $entitySaver
     ){
-        parent::__construct($validator, $httpResponseFactory);
+        parent::__construct($validator);
         $this->entitySaver = $entitySaver;
     }
 

@@ -15,13 +15,15 @@ class CreateUserResponderTest extends TestCase
             ->withValidValidatorResponse()
             ->build();
 
-        $response = $responder->prepare(
-            ValidEntities::getUser()
-        );
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Test content.', $response->getContent());
+        $user = ValidEntities::getUser();
+        $response = $responder->prepare($user);
+
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromObject(200, $user)
+            )
+        );
     }
 
     public function testPrepareForInvalidEntity(): void
@@ -30,11 +32,16 @@ class CreateUserResponderTest extends TestCase
             ->withInvalidValidatorResponse()
             ->build();
 
-        $response = $responder->prepare(
-            $this->createMock(User::class)
-        );
+        $user = $this->createMock(User::class);
+        $response = $responder->prepare($user);
 
-        $this->assertEquals(422, $response->getStatusCode());
-        $this->assertEquals('An error message.', $response->getContent());
+        $this->assertTrue(
+            $response->equals(
+                HttpResponse::fromArray(
+                    422,
+                    CreateUserResponderBuilder::VALIDATOR_ERRORS
+                )
+            )
+        );
     }
 }
